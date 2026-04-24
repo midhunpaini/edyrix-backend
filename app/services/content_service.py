@@ -1,0 +1,377 @@
+import uuid
+
+from sqlalchemy import and_, func, or_, select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.models.content import Chapter, Lesson, Note, Subject
+from app.models.progress import Test, WatchHistory
+from app.models.subscription import Plan
+from app.models.user import User
+from app.schemas.content import (
+    ChapterDetailResponse,
+    ChapterSummary,
+    ClassSummary,
+    LessonPlayResponse,
+    LessonSummary,
+    NotesResponse,
+    SubjectDetailResponse,
+    SubjectListItem,
+)
+from app.services.storage_service import generate_presigned_url
+from app.utils.access_control import user_has_access
+
+
+class AccessDenied(Exception):
+    def __init__(self, subject_id: uuid.UUID, class_number: int) -> None:
+        self.subject_id = subject_id
+        self.class_number = class_number
+
+
+async def get_classes(db: AsyncSession) -> list[ClassSummary]:
+    result = await db.execute(
+        select(Subject.class_number, func.count(Subject.id).label("cnt"))
+        .where(Subject.is_active.is_(True))
+        .group_by(Subject.class_number)
+        .order_by(Subject.class_number.desc())
+    )
+    labels = {10: "Class 10 (SSLC)", 9: "Class 9", 8: "Class 8", 7: "Class 7"}
+    return [
+        ClassSummary(
+            class_number=row.class_number,
+            label=labels.get(row.class_number, f"Class {row.class_number}"),
+            subject_count=row.cnt,
+        )
+        for row in result.all()
+    ]
+
+
+async def get_subjects_by_class(
+    db: AsyncSession,
+    class_number: int,
+    user: User | None,
+) -> list[SubjectListItem]:
+    subjects_result = await db.execute(
+        select(Subject)
+        .where(Subject.class_number == class_number, Subject.is_active.is_(True))
+        .order_by(Subject.order_index)
+    )
+    subjects = subjects_result.scalars().all()
+    if not subjects:
+        return []
+
+    subject_ids = [s.id for s in subjects]
+    chapter_counts_result = await db.execute(
+        select(Chapter.subject_id, func.count(Chapter.id).label("cnt"))
+        .where(Chapter.subject_id.in_(subject_ids), Chapter.is_published.is_(True))
+        .group_by(Chapter.subject_id)
+    )
+    chapter_counts: dict[uuid.UUID, int] = {row.subject_id: row.cnt for row in chapter_counts_result.all()}
+
+    items: list[SubjectListItem] = []
+    for subject in subjects:
+        has_access = False
+        watch_pct = 0
+        if user:
+            has_access = await user_has_access(db, user, subject.id, class_number)
+            watch_pct = await _subject_watch_percentage(db, user.id, subject.id)
+
+        items.append(
+            SubjectListItem(
+                id=subject.id,
+                name=subject.name,
+                name_ml=subject.name_ml,
+                slug=subject.slug,
+                icon=subject.icon,
+                color=subject.color,
+                chapter_count=chapter_counts.get(subject.id, 0),
+                monthly_price_paise=subject.monthly_price_paise,
+                has_access=has_access,
+                watch_percentage=watch_pct,
+            )
+        )
+    return items
+
+
+async def get_subject_detail(
+    db: AsyncSession,
+    subject_id: uuid.UUID,
+    user: User,
+) -> SubjectDetailResponse | None:
+    subject_result = await db.execute(
+        select(Subject).where(Subject.id == subject_id, Subject.is_active.is_(True))
+    )
+    subject = subject_result.scalar_one_or_none()
+    if subject is None:
+        return None
+
+    chapters_result = await db.execute(
+        select(Chapter)
+        .where(Chapter.subject_id == subject_id, Chapter.is_published.is_(True))
+        .order_by(Chapter.order_index)
+    )
+    chapters = chapters_result.scalars().all()
+
+    chapter_count_result = await db.execute(
+        select(func.count(Chapter.id)).where(
+            Chapter.subject_id == subject_id, Chapter.is_published.is_(True)
+        )
+    )
+    chapter_count = chapter_count_result.scalar() or 0
+
+    has_access = await user_has_access(db, user, subject.id, subject.class_number)
+    watch_pct = await _subject_watch_percentage(db, user.id, subject.id)
+
+    return SubjectDetailResponse(
+        id=subject.id,
+        name=subject.name,
+        name_ml=subject.name_ml,
+        slug=subject.slug,
+        icon=subject.icon,
+        color=subject.color,
+        chapter_count=chapter_count,
+        monthly_price_paise=subject.monthly_price_paise,
+        has_access=has_access,
+        watch_percentage=watch_pct,
+        chapters=[await _chapter_summary(db, ch, user.id) for ch in chapters],
+    )
+
+
+async def get_chapter_detail(
+    db: AsyncSession,
+    chapter_id: uuid.UUID,
+    user: User,
+) -> ChapterDetailResponse | None:
+    chapter_result = await db.execute(
+        select(Chapter).where(Chapter.id == chapter_id, Chapter.is_published.is_(True))
+    )
+    chapter = chapter_result.scalar_one_or_none()
+    if chapter is None:
+        return None
+
+    lessons_result = await db.execute(
+        select(Lesson)
+        .where(Lesson.chapter_id == chapter_id, Lesson.is_published.is_(True))
+        .order_by(Lesson.order_index)
+    )
+    lessons = lessons_result.scalars().all()
+    lesson_ids = [l.id for l in lessons]
+
+    watch_map: dict[uuid.UUID, WatchHistory] = {}
+    if lesson_ids:
+        wh_result = await db.execute(
+            select(WatchHistory).where(
+                WatchHistory.user_id == user.id,
+                WatchHistory.lesson_id.in_(lesson_ids),
+            )
+        )
+        for wh in wh_result.scalars().all():
+            watch_map[wh.lesson_id] = wh
+
+    lesson_summaries = [
+        LessonSummary(
+            id=lesson.id,
+            title=lesson.title,
+            duration_seconds=lesson.duration_seconds,
+            is_free=lesson.is_free,
+            thumbnail_url=lesson.thumbnail_url,
+            watch_percentage=watch_map[lesson.id].watch_percentage if lesson.id in watch_map else 0,
+            is_completed=watch_map[lesson.id].is_completed if lesson.id in watch_map else False,
+        )
+        for lesson in lessons
+    ]
+
+    has_notes_result = await db.execute(
+        select(func.count(Note.id)).where(Note.chapter_id == chapter_id)
+    )
+    has_notes = (has_notes_result.scalar() or 0) > 0
+
+    test_result = await db.execute(
+        select(Test.id).where(Test.chapter_id == chapter_id, Test.is_published.is_(True))
+    )
+    test_id = test_result.scalar_one_or_none()
+
+    return ChapterDetailResponse(
+        id=chapter.id,
+        title=chapter.title,
+        lessons=lesson_summaries,
+        has_notes=has_notes,
+        test_id=test_id,
+    )
+
+
+async def get_lesson_play(
+    db: AsyncSession,
+    lesson_id: uuid.UUID,
+    user: User,
+) -> LessonPlayResponse | None:
+    result = await db.execute(
+        select(Lesson, Chapter, Subject)
+        .join(Chapter, Lesson.chapter_id == Chapter.id)
+        .join(Subject, Chapter.subject_id == Subject.id)
+        .where(Lesson.id == lesson_id, Lesson.is_published.is_(True))
+    )
+    row = result.first()
+    if row is None:
+        return None
+
+    lesson, chapter, subject = row
+
+    if not lesson.is_free:
+        has_access = await user_has_access(db, user, subject.id, subject.class_number)
+        if not has_access:
+            raise AccessDenied(subject.id, subject.class_number)
+
+    wh_result = await db.execute(
+        select(WatchHistory).where(
+            WatchHistory.user_id == user.id,
+            WatchHistory.lesson_id == lesson_id,
+        )
+    )
+    wh = wh_result.scalar_one_or_none()
+    watch_pct = wh.watch_percentage if wh else 0
+    resume_at = round((watch_pct / 100) * (lesson.duration_seconds or 0))
+
+    return LessonPlayResponse(
+        youtube_video_id=lesson.youtube_video_id,
+        title=lesson.title,
+        duration_seconds=lesson.duration_seconds,
+        watch_percentage=watch_pct,
+        resume_at_seconds=resume_at,
+    )
+
+
+async def get_chapter_notes(
+    db: AsyncSession,
+    chapter_id: uuid.UUID,
+    user: User,
+) -> NotesResponse | None:
+    result = await db.execute(
+        select(Chapter, Subject)
+        .join(Subject, Chapter.subject_id == Subject.id)
+        .where(Chapter.id == chapter_id, Chapter.is_published.is_(True))
+    )
+    row = result.first()
+    if row is None:
+        return None
+    chapter, subject = row
+
+    note_result = await db.execute(
+        select(Note).where(Note.chapter_id == chapter_id).limit(1)
+    )
+    note = note_result.scalar_one_or_none()
+    if note is None:
+        return None
+
+    if note.is_premium:
+        has_access = await user_has_access(db, user, subject.id, subject.class_number)
+        if not has_access:
+            raise AccessDenied(subject.id, subject.class_number)
+
+    url = generate_presigned_url(note.r2_key, expires_in=3600)
+    return NotesResponse(
+        url=url,
+        expires_in_seconds=3600,
+        title=note.title,
+        file_size_bytes=note.file_size_bytes,
+    )
+
+
+async def get_relevant_plan_slugs(
+    db: AsyncSession,
+    subject_id: uuid.UUID,
+    class_number: int,
+) -> list[str]:
+    result = await db.execute(
+        select(Plan.slug)
+        .where(
+            Plan.is_active.is_(True),
+            or_(
+                Plan.plan_type == "full_access",
+                and_(
+                    Plan.plan_type.in_(["complete", "seasonal"]),
+                    Plan.class_numbers.contains([class_number]),
+                ),
+                and_(
+                    Plan.plan_type.in_(["bundle", "single_subject", "lifetime"]),
+                    Plan.subject_ids.contains([subject_id]),
+                ),
+            ),
+        )
+        .order_by(Plan.order_index)
+        .limit(3)
+    )
+    return [row[0] for row in result.all()]
+
+
+# ── helpers ──────────────────────────────────────────────────────────────────
+
+async def _subject_watch_percentage(
+    db: AsyncSession, user_id: uuid.UUID, subject_id: uuid.UUID
+) -> int:
+    lesson_ids_result = await db.execute(
+        select(Lesson.id)
+        .join(Chapter, Lesson.chapter_id == Chapter.id)
+        .where(Chapter.subject_id == subject_id, Lesson.is_published.is_(True))
+    )
+    lesson_ids = [row[0] for row in lesson_ids_result.all()]
+    if not lesson_ids:
+        return 0
+
+    avg_result = await db.execute(
+        select(func.coalesce(func.avg(WatchHistory.watch_percentage), 0)).where(
+            WatchHistory.user_id == user_id,
+            WatchHistory.lesson_id.in_(lesson_ids),
+        )
+    )
+    return round(float(avg_result.scalar() or 0))
+
+
+async def _chapter_summary(
+    db: AsyncSession, chapter: Chapter, user_id: uuid.UUID
+) -> ChapterSummary:
+    lesson_ids_result = await db.execute(
+        select(Lesson.id).where(
+            Lesson.chapter_id == chapter.id, Lesson.is_published.is_(True)
+        )
+    )
+    lesson_ids = [row[0] for row in lesson_ids_result.all()]
+    lesson_count = len(lesson_ids)
+
+    test_result = await db.execute(
+        select(Test.id).where(
+            Test.chapter_id == chapter.id, Test.is_published.is_(True)
+        )
+    )
+    has_test = test_result.scalar_one_or_none() is not None
+
+    watch_pct = 0
+    is_completed = False
+    if lesson_ids:
+        avg_result = await db.execute(
+            select(func.coalesce(func.avg(WatchHistory.watch_percentage), 0)).where(
+                WatchHistory.user_id == user_id,
+                WatchHistory.lesson_id.in_(lesson_ids),
+            )
+        )
+        watch_pct = round(float(avg_result.scalar() or 0))
+
+        completed_result = await db.execute(
+            select(func.count(WatchHistory.id)).where(
+                WatchHistory.user_id == user_id,
+                WatchHistory.lesson_id.in_(lesson_ids),
+                WatchHistory.is_completed.is_(True),
+            )
+        )
+        completed_count = completed_result.scalar() or 0
+        is_completed = lesson_count > 0 and completed_count == lesson_count
+
+    return ChapterSummary(
+        id=chapter.id,
+        chapter_number=chapter.chapter_number,
+        title=chapter.title,
+        title_ml=chapter.title_ml,
+        lesson_count=lesson_count,
+        has_test=has_test,
+        watch_percentage=watch_pct,
+        is_completed=is_completed,
+    )
