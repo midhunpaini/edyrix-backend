@@ -1,12 +1,13 @@
 from datetime import datetime, timezone
 from typing import AsyncGenerator
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import AsyncSessionLocal
+from app.exceptions import ForbiddenException, UnauthorizedException
 from app.models.subscription import Subscription
 from app.models.user import User
 from app.services.auth_service import decode_access_token, is_token_valid
@@ -28,22 +29,22 @@ async def get_current_user(
     try:
         payload = decode_access_token(token)
     except ValueError:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
+        raise UnauthorizedException("Invalid token")
 
     jti: str | None = payload.get("jti")
     user_id: str | None = payload.get("sub")
 
     if not jti or not user_id:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token payload")
+        raise UnauthorizedException("Invalid token payload")
 
-    if not await is_token_valid(jti):
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token has been revoked")
+    if not await is_token_valid(jti, db):
+        raise UnauthorizedException("Token has been revoked")
 
     result = await db.execute(select(User).where(User.id == user_id, User.is_active.is_(True)))
     user = result.scalar_one_or_none()
 
     if user is None:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
+        raise UnauthorizedException("User not found")
 
     await _expire_old_subscriptions(db, user)
 
@@ -69,5 +70,5 @@ async def _expire_old_subscriptions(db: AsyncSession, user: User) -> None:
 
 async def require_admin(user: User = Depends(get_current_user)) -> User:
     if user.role != "admin":
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admin access required")
+        raise ForbiddenException("Admin access required")
     return user

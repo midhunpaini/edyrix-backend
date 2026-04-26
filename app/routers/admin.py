@@ -2,12 +2,14 @@ import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, status
+from fastapi import APIRouter, Depends, Query, UploadFile, status
 from sqlalchemy import and_, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import aliased
 
 from app.dependencies import get_db, require_admin
+from app.exceptions import BadRequestException, ConflictException, NotFoundException
+from app.queue import enqueue
 from app.models.content import Chapter, Lesson, Note, Subject
 from app.models.doubt import Doubt
 from app.models.progress import Test
@@ -30,10 +32,9 @@ from app.schemas.admin import (
     SubjectChaptersAdminResponse,
     TestAdminResponse,
 )
+from app.schemas.common import CommonResponse
 from app.schemas.content import CreateLessonRequest, LessonResponse
 from app.schemas.doubt import AnswerDoubtRequest, AnswerDoubtResponse
-from app.services import notification_service
-from app.services.email_service import send_doubt_answered_email
 from app.services.storage_service import upload_bytes
 
 router = APIRouter(prefix="/admin", tags=["admin"])
@@ -44,12 +45,11 @@ _MAX_UPLOAD_BYTES = 20 * 1024 * 1024  # 20 MB
 
 # ── Dashboard ─────────────────────────────────────────────────────────────────
 
-@router.get("/dashboard", response_model=AdminDashboardResponse, summary="Admin dashboard stats")
+@router.get("/dashboard", response_model=CommonResponse[AdminDashboardResponse])
 async def dashboard(
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> AdminDashboardResponse:
-    """Return platform-wide statistics: student counts, MRR, pending doubts, and 30-day revenue."""
+) -> CommonResponse[AdminDashboardResponse]:
     now = datetime.now(timezone.utc)
     today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
     thirty_days_ago = now - timedelta(days=30)
@@ -107,19 +107,19 @@ async def dashboard(
         for row in revenue_result.all()
     ]
 
-    return AdminDashboardResponse(
+    return CommonResponse.ok(AdminDashboardResponse(
         total_students=total_students,
         active_subscriptions=active_subs,
         mrr_paise=mrr_paise,
         new_signups_today=new_signups,
         pending_doubts=pending_doubts,
         revenue_last_30_days=revenue_days,
-    )
+    ))
 
 
 # ── Students ──────────────────────────────────────────────────────────────────
 
-@router.get("/students", response_model=AdminStudentListResponse, summary="Paginated student list")
+@router.get("/students", response_model=CommonResponse[AdminStudentListResponse])
 async def list_students(
     page: int = Query(1, ge=1),
     limit: int = Query(20, ge=1, le=100),
@@ -128,8 +128,7 @@ async def list_students(
     subscription_status: Literal["active", "trial", "free"] | None = Query(None),
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> AdminStudentListResponse:
-    """Return a paginated, filterable list of students with their subscription status."""
+) -> CommonResponse[AdminStudentListResponse]:
     now = datetime.now(timezone.utc)
     offset = (page - 1) * limit
 
@@ -152,11 +151,10 @@ async def list_students(
     users = users_result.scalars().all()
 
     if not users:
-        return AdminStudentListResponse(total=total, students=[])
+        return CommonResponse.ok(AdminStudentListResponse(total=total, students=[]))
 
     user_ids = [u.id for u in users]
 
-    # Batch-fetch active subscriptions and trials in 2 queries instead of N+1
     active_sub_ids: set[uuid.UUID] = {
         row[0]
         for row in (
@@ -209,26 +207,20 @@ async def list_students(
             )
         )
 
-    return AdminStudentListResponse(total=total, students=items)
+    return CommonResponse.ok(AdminStudentListResponse(total=total, students=items))
 
 
 # ── Content: Subjects ─────────────────────────────────────────────────────────
 
-@router.post(
-    "/subjects",
-    response_model=SubjectAdminResponse,
-    status_code=status.HTTP_201_CREATED,
-    summary="Create a subject",
-)
+@router.post("/subjects", response_model=CommonResponse[SubjectAdminResponse], status_code=status.HTTP_201_CREATED)
 async def create_subject(
     body: CreateSubjectRequest,
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> SubjectAdminResponse:
-    """Create a new subject. Returns 409 if the slug is already taken."""
+) -> CommonResponse[SubjectAdminResponse]:
     existing = await db.execute(select(Subject).where(Subject.slug == body.slug))
     if existing.scalar_one_or_none():
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Slug already exists")
+        raise ConflictException("Slug already exists")
 
     subject = Subject(
         name=body.name,
@@ -243,28 +235,22 @@ async def create_subject(
     db.add(subject)
     await db.commit()
     await db.refresh(subject)
-    return SubjectAdminResponse.model_validate(subject)
+    return CommonResponse.ok(SubjectAdminResponse.model_validate(subject), "Subject created")
 
 
 # ── Content: Chapters ─────────────────────────────────────────────────────────
 
-@router.post(
-    "/chapters",
-    response_model=ChapterAdminResponse,
-    status_code=status.HTTP_201_CREATED,
-    summary="Create a chapter",
-)
+@router.post("/chapters", response_model=CommonResponse[ChapterAdminResponse], status_code=status.HTTP_201_CREATED)
 async def create_chapter(
     body: CreateChapterRequest,
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> ChapterAdminResponse:
-    """Create a chapter under a subject. Returns 404 if the subject does not exist."""
+) -> CommonResponse[ChapterAdminResponse]:
     subject_result = await db.execute(
         select(Subject).where(Subject.id == body.subject_id, Subject.is_active.is_(True))
     )
     if subject_result.scalar_one_or_none() is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Subject not found")
+        raise NotFoundException("Subject not found")
 
     chapter = Chapter(
         subject_id=body.subject_id,
@@ -277,48 +263,37 @@ async def create_chapter(
     db.add(chapter)
     await db.commit()
     await db.refresh(chapter)
-    return ChapterAdminResponse.model_validate(chapter)
+    return CommonResponse.ok(ChapterAdminResponse.model_validate(chapter), "Chapter created")
 
 
-@router.patch(
-    "/chapters/{chapter_id}/publish",
-    response_model=PublishToggleResponse,
-    summary="Toggle chapter published state",
-)
+@router.patch("/chapters/{chapter_id}/publish", response_model=CommonResponse[PublishToggleResponse])
 async def toggle_chapter_publish(
     chapter_id: uuid.UUID,
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> PublishToggleResponse:
-    """Toggle the is_published flag on a chapter."""
+) -> CommonResponse[PublishToggleResponse]:
     result = await db.execute(select(Chapter).where(Chapter.id == chapter_id))
     chapter = result.scalar_one_or_none()
     if chapter is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Chapter not found")
+        raise NotFoundException("Chapter not found")
     chapter.is_published = not chapter.is_published
     await db.commit()
-    return PublishToggleResponse(id=chapter.id, is_published=chapter.is_published)
+    return CommonResponse.ok(PublishToggleResponse(id=chapter.id, is_published=chapter.is_published))
 
 
 # ── Content: Lessons ──────────────────────────────────────────────────────────
 
-@router.post(
-    "/lessons",
-    response_model=LessonResponse,
-    status_code=status.HTTP_201_CREATED,
-    summary="Create a lesson",
-)
+@router.post("/lessons", response_model=CommonResponse[LessonResponse], status_code=status.HTTP_201_CREATED)
 async def create_lesson(
     body: CreateLessonRequest,
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> LessonResponse:
-    """Create a lesson under a chapter."""
+) -> CommonResponse[LessonResponse]:
     chapter_result = await db.execute(
         select(Chapter).where(Chapter.id == body.chapter_id)
     )
     if chapter_result.scalar_one_or_none() is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Chapter not found")
+        raise NotFoundException("Chapter not found")
 
     lesson = Lesson(
         chapter_id=body.chapter_id,
@@ -332,57 +307,43 @@ async def create_lesson(
     db.add(lesson)
     await db.commit()
     await db.refresh(lesson)
-    return LessonResponse.model_validate(lesson)
+    return CommonResponse.ok(LessonResponse.model_validate(lesson), "Lesson created")
 
 
-@router.patch(
-    "/lessons/{lesson_id}/publish",
-    response_model=PublishToggleResponse,
-    summary="Toggle lesson published state",
-)
+@router.patch("/lessons/{lesson_id}/publish", response_model=CommonResponse[PublishToggleResponse])
 async def toggle_lesson_publish(
     lesson_id: uuid.UUID,
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> PublishToggleResponse:
-    """Toggle the is_published flag on a lesson."""
+) -> CommonResponse[PublishToggleResponse]:
     result = await db.execute(select(Lesson).where(Lesson.id == lesson_id))
     lesson = result.scalar_one_or_none()
     if lesson is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Lesson not found")
+        raise NotFoundException("Lesson not found")
     lesson.is_published = not lesson.is_published
     await db.commit()
-    return PublishToggleResponse(id=lesson.id, is_published=lesson.is_published)
+    return CommonResponse.ok(PublishToggleResponse(id=lesson.id, is_published=lesson.is_published))
 
 
 # ── Content: Tests ────────────────────────────────────────────────────────────
 
-@router.post(
-    "/tests",
-    response_model=TestAdminResponse,
-    status_code=status.HTTP_201_CREATED,
-    summary="Create a chapter test",
-)
+@router.post("/tests", response_model=CommonResponse[TestAdminResponse], status_code=status.HTTP_201_CREATED)
 async def create_test(
     body: CreateTestRequest,
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> TestAdminResponse:
-    """Create a test with validated MCQ questions. Returns 409 if a test already exists for the chapter."""
+) -> CommonResponse[TestAdminResponse]:
     chapter_result = await db.execute(
         select(Chapter).where(Chapter.id == body.chapter_id)
     )
     if chapter_result.scalar_one_or_none() is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Chapter not found")
+        raise NotFoundException("Chapter not found")
 
     existing_test = await db.execute(
         select(Test).where(Test.chapter_id == body.chapter_id)
     )
     if existing_test.scalar_one_or_none():
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="Test already exists for this chapter",
-        )
+        raise ConflictException("Test already exists for this chapter")
 
     test = Test(
         chapter_id=body.chapter_id,
@@ -394,37 +355,27 @@ async def create_test(
     db.add(test)
     await db.commit()
     await db.refresh(test)
-    return TestAdminResponse.model_validate(test)
+    return CommonResponse.ok(TestAdminResponse.model_validate(test), "Test created")
 
 
-@router.patch(
-    "/tests/{test_id}/publish",
-    response_model=PublishToggleResponse,
-    summary="Toggle test published state",
-)
+@router.patch("/tests/{test_id}/publish", response_model=CommonResponse[PublishToggleResponse])
 async def toggle_test_publish(
     test_id: uuid.UUID,
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> PublishToggleResponse:
-    """Toggle the is_published flag on a test."""
+) -> CommonResponse[PublishToggleResponse]:
     result = await db.execute(select(Test).where(Test.id == test_id))
     test = result.scalar_one_or_none()
     if test is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Test not found")
+        raise NotFoundException("Test not found")
     test.is_published = not test.is_published
     await db.commit()
-    return PublishToggleResponse(id=test.id, is_published=test.is_published)
+    return CommonResponse.ok(PublishToggleResponse(id=test.id, is_published=test.is_published))
 
 
 # ── Notes Upload ──────────────────────────────────────────────────────────────
 
-@router.post(
-    "/notes/upload",
-    response_model=NoteUploadResponse,
-    status_code=status.HTTP_201_CREATED,
-    summary="Upload chapter PDF notes",
-)
+@router.post("/notes/upload", response_model=CommonResponse[NoteUploadResponse], status_code=status.HTTP_201_CREATED)
 async def upload_note(
     chapter_id: uuid.UUID = Query(...),
     title: str = Query(...),
@@ -432,22 +383,17 @@ async def upload_note(
     is_premium: bool = Query(True),
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> NoteUploadResponse:
-    """Upload a PDF file to R2 and attach it to a chapter. Maximum 20 MB."""
+) -> CommonResponse[NoteUploadResponse]:
     if file.content_type not in _ALLOWED_CONTENT_TYPES:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="Only PDF files are allowed"
-        )
+        raise BadRequestException("Only PDF files are allowed")
 
     chapter_result = await db.execute(select(Chapter).where(Chapter.id == chapter_id))
     if chapter_result.scalar_one_or_none() is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Chapter not found")
+        raise NotFoundException("Chapter not found")
 
     pdf_bytes = await file.read()
     if len(pdf_bytes) > _MAX_UPLOAD_BYTES:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="File exceeds 20 MB limit"
-        )
+        raise BadRequestException("File exceeds 20 MB limit")
 
     r2_key = f"notes/{uuid.uuid4()}.pdf"
     await upload_bytes(pdf_bytes, r2_key, content_type="application/pdf")
@@ -463,20 +409,19 @@ async def upload_note(
     await db.commit()
     await db.refresh(note)
 
-    return NoteUploadResponse(id=note.id, r2_key=note.r2_key, file_size_bytes=note.file_size_bytes)
+    return CommonResponse.ok(NoteUploadResponse(id=note.id, r2_key=note.r2_key, file_size_bytes=note.file_size_bytes), "Notes uploaded")
 
 
 # ── Doubts ────────────────────────────────────────────────────────────────────
 
-@router.get("/doubts", response_model=AdminDoubtListResponse, summary="List all doubts")
+@router.get("/doubts", response_model=CommonResponse[AdminDoubtListResponse])
 async def list_doubts(
     page: int = Query(1, ge=1),
     limit: int = Query(20, ge=1, le=100),
     status_filter: Literal["pending", "answered"] | None = Query(None, alias="status"),
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> AdminDoubtListResponse:
-    """Return paginated doubts, optionally filtered by status. Student names are fetched via JOIN."""
+) -> CommonResponse[AdminDoubtListResponse]:
     offset = (page - 1) * limit
     StudentUser = aliased(User)
 
@@ -508,25 +453,20 @@ async def list_doubts(
         for d, student in doubts_result.all()
     ]
 
-    return AdminDoubtListResponse(total=total, doubts=items)
+    return CommonResponse.ok(AdminDoubtListResponse(total=total, doubts=items))
 
 
-@router.put(
-    "/doubts/{doubt_id}/answer",
-    response_model=AnswerDoubtResponse,
-    summary="Answer a student doubt",
-)
+@router.put("/doubts/{doubt_id}/answer", response_model=CommonResponse[AnswerDoubtResponse])
 async def answer_doubt(
     doubt_id: uuid.UUID,
     body: AnswerDoubtRequest,
     db: AsyncSession = Depends(get_db),
     admin: User = Depends(require_admin),
-) -> AnswerDoubtResponse:
-    """Record an answer to a doubt and notify the student via FCM and email."""
+) -> CommonResponse[AnswerDoubtResponse]:
     result = await db.execute(select(Doubt).where(Doubt.id == doubt_id))
     doubt = result.scalar_one_or_none()
     if doubt is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Doubt not found")
+        raise NotFoundException("Doubt not found")
 
     doubt.answer_text = body.answer_text
     doubt.answered_by = admin.id
@@ -538,32 +478,29 @@ async def answer_doubt(
     student_result = await db.execute(select(User).where(User.id == doubt.user_id))
     student = student_result.scalar_one_or_none()
 
-    notif_sent = await notification_service.send_doubt_answered(
-        db, doubt.user_id, doubt.question_text  # type: ignore[arg-type]
+    await enqueue(
+        "task_send_doubt_answered",
+        user_id=str(doubt.user_id),
+        email=student.email if student else None,
+        question=doubt.question_text,
+        answer=body.answer_text,
     )
-    if student and student.email:
-        await send_doubt_answered_email(student.email, doubt.question_text, body.answer_text)
 
-    return AnswerDoubtResponse(message="Doubt answered", notification_sent=notif_sent)
+    return CommonResponse.ok(AnswerDoubtResponse(message="Doubt answered", notification_sent=True))
 
 
-# ── Admin read endpoints (return admin-shaped data including drafts) ───────────
+# ── Admin read endpoints ───────────────────────────────────────────────────────
 
-@router.get(
-    "/subjects/{subject_id}",
-    response_model=SubjectChaptersAdminResponse,
-    summary="Get subject with all chapters (admin)",
-)
+@router.get("/subjects/{subject_id}", response_model=CommonResponse[SubjectChaptersAdminResponse])
 async def get_subject_with_chapters(
     subject_id: uuid.UUID,
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> SubjectChaptersAdminResponse:
-    """Return a subject and all its chapters (including unpublished) for the admin panel."""
+) -> CommonResponse[SubjectChaptersAdminResponse]:
     subject_result = await db.execute(select(Subject).where(Subject.id == subject_id))
     subject = subject_result.scalar_one_or_none()
     if subject is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Subject not found")
+        raise NotFoundException("Subject not found")
 
     chapters_result = await db.execute(
         select(Chapter)
@@ -572,47 +509,37 @@ async def get_subject_with_chapters(
     )
     chapters = chapters_result.scalars().all()
 
-    return SubjectChaptersAdminResponse(
+    return CommonResponse.ok(SubjectChaptersAdminResponse(
         id=subject.id,
         name=subject.name,
         chapters=[ChapterAdminResponse.model_validate(ch) for ch in chapters],
-    )
+    ))
 
 
-@router.get(
-    "/chapters/{chapter_id}/lessons",
-    response_model=list[LessonResponse],
-    summary="Get all lessons in a chapter (admin)",
-)
+@router.get("/chapters/{chapter_id}/lessons", response_model=CommonResponse[list[LessonResponse]])
 async def list_chapter_lessons(
     chapter_id: uuid.UUID,
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> list[LessonResponse]:
-    """Return all lessons for a chapter (including unpublished) for the admin panel."""
+) -> CommonResponse[list[LessonResponse]]:
     chapter_result = await db.execute(select(Chapter).where(Chapter.id == chapter_id))
     if chapter_result.scalar_one_or_none() is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Chapter not found")
+        raise NotFoundException("Chapter not found")
 
     lessons_result = await db.execute(
         select(Lesson).where(Lesson.chapter_id == chapter_id).order_by(Lesson.order_index)
     )
-    return [LessonResponse.model_validate(lesson) for lesson in lessons_result.scalars().all()]
+    return CommonResponse.ok([LessonResponse.model_validate(lesson) for lesson in lessons_result.scalars().all()])
 
 
-@router.get(
-    "/tests/chapter/{chapter_id}",
-    response_model=TestAdminResponse,
-    summary="Get chapter test (admin)",
-)
+@router.get("/tests/chapter/{chapter_id}", response_model=CommonResponse[TestAdminResponse])
 async def get_chapter_test_admin(
     chapter_id: uuid.UUID,
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
-) -> TestAdminResponse:
-    """Return the test for a chapter (including unpublished) for the admin panel."""
+) -> CommonResponse[TestAdminResponse]:
     result = await db.execute(select(Test).where(Test.chapter_id == chapter_id))
     test = result.scalar_one_or_none()
     if test is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Test not found")
-    return TestAdminResponse.model_validate(test)
+        raise NotFoundException("Test not found")
+    return CommonResponse.ok(TestAdminResponse.model_validate(test))

@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.dependencies import get_current_user, get_db
 from app.models.subscription import Plan, Subscription
 from app.models.user import FreeTrial, User
+from app.schemas.common import CommonResponse
 from app.schemas.subscription import (
     FreeTrialDetail,
     MySubscriptionResponse,
@@ -17,11 +18,11 @@ from app.schemas.subscription import (
 router = APIRouter(prefix="/subscriptions", tags=["subscriptions"])
 
 
-@router.get("/my", response_model=MySubscriptionResponse)
+@router.get("/my", response_model=CommonResponse[MySubscriptionResponse])
 async def get_my_subscription(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> MySubscriptionResponse:
+) -> CommonResponse[MySubscriptionResponse]:
     now = datetime.now(timezone.utc)
 
     sub_result = await db.execute(
@@ -58,4 +59,4 @@ async def get_my_subscription(
         expires_at=trial.expires_at if trial else None,
     )
 
-    return MySubscriptionResponse(subscription=subscription_detail, free_trial=free_trial)
+    return CommonResponse.ok(MySubscriptionResponse(subscription=subscription_detail, free_trial=free_trial))

@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -8,33 +8,33 @@ from app.dependencies import get_current_user, get_db
 from app.models.content import Chapter, Lesson, Subject
 from app.models.progress import TestAttempt, WatchHistory
 from app.models.user import FCMToken, FreeTrial, User
+from app.schemas.common import CommonResponse, MessageResponse
 from app.schemas.user import FCMTokenRequest, UserResponse, UserStatsResponse, UserUpdateRequest
 
 router = APIRouter(prefix="/users", tags=["users"])
 
 
-@router.get("/me", response_model=UserResponse)
+@router.get("/me", response_model=CommonResponse[UserResponse])
 async def get_me(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> UserResponse:
+) -> CommonResponse[UserResponse]:
     trial_result = await db.execute(
         select(FreeTrial).where(FreeTrial.user_id == user.id)
     )
     trial = trial_result.scalar_one_or_none()
-
     data = UserResponse.model_validate(user)
     if trial:
         data.free_trial_expires_at = trial.expires_at
-    return data
+    return CommonResponse.ok(data)
 
 
-@router.put("/me", response_model=UserResponse)
+@router.put("/me", response_model=CommonResponse[UserResponse])
 async def update_me(
     body: UserUpdateRequest,
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> UserResponse:
+) -> CommonResponse[UserResponse]:
     if body.name is not None:
         user.name = body.name
     if body.current_class is not None:
@@ -44,14 +44,14 @@ async def update_me(
     user.updated_at = datetime.now(timezone.utc)
     await db.commit()
     await db.refresh(user)
-    return UserResponse.model_validate(user)
+    return CommonResponse.ok(UserResponse.model_validate(user))
 
 
-@router.get("/me/stats", response_model=UserStatsResponse)
+@router.get("/me/stats", response_model=CommonResponse[UserStatsResponse])
 async def get_stats(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> UserStatsResponse:
+) -> CommonResponse[UserStatsResponse]:
     completed_result = await db.execute(
         select(func.count(WatchHistory.id)).where(
             WatchHistory.user_id == user.id,
@@ -80,21 +80,21 @@ async def get_stats(
     )
     subjects_active = [row[0] for row in active_subjects_result.all()]
 
-    return UserStatsResponse(
+    return CommonResponse.ok(UserStatsResponse(
         videos_completed=videos_completed,
         tests_taken=tests_taken,
         avg_test_score=avg_score,
         streak_days=0,
         subjects_active=subjects_active,
-    )
+    ))
 
 
-@router.post("/fcm-token", status_code=status.HTTP_200_OK)
+@router.post("/fcm-token", status_code=status.HTTP_200_OK, response_model=CommonResponse[MessageResponse])
 async def register_fcm_token(
     body: FCMTokenRequest,
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> dict[str, str]:
+) -> CommonResponse[MessageResponse]:
     existing = await db.execute(
         select(FCMToken).where(
             FCMToken.user_id == user.id, FCMToken.token == body.token
@@ -103,4 +103,4 @@ async def register_fcm_token(
     if existing.scalar_one_or_none() is None:
         db.add(FCMToken(user_id=user.id, token=body.token, platform=body.platform))
         await db.commit()
-    return {"message": "Token registered"}
+    return CommonResponse.ok(MessageResponse(message="Token registered"))

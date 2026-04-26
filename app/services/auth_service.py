@@ -10,6 +10,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
+from app.models.auth import TokenBlacklist
 from app.models.user import FreeTrial, User
 from app.redis_client import redis
 
@@ -39,7 +40,6 @@ async def authenticate_admin(db: AsyncSession, email: str, password: str) -> Use
 
 
 def _ensure_firebase() -> None:
-    """Initialize the Firebase Admin SDK if not already done."""
     try:
         firebase_admin.get_app()
     except ValueError:
@@ -64,7 +64,6 @@ def _ensure_firebase() -> None:
 
 
 def verify_firebase_token(firebase_token: str) -> dict[str, Any]:
-    """Verify a Firebase ID token and return its decoded claims."""
     _ensure_firebase()
     try:
         return firebase_auth.verify_id_token(firebase_token)
@@ -73,7 +72,6 @@ def verify_firebase_token(firebase_token: str) -> dict[str, Any]:
 
 
 def create_access_token(user_id: uuid.UUID, role: str) -> tuple[str, str]:
-    """Create a signed JWT and return (token, jti)."""
     jti = str(uuid.uuid4())
     expire = datetime.now(timezone.utc) + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     payload = {
@@ -87,7 +85,6 @@ def create_access_token(user_id: uuid.UUID, role: str) -> tuple[str, str]:
 
 
 def decode_access_token(token: str) -> dict[str, Any]:
-    """Decode and verify a JWT, raising ValueError on failure."""
     try:
         return jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
     except JWTError as exc:
@@ -95,19 +92,34 @@ def decode_access_token(token: str) -> dict[str, Any]:
 
 
 async def store_token_jti(jti: str) -> None:
-    """Persist a JTI in Redis so the token can be validated and revoked."""
     ttl = settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60
     await redis.set(f"jwt:{jti}", "1", ex=ttl)
 
 
-async def is_token_valid(jti: str) -> bool:
-    """Return True if the JTI is still present in Redis (not revoked)."""
-    return await redis.exists(f"jwt:{jti}") == 1
+async def is_token_valid(jti: str, db: AsyncSession | None = None) -> bool:
+    # Fast path: JTI present in Redis → valid
+    if await redis.exists(f"jwt:{jti}") == 1:
+        return True
+    # Redis miss: check DB blacklist for explicit revocations.
+    # If the JTI was deliberately revoked, it will be in the blacklist.
+    # If it merely expired from Redis, it's also invalid — JWT expiry enforced by decode_access_token.
+    if db is not None:
+        result = await db.execute(select(TokenBlacklist).where(TokenBlacklist.jti == jti))
+        if result.scalar_one_or_none() is not None:
+            return False
+    # Not in Redis, not blacklisted: optimistically trust JWT signature + expiry
+    return True
 
 
-async def invalidate_token(jti: str) -> None:
-    """Remove a JTI from Redis, effectively revoking the token."""
+async def invalidate_token(
+    jti: str,
+    db: AsyncSession | None = None,
+    expires_at: datetime | None = None,
+) -> None:
     await redis.delete(f"jwt:{jti}")
+    if db is not None and expires_at is not None:
+        db.add(TokenBlacklist(jti=jti, expires_at=expires_at))
+        await db.commit()
 
 
 async def get_or_create_user(
@@ -118,7 +130,6 @@ async def get_or_create_user(
     name: str,
     avatar_url: str | None,
 ) -> tuple[User, bool]:
-    """Fetch an existing user or create a new one with a 7-day free trial."""
     result = await db.execute(select(User).where(User.firebase_uid == firebase_uid))
     user = result.scalar_one_or_none()
 

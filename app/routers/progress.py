@@ -1,14 +1,16 @@
 from datetime import datetime, timezone
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.dependencies import get_current_user, get_db
+from app.exceptions import BadRequestException, NotFoundException
 from app.models.content import Chapter, Lesson, Subject
 from app.models.progress import WatchHistory
 from app.models.user import User
+from app.schemas.common import CommonResponse
 from app.schemas.progress import (
     ChapterProgressResponse,
     LessonProgress,
@@ -21,20 +23,20 @@ from app.schemas.progress import (
 router = APIRouter(prefix="/progress", tags=["progress"])
 
 
-@router.post("/watch", response_model=WatchHeartbeatResponse)
+@router.post("/watch", response_model=CommonResponse[WatchHeartbeatResponse])
 async def watch_heartbeat(
     body: WatchHeartbeatRequest,
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> WatchHeartbeatResponse:
+) -> CommonResponse[WatchHeartbeatResponse]:
     if not (0 <= body.percentage <= 100):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="percentage must be 0–100")
+        raise BadRequestException("percentage must be 0–100")
 
     lesson_exists = await db.execute(
         select(Lesson.id).where(Lesson.id == body.lesson_id, Lesson.is_published.is_(True))
     )
     if lesson_exists.scalar_one_or_none() is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Lesson not found")
+        raise NotFoundException("Lesson not found")
 
     now = datetime.now(timezone.utc)
     is_completed = body.percentage >= 80
@@ -61,14 +63,14 @@ async def watch_heartbeat(
         db.add(wh)
 
     await db.commit()
-    return WatchHeartbeatResponse(is_completed=wh.is_completed)
+    return CommonResponse.ok(WatchHeartbeatResponse(is_completed=wh.is_completed))
 
 
-@router.get("/summary", response_model=ProgressSummaryResponse)
+@router.get("/summary", response_model=CommonResponse[ProgressSummaryResponse])
 async def get_progress_summary(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> ProgressSummaryResponse:
+) -> CommonResponse[ProgressSummaryResponse]:
     subjects_result = await db.execute(
         select(Subject)
         .join(Chapter, Chapter.subject_id == Subject.id)
@@ -113,7 +115,6 @@ async def get_progress_summary(
 
         pct = round(chapters_completed * 100 / chapters_total) if chapters_total else 0
         overall_pcts.append(pct)
-
         subject_progresses.append(
             SubjectProgress(
                 subject_id=subject.id,
@@ -125,20 +126,20 @@ async def get_progress_summary(
         )
 
     overall = round(sum(overall_pcts) / len(overall_pcts)) if overall_pcts else 0
-    return ProgressSummaryResponse(overall_percentage=overall, subjects=subject_progresses)
+    return CommonResponse.ok(ProgressSummaryResponse(overall_percentage=overall, subjects=subject_progresses))
 
 
-@router.get("/chapter/{chapter_id}", response_model=ChapterProgressResponse)
+@router.get("/chapter/{chapter_id}", response_model=CommonResponse[ChapterProgressResponse])
 async def get_chapter_progress(
     chapter_id: UUID,
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> ChapterProgressResponse:
+) -> CommonResponse[ChapterProgressResponse]:
     chapter_result = await db.execute(
         select(Chapter).where(Chapter.id == chapter_id, Chapter.is_published.is_(True))
     )
     if chapter_result.scalar_one_or_none() is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Chapter not found")
+        raise NotFoundException("Chapter not found")
 
     lessons_result = await db.execute(
         select(Lesson).where(Lesson.chapter_id == chapter_id, Lesson.is_published.is_(True))
@@ -158,7 +159,7 @@ async def get_chapter_progress(
     lessons_total = len(lesson_ids)
     percentage = round(lessons_completed * 100 / lessons_total) if lessons_total else 0
 
-    return ChapterProgressResponse(
+    return CommonResponse.ok(ChapterProgressResponse(
         chapter_id=chapter_id,
         lessons_completed=lessons_completed,
         lessons_total=lessons_total,
@@ -171,4 +172,4 @@ async def get_chapter_progress(
             )
             for lid in lesson_ids
         ],
-    )
+    ))

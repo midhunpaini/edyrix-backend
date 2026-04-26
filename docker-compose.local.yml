@@ -14,7 +14,13 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: ${LOCAL_DATABASE_URL:-postgresql+asyncpg://postgres:postgres@postgres:5432/edurix}
+      POSTGRES_SERVER: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-edurix}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_ASYNC_PREFIX: "postgresql+asyncpg://"
+      POSTGRES_SYNC_PREFIX: "postgresql://"
       REDIS_URL: ${LOCAL_REDIS_URL:-redis://redis:6379/0}
     volumes:
       - ./app:/app/app
@@ -38,6 +44,30 @@ services:
       retries: 10
       start_period: 10s
     restart: unless-stopped
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python -m arq app.worker.WorkerSettings
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      POSTGRES_SERVER: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-edurix}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_ASYNC_PREFIX: "postgresql+asyncpg://"
+      POSTGRES_SYNC_PREFIX: "postgresql://"
+      REDIS_URL: ${LOCAL_REDIS_URL:-redis://redis:6379/0}
+    volumes:
+      - ./app:/app/app
 
   redis:
     image: redis:7-alpine

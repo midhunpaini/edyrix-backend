@@ -1,13 +1,15 @@
 from decimal import Decimal
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.dependencies import get_current_user, get_db
+from app.exceptions import NotFoundException
 from app.models.progress import Test, TestAttempt
 from app.models.user import User
+from app.schemas.common import CommonResponse
 from app.schemas.progress import (
     LastAttempt,
     QuestionResult,
@@ -22,18 +24,18 @@ from app.schemas.progress import (
 router = APIRouter(prefix="/tests", tags=["tests"])
 
 
-@router.get("/history", response_model=list[TestHistoryItem])
+@router.get("/history", response_model=CommonResponse[list[TestHistoryItem]])
 async def get_test_history(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> list[TestHistoryItem]:
+) -> CommonResponse[list[TestHistoryItem]]:
     result = await db.execute(
         select(TestAttempt, Test)
         .join(Test, TestAttempt.test_id == Test.id)
         .where(TestAttempt.user_id == user.id)
         .order_by(TestAttempt.completed_at.desc())
     )
-    return [
+    items = [
         TestHistoryItem(
             attempt_id=attempt.id,
             test_title=test.title,
@@ -44,20 +46,21 @@ async def get_test_history(
         )
         for attempt, test in result.all()
     ]
+    return CommonResponse.ok(items)
 
 
-@router.get("/chapter/{chapter_id}", response_model=TestSummaryResponse)
+@router.get("/chapter/{chapter_id}", response_model=CommonResponse[TestSummaryResponse])
 async def get_chapter_test(
     chapter_id: UUID,
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> TestSummaryResponse:
+) -> CommonResponse[TestSummaryResponse]:
     result = await db.execute(
         select(Test).where(Test.chapter_id == chapter_id, Test.is_published.is_(True))
     )
     test = result.scalar_one_or_none()
     if test is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Test not found")
+        raise NotFoundException("Test not found")
 
     last_attempt_result = await db.execute(
         select(TestAttempt)
@@ -67,7 +70,7 @@ async def get_chapter_test(
     )
     last_attempt = last_attempt_result.scalar_one_or_none()
 
-    return TestSummaryResponse(
+    return CommonResponse.ok(TestSummaryResponse(
         id=test.id,
         title=test.title,
         duration_minutes=test.duration_minutes,
@@ -78,21 +81,21 @@ async def get_chapter_test(
             percentage=last_attempt.percentage or Decimal(0),
             completed_at=last_attempt.completed_at,
         ) if last_attempt else None,
-    )
+    ))
 
 
-@router.get("/{test_id}", response_model=TestDetailResponse)
+@router.get("/{test_id}", response_model=CommonResponse[TestDetailResponse])
 async def get_test(
     test_id: UUID,
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> TestDetailResponse:
+) -> CommonResponse[TestDetailResponse]:
     result = await db.execute(
         select(Test).where(Test.id == test_id, Test.is_published.is_(True))
     )
     test = result.scalar_one_or_none()
     if test is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Test not found")
+        raise NotFoundException("Test not found")
 
     questions = [
         TestQuestion(
@@ -104,29 +107,28 @@ async def get_test(
         )
         for q in test.questions
     ]
-
-    return TestDetailResponse(
+    return CommonResponse.ok(TestDetailResponse(
         id=test.id,
         title=test.title,
         duration_minutes=test.duration_minutes,
         total_marks=test.total_marks,
         questions=questions,
-    )
+    ))
 
 
-@router.post("/{test_id}/submit", response_model=SubmitTestResponse)
+@router.post("/{test_id}/submit", response_model=CommonResponse[SubmitTestResponse])
 async def submit_test(
     test_id: UUID,
     body: SubmitTestRequest,
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> SubmitTestResponse:
+) -> CommonResponse[SubmitTestResponse]:
     result = await db.execute(
         select(Test).where(Test.id == test_id, Test.is_published.is_(True))
     )
     test = result.scalar_one_or_none()
     if test is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Test not found")
+        raise NotFoundException("Test not found")
 
     score = 0
     results: list[QuestionResult] = []
@@ -163,4 +165,4 @@ async def submit_test(
     db.add(attempt)
     await db.commit()
 
-    return SubmitTestResponse(score=score, total_marks=total, percentage=pct, results=results)
+    return CommonResponse.ok(SubmitTestResponse(score=score, total_marks=total, percentage=pct, results=results))

@@ -1,12 +1,13 @@
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.dependencies import get_current_user, get_db
 from app.models.doubt import Doubt
 from app.models.user import User
+from app.schemas.common import CommonResponse
 from app.schemas.doubt import (
     DoubtCreateRequest,
     DoubtCreateResponse,
@@ -16,13 +17,12 @@ from app.schemas.doubt import (
 router = APIRouter(prefix="/doubts", tags=["doubts"])
 
 
-@router.post("", response_model=DoubtCreateResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=CommonResponse[DoubtCreateResponse], status_code=status.HTTP_201_CREATED)
 async def create_doubt(
     body: DoubtCreateRequest,
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> DoubtCreateResponse:
-    """Submit a new doubt question."""
+) -> CommonResponse[DoubtCreateResponse]:
     doubt = Doubt(
         user_id=user.id,
         lesson_id=body.lesson_id,
@@ -33,21 +33,20 @@ async def create_doubt(
     db.add(doubt)
     await db.commit()
     await db.refresh(doubt)
-    return DoubtCreateResponse(id=doubt.id, status=doubt.status)
+    return CommonResponse.ok(DoubtCreateResponse(id=doubt.id, status=doubt.status), "Doubt submitted")
 
 
-@router.get("", response_model=list[DoubtListItem])
+@router.get("", response_model=CommonResponse[list[DoubtListItem]])
 async def list_doubts(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
-) -> list[DoubtListItem]:
-    """Return all doubts submitted by the current user."""
+) -> CommonResponse[list[DoubtListItem]]:
     result = await db.execute(
         select(Doubt)
         .where(Doubt.user_id == user.id)
         .order_by(Doubt.created_at.desc())
     )
-    return [
+    items = [
         DoubtListItem(
             id=d.id,
             question_text=d.question_text,
@@ -58,3 +57,4 @@ async def list_doubts(
         )
         for d in result.scalars().all()
     ]
+    return CommonResponse.ok(items)
