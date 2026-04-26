@@ -8,6 +8,7 @@ from pydantic import BaseModel
 class WatchHeartbeatRequest(BaseModel):
     lesson_id: UUID
     percentage: int
+    current_time_seconds: int = 0
 
 
 class WatchHeartbeatResponse(BaseModel):
@@ -41,22 +42,47 @@ class ChapterProgressResponse(BaseModel):
     lessons: list[LessonProgress]
 
 
-class TestSummaryResponse(BaseModel):
-    id: UUID
-    title: str
-    duration_minutes: int
-    total_marks: int
-    question_count: int
-    last_attempt: "LastAttempt | None"
-
-
 class LastAttempt(BaseModel):
     score: int
+    total_marks: int | None = None
     percentage: Decimal
     completed_at: datetime
 
 
-TestSummaryResponse.model_rebuild()
+class TestSummaryResponse(BaseModel):
+    id: UUID
+    title: str
+    subject_id: UUID | None = None
+    subject_name: str | None = None
+    chapter_id: UUID
+    chapter_number: int | None = None
+    chapter_title: str | None = None
+    lesson_id: UUID | None = None
+    lesson_title: str | None = None
+    duration_minutes: int
+    total_marks: int
+    question_count: int
+    is_unlocked: bool = True
+    unlock_reason: str | None = None
+    last_attempt: LastAttempt | None
+
+
+class AvailableTestItem(BaseModel):
+    id: UUID
+    title: str
+    subject_id: UUID
+    subject_name: str
+    chapter_id: UUID
+    chapter_number: int
+    chapter_title: str
+    lesson_id: UUID
+    lesson_title: str
+    duration_minutes: int
+    total_marks: int
+    question_count: int
+    is_unlocked: bool
+    unlock_reason: str | None = None
+    last_attempt: LastAttempt | None
 
 
 class TestQuestion(BaseModel):
@@ -70,6 +96,13 @@ class TestQuestion(BaseModel):
 class TestDetailResponse(BaseModel):
     id: UUID
     title: str
+    subject_id: UUID
+    subject_name: str
+    chapter_id: UUID
+    chapter_number: int
+    chapter_title: str
+    lesson_id: UUID
+    lesson_title: str
     duration_minutes: int
     total_marks: int
     questions: list[TestQuestion]

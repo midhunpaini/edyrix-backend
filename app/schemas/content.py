@@ -1,3 +1,4 @@
+from datetime import datetime
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict
@@ -54,13 +55,37 @@ class LessonSummary(BaseModel):
     title: str
     duration_seconds: int | None
     is_free: bool
+    is_locked: bool = False
     thumbnail_url: str | None
     watch_percentage: int
     is_completed: bool
+    test: "LessonTestSummary | None" = None
+
+
+class LessonTestSummary(BaseModel):
+    id: UUID
+    title: str
+    duration_minutes: int
+    total_marks: int
+    question_count: int
+    is_unlocked: bool
+    unlock_reason: str | None = None
+    last_attempt: "LessonTestAttemptSummary | None" = None
+
+
+class LessonTestAttemptSummary(BaseModel):
+    score: int
+    total_marks: int
+    percentage: float
+    completed_at: datetime
+
+
+LessonSummary.model_rebuild()
 
 
 class ChapterDetailResponse(BaseModel):
     id: UUID
+    subject_id: UUID
     title: str
     lessons: list[LessonSummary]
     has_notes: bool

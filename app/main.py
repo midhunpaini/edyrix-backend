@@ -8,7 +8,7 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 
 from app.config import settings
-from app.content_seed import seed_physics_content
+from app.content_seed import seed_content
 from app.dev_seed import seed_dev_user
 from app.limiter import get_client_ip, limiter
 from app.logger import logger, setup_logging
@@ -20,7 +20,7 @@ setup_logging()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await seed_dev_user()
-    await seed_physics_content()
+    await seed_content()
     yield
 
 

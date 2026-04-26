@@ -335,20 +335,26 @@ async def create_test(
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
 ) -> CommonResponse[TestAdminResponse]:
-    chapter_result = await db.execute(
-        select(Chapter).where(Chapter.id == body.chapter_id)
-    )
-    if chapter_result.scalar_one_or_none() is None:
+    chapter_result = await db.execute(select(Chapter).where(Chapter.id == body.chapter_id))
+    chapter = chapter_result.scalar_one_or_none()
+    if chapter is None:
         raise NotFoundException("Chapter not found")
 
-    existing_test = await db.execute(
-        select(Test).where(Test.chapter_id == body.chapter_id)
-    )
-    if existing_test.scalar_one_or_none():
-        raise ConflictException("Test already exists for this chapter")
+    if body.lesson_id is not None:
+        lesson_result = await db.execute(
+            select(Lesson).where(Lesson.id == body.lesson_id, Lesson.chapter_id == body.chapter_id)
+        )
+        if lesson_result.scalar_one_or_none() is None:
+            raise NotFoundException("Lesson not found for this chapter")
+
+        existing_test = await db.execute(select(Test).where(Test.lesson_id == body.lesson_id))
+        if existing_test.scalar_one_or_none():
+            raise ConflictException("Test already exists for this lesson")
 
     test = Test(
+        subject_id=chapter.subject_id,
         chapter_id=body.chapter_id,
+        lesson_id=body.lesson_id,
         title=body.title,
         duration_minutes=body.duration_minutes,
         total_marks=body.total_marks,
@@ -540,7 +546,9 @@ async def get_chapter_test_admin(
     db: AsyncSession = Depends(get_db),
     _: User = Depends(require_admin),
 ) -> CommonResponse[TestAdminResponse]:
-    result = await db.execute(select(Test).where(Test.chapter_id == chapter_id))
+    result = await db.execute(
+        select(Test).where(Test.chapter_id == chapter_id).order_by(Test.created_at, Test.id).limit(1)
+    )
     test = result.scalar_one_or_none()
     if test is None:
         raise NotFoundException("Test not found")

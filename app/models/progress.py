@@ -29,6 +29,7 @@ class WatchHistory(Base):
         UUID(as_uuid=True), ForeignKey("lessons.id", ondelete="CASCADE"), nullable=False
     )
     watch_percentage: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    current_time_seconds: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     is_completed: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     last_watched_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False, default=_utcnow)
 
@@ -37,8 +38,14 @@ class Test(Base):
     __tablename__ = "tests"
 
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    subject_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("subjects.id", ondelete="CASCADE"), nullable=False
+    )
     chapter_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("chapters.id", ondelete="CASCADE"), nullable=False
+    )
+    lesson_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("lessons.id", ondelete="CASCADE"), nullable=True
     )
     title: Mapped[str] = mapped_column(String(255), nullable=False)
     duration_minutes: Mapped[int] = mapped_column(Integer, nullable=False, default=30)
@@ -47,7 +54,9 @@ class Test(Base):
     is_published: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     created_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False, default=_utcnow)
 
-    chapter: Mapped["Chapter"] = relationship("Chapter", back_populates="test")  # type: ignore[name-defined]
+    subject: Mapped["Subject"] = relationship("Subject")  # type: ignore[name-defined]
+    chapter: Mapped["Chapter"] = relationship("Chapter", back_populates="tests")  # type: ignore[name-defined]
+    lesson: Mapped["Lesson | None"] = relationship("Lesson", back_populates="tests")  # type: ignore[name-defined]
     attempts: Mapped[list["TestAttempt"]] = relationship("TestAttempt", back_populates="test")
 
 

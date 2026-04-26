@@ -1,16 +1,18 @@
 from decimal import Decimal
 from uuid import UUID
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.dependencies import get_current_user, get_db
 from app.exceptions import NotFoundException
-from app.models.progress import Test, TestAttempt
+from app.models.content import Chapter, Lesson, Subject
+from app.models.progress import Test, TestAttempt, WatchHistory
 from app.models.user import User
 from app.schemas.common import CommonResponse
 from app.schemas.progress import (
+    AvailableTestItem,
     LastAttempt,
     QuestionResult,
     SubmitTestRequest,
@@ -20,8 +22,94 @@ from app.schemas.progress import (
     TestQuestion,
     TestSummaryResponse,
 )
+from app.utils.access_control import user_has_access
 
 router = APIRouter(prefix="/tests", tags=["tests"])
+
+
+def _last_attempt_response(attempt: TestAttempt | None) -> LastAttempt | None:
+    if attempt is None:
+        return None
+    return LastAttempt(
+        score=attempt.score,
+        total_marks=attempt.total_marks,
+        percentage=attempt.percentage or Decimal(0),
+        completed_at=attempt.completed_at,
+    )
+
+
+async def _last_attempt_map(
+    db: AsyncSession,
+    user: User,
+    test_ids: list[UUID],
+) -> dict[UUID, TestAttempt]:
+    if not test_ids:
+        return {}
+    result = await db.execute(
+        select(TestAttempt)
+        .where(TestAttempt.user_id == user.id, TestAttempt.test_id.in_(test_ids))
+        .order_by(TestAttempt.completed_at.desc())
+    )
+    attempts: dict[UUID, TestAttempt] = {}
+    for attempt in result.scalars().all():
+        if attempt.test_id not in attempts:
+            attempts[attempt.test_id] = attempt
+    return attempts
+
+
+async def _unlock_state(
+    db: AsyncSession,
+    user: User,
+    lesson: Lesson,
+    subject: Subject,
+) -> tuple[bool, str | None]:
+    if not lesson.is_free:
+        has_access = await user_has_access(db, user, subject.id, subject.class_number)
+        if not has_access:
+            return False, "subscription_required"
+
+    result = await db.execute(
+        select(WatchHistory).where(
+            WatchHistory.user_id == user.id,
+            WatchHistory.lesson_id == lesson.id,
+            WatchHistory.is_completed.is_(True),
+        )
+    )
+    if result.scalar_one_or_none() is None:
+        return False, "complete_lesson"
+    return True, None
+
+
+def _locked_exception(reason: str | None, lesson: Lesson, chapter: Chapter) -> HTTPException:
+    return HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail={
+            "detail": "test_locked",
+            "unlock_reason": reason or "complete_lesson",
+            "lesson_id": str(lesson.id),
+            "lesson_title": lesson.title,
+            "chapter_id": str(chapter.id),
+            "chapter_title": chapter.title,
+        },
+    )
+
+
+async def _test_context_by_id(db: AsyncSession, test_id: UUID):
+    result = await db.execute(
+        select(Test, Subject, Chapter, Lesson)
+        .join(Subject, Test.subject_id == Subject.id)
+        .join(Chapter, Test.chapter_id == Chapter.id)
+        .join(Lesson, Test.lesson_id == Lesson.id)
+        .where(
+            Test.id == test_id,
+            Test.lesson_id.isnot(None),
+            Test.is_published.is_(True),
+            Subject.is_active.is_(True),
+            Chapter.is_published.is_(True),
+            Lesson.is_published.is_(True),
+        )
+    )
+    return result.first()
 
 
 @router.get("/history", response_model=CommonResponse[list[TestHistoryItem]])
@@ -49,6 +137,103 @@ async def get_test_history(
     return CommonResponse.ok(items)
 
 
+@router.get("/available", response_model=CommonResponse[list[AvailableTestItem]])
+async def get_available_tests(
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+) -> CommonResponse[list[AvailableTestItem]]:
+    if user.current_class is None:
+        return CommonResponse.ok([])
+
+    result = await db.execute(
+        select(Test, Subject, Chapter, Lesson)
+        .join(Subject, Test.subject_id == Subject.id)
+        .join(Chapter, Test.chapter_id == Chapter.id)
+        .join(Lesson, Test.lesson_id == Lesson.id)
+        .where(
+            Subject.class_number == user.current_class,
+            Subject.is_active.is_(True),
+            Chapter.is_published.is_(True),
+            Lesson.is_published.is_(True),
+            Test.lesson_id.isnot(None),
+            Test.is_published.is_(True),
+        )
+        .order_by(Subject.order_index, Chapter.order_index, Lesson.order_index, Test.created_at)
+    )
+    rows = result.all()
+    attempts = await _last_attempt_map(db, user, [test.id for test, *_ in rows])
+
+    items: list[AvailableTestItem] = []
+    for test, subject, chapter, lesson in rows:
+        is_unlocked, reason = await _unlock_state(db, user, lesson, subject)
+        items.append(
+            AvailableTestItem(
+                id=test.id,
+                title=test.title,
+                subject_id=subject.id,
+                subject_name=subject.name,
+                chapter_id=chapter.id,
+                chapter_number=chapter.chapter_number,
+                chapter_title=chapter.title,
+                lesson_id=lesson.id,
+                lesson_title=lesson.title,
+                duration_minutes=test.duration_minutes,
+                total_marks=test.total_marks,
+                question_count=len(test.questions),
+                is_unlocked=is_unlocked,
+                unlock_reason=reason,
+                last_attempt=_last_attempt_response(attempts.get(test.id)),
+            )
+        )
+    return CommonResponse.ok(items)
+
+
+@router.get("/lesson/{lesson_id}", response_model=CommonResponse[TestSummaryResponse])
+async def get_lesson_test(
+    lesson_id: UUID,
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+) -> CommonResponse[TestSummaryResponse]:
+    result = await db.execute(
+        select(Test, Subject, Chapter, Lesson)
+        .join(Subject, Test.subject_id == Subject.id)
+        .join(Chapter, Test.chapter_id == Chapter.id)
+        .join(Lesson, Test.lesson_id == Lesson.id)
+        .where(
+            Test.lesson_id == lesson_id,
+            Test.is_published.is_(True),
+            Subject.is_active.is_(True),
+            Chapter.is_published.is_(True),
+            Lesson.is_published.is_(True),
+        )
+        .order_by(Test.created_at, Test.id)
+        .limit(1)
+    )
+    row = result.first()
+    if row is None:
+        raise NotFoundException("Test not found")
+    test, subject, chapter, lesson = row
+    attempts = await _last_attempt_map(db, user, [test.id])
+    is_unlocked, reason = await _unlock_state(db, user, lesson, subject)
+    return CommonResponse.ok(TestSummaryResponse(
+        id=test.id,
+        title=test.title,
+        subject_id=subject.id,
+        subject_name=subject.name,
+        chapter_id=chapter.id,
+        chapter_number=chapter.chapter_number,
+        chapter_title=chapter.title,
+        lesson_id=lesson.id,
+        lesson_title=lesson.title,
+        duration_minutes=test.duration_minutes,
+        total_marks=test.total_marks,
+        question_count=len(test.questions),
+        is_unlocked=is_unlocked,
+        unlock_reason=reason,
+        last_attempt=_last_attempt_response(attempts.get(test.id)),
+    ))
+
+
 @router.get("/chapter/{chapter_id}", response_model=CommonResponse[TestSummaryResponse])
 async def get_chapter_test(
     chapter_id: UUID,
@@ -56,31 +241,41 @@ async def get_chapter_test(
     user: User = Depends(get_current_user),
 ) -> CommonResponse[TestSummaryResponse]:
     result = await db.execute(
-        select(Test).where(Test.chapter_id == chapter_id, Test.is_published.is_(True))
-    )
-    test = result.scalar_one_or_none()
-    if test is None:
-        raise NotFoundException("Test not found")
-
-    last_attempt_result = await db.execute(
-        select(TestAttempt)
-        .where(TestAttempt.user_id == user.id, TestAttempt.test_id == test.id)
-        .order_by(TestAttempt.completed_at.desc())
+        select(Test, Subject, Chapter, Lesson)
+        .join(Subject, Test.subject_id == Subject.id)
+        .join(Chapter, Test.chapter_id == Chapter.id)
+        .join(Lesson, Test.lesson_id == Lesson.id)
+        .where(
+            Test.chapter_id == chapter_id,
+            Test.lesson_id.isnot(None),
+            Test.is_published.is_(True),
+        )
+        .order_by(Lesson.order_index, Test.created_at, Test.id)
         .limit(1)
     )
-    last_attempt = last_attempt_result.scalar_one_or_none()
+    row = result.first()
+    if row is None:
+        raise NotFoundException("Test not found")
+    test, subject, chapter, lesson = row
+    attempts = await _last_attempt_map(db, user, [test.id])
+    is_unlocked, reason = await _unlock_state(db, user, lesson, subject)
 
     return CommonResponse.ok(TestSummaryResponse(
         id=test.id,
         title=test.title,
+        subject_id=subject.id,
+        subject_name=subject.name,
+        chapter_id=chapter.id,
+        chapter_number=chapter.chapter_number,
+        chapter_title=chapter.title,
+        lesson_id=lesson.id,
+        lesson_title=lesson.title,
         duration_minutes=test.duration_minutes,
         total_marks=test.total_marks,
         question_count=len(test.questions),
-        last_attempt=LastAttempt(
-            score=last_attempt.score,
-            percentage=last_attempt.percentage or Decimal(0),
-            completed_at=last_attempt.completed_at,
-        ) if last_attempt else None,
+        is_unlocked=is_unlocked,
+        unlock_reason=reason,
+        last_attempt=_last_attempt_response(attempts.get(test.id)),
     ))
 
 
@@ -90,12 +285,14 @@ async def get_test(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
 ) -> CommonResponse[TestDetailResponse]:
-    result = await db.execute(
-        select(Test).where(Test.id == test_id, Test.is_published.is_(True))
-    )
-    test = result.scalar_one_or_none()
-    if test is None:
+    row = await _test_context_by_id(db, test_id)
+    if row is None:
         raise NotFoundException("Test not found")
+    test, subject, chapter, lesson = row
+
+    is_unlocked, reason = await _unlock_state(db, user, lesson, subject)
+    if not is_unlocked:
+        raise _locked_exception(reason, lesson, chapter)
 
     questions = [
         TestQuestion(
@@ -110,6 +307,13 @@ async def get_test(
     return CommonResponse.ok(TestDetailResponse(
         id=test.id,
         title=test.title,
+        subject_id=subject.id,
+        subject_name=subject.name,
+        chapter_id=chapter.id,
+        chapter_number=chapter.chapter_number,
+        chapter_title=chapter.title,
+        lesson_id=lesson.id,
+        lesson_title=lesson.title,
         duration_minutes=test.duration_minutes,
         total_marks=test.total_marks,
         questions=questions,
@@ -123,12 +327,14 @@ async def submit_test(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
 ) -> CommonResponse[SubmitTestResponse]:
-    result = await db.execute(
-        select(Test).where(Test.id == test_id, Test.is_published.is_(True))
-    )
-    test = result.scalar_one_or_none()
-    if test is None:
+    row = await _test_context_by_id(db, test_id)
+    if row is None:
         raise NotFoundException("Test not found")
+    test, subject, chapter, lesson = row
+
+    is_unlocked, reason = await _unlock_state(db, user, lesson, subject)
+    if not is_unlocked:
+        raise _locked_exception(reason, lesson, chapter)
 
     score = 0
     results: list[QuestionResult] = []

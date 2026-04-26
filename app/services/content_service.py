@@ -5,7 +5,7 @@ from sqlalchemy import and_, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.content import Chapter, Lesson, Note, Subject
-from app.models.progress import Test, WatchHistory
+from app.models.progress import Test, TestAttempt, WatchHistory
 from app.models.subscription import Plan
 from app.models.user import User
 from app.schemas.content import (
@@ -14,6 +14,8 @@ from app.schemas.content import (
     ClassSummary,
     LessonPlayResponse,
     LessonSummary,
+    LessonTestAttemptSummary,
+    LessonTestSummary,
     NotesResponse,
     SubjectDetailResponse,
     SubjectListItem,
@@ -147,11 +149,18 @@ async def get_chapter_detail(
 ) -> ChapterDetailResponse | None:
     """Return chapter detail with lesson list and per-lesson watch progress."""
     chapter_result = await db.execute(
-        select(Chapter).where(Chapter.id == chapter_id, Chapter.is_published.is_(True))
+        select(Chapter, Subject)
+        .join(Subject, Chapter.subject_id == Subject.id)
+        .where(
+            Chapter.id == chapter_id,
+            Chapter.is_published.is_(True),
+            Subject.is_active.is_(True),
+        )
     )
-    chapter = chapter_result.scalar_one_or_none()
-    if chapter is None:
+    row = chapter_result.first()
+    if row is None:
         return None
+    chapter, subject = row
 
     lessons_result = await db.execute(
         select(Lesson)
@@ -172,18 +181,82 @@ async def get_chapter_detail(
         for wh in wh_result.scalars().all():
             watch_map[wh.lesson_id] = wh
 
-    lesson_summaries = [
-        LessonSummary(
-            id=lesson.id,
-            title=lesson.title,
-            duration_seconds=lesson.duration_seconds,
-            is_free=lesson.is_free,
-            thumbnail_url=lesson.thumbnail_url,
-            watch_percentage=watch_map[lesson.id].watch_percentage if lesson.id in watch_map else 0,
-            is_completed=watch_map[lesson.id].is_completed if lesson.id in watch_map else False,
+    tests_by_lesson: dict[uuid.UUID, Test] = {}
+    attempts_by_test: dict[uuid.UUID, TestAttempt] = {}
+    if lesson_ids:
+        tests_result = await db.execute(
+            select(Test)
+            .where(
+                Test.lesson_id.in_(lesson_ids),
+                Test.is_published.is_(True),
+            )
+            .order_by(Test.created_at, Test.id)
         )
-        for lesson in lessons
-    ]
+        for test in tests_result.scalars().all():
+            if test.lesson_id is not None and test.lesson_id not in tests_by_lesson:
+                tests_by_lesson[test.lesson_id] = test
+
+        if tests_by_lesson:
+            attempts_result = await db.execute(
+                select(TestAttempt)
+                .where(
+                    TestAttempt.user_id == user.id,
+                    TestAttempt.test_id.in_([test.id for test in tests_by_lesson.values()]),
+                )
+                .order_by(TestAttempt.completed_at.desc())
+            )
+            for attempt in attempts_result.scalars().all():
+                if attempt.test_id not in attempts_by_test:
+                    attempts_by_test[attempt.test_id] = attempt
+
+    has_access = await user_has_access(db, user, subject.id, subject.class_number)
+
+    lesson_summaries: list[LessonSummary] = []
+    for lesson in lessons:
+        watch = watch_map.get(lesson.id)
+        test = tests_by_lesson.get(lesson.id)
+        test_summary: LessonTestSummary | None = None
+        if test is not None:
+            is_lesson_completed = watch.is_completed if watch else False
+            is_unlocked = is_lesson_completed and (lesson.is_free or has_access)
+            unlock_reason = None
+            if not lesson.is_free and not has_access:
+                unlock_reason = "subscription_required"
+            elif not is_lesson_completed:
+                unlock_reason = "complete_lesson"
+
+            last_attempt = attempts_by_test.get(test.id)
+            test_summary = LessonTestSummary(
+                id=test.id,
+                title=test.title,
+                duration_minutes=test.duration_minutes,
+                total_marks=test.total_marks,
+                question_count=len(test.questions),
+                is_unlocked=is_unlocked,
+                unlock_reason=unlock_reason,
+                last_attempt=LessonTestAttemptSummary(
+                    score=last_attempt.score,
+                    total_marks=last_attempt.total_marks,
+                    percentage=float(last_attempt.percentage or 0),
+                    completed_at=last_attempt.completed_at,
+                )
+                if last_attempt
+                else None,
+            )
+
+        lesson_summaries.append(
+            LessonSummary(
+                id=lesson.id,
+                title=lesson.title,
+                duration_seconds=lesson.duration_seconds,
+                is_free=lesson.is_free,
+                is_locked=not lesson.is_free and not has_access,
+                thumbnail_url=lesson.thumbnail_url,
+                watch_percentage=watch.watch_percentage if watch else 0,
+                is_completed=watch.is_completed if watch else False,
+                test=test_summary,
+            )
+        )
 
     has_notes_result = await db.execute(
         select(func.count(Note.id)).where(Note.chapter_id == chapter_id)
@@ -191,12 +264,17 @@ async def get_chapter_detail(
     has_notes = (has_notes_result.scalar() or 0) > 0
 
     test_result = await db.execute(
-        select(Test.id).where(Test.chapter_id == chapter_id, Test.is_published.is_(True))
+        select(Test.id).where(
+            Test.chapter_id == chapter_id,
+            Test.lesson_id.isnot(None),
+            Test.is_published.is_(True),
+        ).limit(1)
     )
     test_id = test_result.scalar_one_or_none()
 
     return ChapterDetailResponse(
         id=chapter.id,
+        subject_id=subject.id,
         title=chapter.title,
         lessons=lesson_summaries,
         has_notes=has_notes,
@@ -235,7 +313,7 @@ async def get_lesson_play(
     )
     wh = wh_result.scalar_one_or_none()
     watch_pct = wh.watch_percentage if wh else 0
-    resume_at = round((watch_pct / 100) * (lesson.duration_seconds or 0))
+    resume_at = wh.current_time_seconds if wh else 0
 
     return LessonPlayResponse(
         youtube_video_id=lesson.youtube_video_id,
@@ -326,13 +404,13 @@ async def _subject_watch_percentage(
     if not lesson_ids:
         return 0
 
-    avg_result = await db.execute(
-        select(func.coalesce(func.avg(WatchHistory.watch_percentage), 0)).where(
+    total_result = await db.execute(
+        select(func.coalesce(func.sum(WatchHistory.watch_percentage), 0)).where(
             WatchHistory.user_id == user_id,
             WatchHistory.lesson_id.in_(lesson_ids),
         )
     )
-    return round(float(avg_result.scalar() or 0))
+    return round(float(total_result.scalar() or 0) / len(lesson_ids))
 
 
 async def _chapter_summary(
@@ -349,21 +427,23 @@ async def _chapter_summary(
 
     test_result = await db.execute(
         select(Test.id).where(
-            Test.chapter_id == chapter.id, Test.is_published.is_(True)
-        )
+            Test.chapter_id == chapter.id,
+            Test.lesson_id.isnot(None),
+            Test.is_published.is_(True),
+        ).limit(1)
     )
     has_test = test_result.scalar_one_or_none() is not None
 
     watch_pct = 0
     is_completed = False
     if lesson_ids:
-        avg_result = await db.execute(
-            select(func.coalesce(func.avg(WatchHistory.watch_percentage), 0)).where(
+        total_result = await db.execute(
+            select(func.coalesce(func.sum(WatchHistory.watch_percentage), 0)).where(
                 WatchHistory.user_id == user_id,
                 WatchHistory.lesson_id.in_(lesson_ids),
             )
         )
-        watch_pct = round(float(avg_result.scalar() or 0))
+        watch_pct = round(float(total_result.scalar() or 0) / lesson_count)
 
         completed_result = await db.execute(
             select(func.count(WatchHistory.id)).where(

@@ -38,7 +38,6 @@ railway.toml
 # ── Dev utility scripts ───────────────────────────────────────────
 create_admin.py
 seed.py
-seed_data/
 
 # ── Logs ──────────────────────────────────────────────────────────
 *.log

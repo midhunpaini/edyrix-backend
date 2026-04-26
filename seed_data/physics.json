@@ -7,6 +7,363 @@
       "title_ml": "Effects of Electric Current",
       "description": "Heating effect, power, resistance, safety devices and domestic electric circuits.",
       "order_index": 1,
+      "lessons": [
+        {
+          "title": "Effects of Electric Current - Overview",
+          "title_ml": "Effects of Electric Current - Overview",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Effects of Electric Current - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c1-l1-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Effects of Electric Current - Overview",
+                  "Heating Effect and Joule's Law",
+                  "Effects of Electric Current",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Effects of Electric Current - Overview."
+              },
+              {
+                "id": "phy-c1-l1-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Effects of Electric Current",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Effects of Electric Current."
+              },
+              {
+                "id": "phy-c1-l1-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Heating Effect and Joule's Law",
+          "title_ml": "Heating Effect and Joule's Law",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Heating Effect and Joule's Law - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c1-l2-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Heating Effect and Joule's Law",
+                  "Effects of Electric Current - Overview",
+                  "Effects of Electric Current",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Heating Effect and Joule's Law."
+              },
+              {
+                "id": "phy-c1-l2-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Effects of Electric Current",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Effects of Electric Current."
+              },
+              {
+                "id": "phy-c1-l2-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Power, Energy and Domestic Circuits",
+          "title_ml": "Power, Energy and Domestic Circuits",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Power, Energy and Domestic Circuits - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c1-l3-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Power, Energy and Domestic Circuits",
+                  "Effects of Electric Current - Overview",
+                  "Effects of Electric Current",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Power, Energy and Domestic Circuits."
+              },
+              {
+                "id": "phy-c1-l3-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Effects of Electric Current",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Effects of Electric Current."
+              },
+              {
+                "id": "phy-c1-l3-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Safety Devices and Earthing",
+          "title_ml": "Safety Devices and Earthing",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Safety Devices and Earthing - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c1-l4-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Safety Devices and Earthing",
+                  "Effects of Electric Current - Overview",
+                  "Effects of Electric Current",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Safety Devices and Earthing."
+              },
+              {
+                "id": "phy-c1-l4-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Effects of Electric Current",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Effects of Electric Current."
+              },
+              {
+                "id": "phy-c1-l4-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Effects of Electric Current - Revision",
+          "title_ml": "Effects of Electric Current - Revision",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Effects of Electric Current - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 8,
+            "questions": [
+              {
+                "id": "ph10-1-q1",
+                "text": "Which effect of electric current is used in an electric heater?",
+                "text_ml": "",
+                "options": [
+                  "Magnetic effect",
+                  "Heating effect",
+                  "Chemical effect",
+                  "Photoelectric effect"
+                ],
+                "correct_answer": 1,
+                "explanation": "An electric heater converts electrical energy into heat due to the heating effect of current.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-1-q2",
+                "text": "The SI unit of electric power is:",
+                "text_ml": "",
+                "options": [
+                  "Joule",
+                  "Ohm",
+                  "Watt",
+                  "Ampere"
+                ],
+                "correct_answer": 2,
+                "explanation": "Electric power is the rate of doing electrical work. Its SI unit is watt.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-1-q3",
+                "text": "Which relation gives the heat produced in a resistor?",
+                "text_ml": "",
+                "options": [
+                  "H = IRT",
+                  "H = I^2Rt",
+                  "H = IR^2t",
+                  "H = VIt^2"
+                ],
+                "correct_answer": 1,
+                "explanation": "Joule's law of heating is H = I^2Rt.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-1-q4",
+                "text": "A fuse wire is connected in a circuit to:",
+                "text_ml": "",
+                "options": [
+                  "Increase voltage",
+                  "Reduce resistance",
+                  "Protect from excess current",
+                  "Store charge"
+                ],
+                "correct_answer": 2,
+                "explanation": "A fuse melts and breaks the circuit when current exceeds the safe limit.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-1-q5",
+                "text": "For a given voltage, current is inversely proportional to:",
+                "text_ml": "",
+                "options": [
+                  "Resistance",
+                  "Power",
+                  "Time",
+                  "Charge"
+                ],
+                "correct_answer": 0,
+                "explanation": "By Ohm's law, I = V/R. At fixed voltage, current decreases when resistance increases.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-1-q6",
+                "text": "Which material is commonly used as the heating element in appliances?",
+                "text_ml": "",
+                "options": [
+                  "Copper",
+                  "Aluminium",
+                  "Nichrome",
+                  "Silver"
+                ],
+                "correct_answer": 2,
+                "explanation": "Nichrome has high resistance and high melting point, so it is suitable for heating elements.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-1-q7",
+                "text": "One unit of electrical energy used in household billing is:",
+                "text_ml": "",
+                "options": [
+                  "1 watt",
+                  "1 kilowatt hour",
+                  "1 ampere hour",
+                  "1 volt"
+                ],
+                "correct_answer": 1,
+                "explanation": "Electricity consumption is commonly measured in kilowatt hour.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-1-q8",
+                "text": "Earthing of appliances mainly helps to:",
+                "text_ml": "",
+                "options": [
+                  "Increase brightness",
+                  "Prevent electric shock",
+                  "Increase power",
+                  "Reduce voltage supply"
+                ],
+                "correct_answer": 1,
+                "explanation": "Earthing provides a low resistance path for leakage current and protects users from electric shock.",
+                "marks": 1
+              }
+            ]
+          }
+        }
+      ],
       "test": {
         "title": "Effects of Electric Current - Chapter Test",
         "duration_minutes": 15,
@@ -16,7 +373,12 @@
             "id": "ph10-1-q1",
             "text": "Which effect of electric current is used in an electric heater?",
             "text_ml": "",
-            "options": ["Magnetic effect", "Heating effect", "Chemical effect", "Photoelectric effect"],
+            "options": [
+              "Magnetic effect",
+              "Heating effect",
+              "Chemical effect",
+              "Photoelectric effect"
+            ],
             "correct_answer": 1,
             "explanation": "An electric heater converts electrical energy into heat due to the heating effect of current.",
             "marks": 1
@@ -25,7 +387,12 @@
             "id": "ph10-1-q2",
             "text": "The SI unit of electric power is:",
             "text_ml": "",
-            "options": ["Joule", "Ohm", "Watt", "Ampere"],
+            "options": [
+              "Joule",
+              "Ohm",
+              "Watt",
+              "Ampere"
+            ],
             "correct_answer": 2,
             "explanation": "Electric power is the rate of doing electrical work. Its SI unit is watt.",
             "marks": 1
@@ -34,7 +401,12 @@
             "id": "ph10-1-q3",
             "text": "Which relation gives the heat produced in a resistor?",
             "text_ml": "",
-            "options": ["H = IRT", "H = I^2Rt", "H = IR^2t", "H = VIt^2"],
+            "options": [
+              "H = IRT",
+              "H = I^2Rt",
+              "H = IR^2t",
+              "H = VIt^2"
+            ],
             "correct_answer": 1,
             "explanation": "Joule's law of heating is H = I^2Rt.",
             "marks": 1
@@ -43,7 +415,12 @@
             "id": "ph10-1-q4",
             "text": "A fuse wire is connected in a circuit to:",
             "text_ml": "",
-            "options": ["Increase voltage", "Reduce resistance", "Protect from excess current", "Store charge"],
+            "options": [
+              "Increase voltage",
+              "Reduce resistance",
+              "Protect from excess current",
+              "Store charge"
+            ],
             "correct_answer": 2,
             "explanation": "A fuse melts and breaks the circuit when current exceeds the safe limit.",
             "marks": 1
@@ -52,7 +429,12 @@
             "id": "ph10-1-q5",
             "text": "For a given voltage, current is inversely proportional to:",
             "text_ml": "",
-            "options": ["Resistance", "Power", "Time", "Charge"],
+            "options": [
+              "Resistance",
+              "Power",
+              "Time",
+              "Charge"
+            ],
             "correct_answer": 0,
             "explanation": "By Ohm's law, I = V/R. At fixed voltage, current decreases when resistance increases.",
             "marks": 1
@@ -61,7 +443,12 @@
             "id": "ph10-1-q6",
             "text": "Which material is commonly used as the heating element in appliances?",
             "text_ml": "",
-            "options": ["Copper", "Aluminium", "Nichrome", "Silver"],
+            "options": [
+              "Copper",
+              "Aluminium",
+              "Nichrome",
+              "Silver"
+            ],
             "correct_answer": 2,
             "explanation": "Nichrome has high resistance and high melting point, so it is suitable for heating elements.",
             "marks": 1
@@ -70,7 +457,12 @@
             "id": "ph10-1-q7",
             "text": "One unit of electrical energy used in household billing is:",
             "text_ml": "",
-            "options": ["1 watt", "1 kilowatt hour", "1 ampere hour", "1 volt"],
+            "options": [
+              "1 watt",
+              "1 kilowatt hour",
+              "1 ampere hour",
+              "1 volt"
+            ],
             "correct_answer": 1,
             "explanation": "Electricity consumption is commonly measured in kilowatt hour.",
             "marks": 1
@@ -79,7 +471,12 @@
             "id": "ph10-1-q8",
             "text": "Earthing of appliances mainly helps to:",
             "text_ml": "",
-            "options": ["Increase brightness", "Prevent electric shock", "Increase power", "Reduce voltage supply"],
+            "options": [
+              "Increase brightness",
+              "Prevent electric shock",
+              "Increase power",
+              "Reduce voltage supply"
+            ],
             "correct_answer": 1,
             "explanation": "Earthing provides a low resistance path for leakage current and protects users from electric shock.",
             "marks": 1
@@ -93,6 +490,363 @@
       "title_ml": "Magnetic Effect of Electric Current",
       "description": "Magnetic field around current carrying conductors, solenoids, motors and electromagnets.",
       "order_index": 2,
+      "lessons": [
+        {
+          "title": "Magnetic Effect of Electric Current - Overview",
+          "title_ml": "Magnetic Effect of Electric Current - Overview",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Magnetic Effect of Electric Current - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c2-l1-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Magnetic Effect of Electric Current - Overview",
+                  "Magnetic Field Around Conductors",
+                  "Magnetic Effect of Electric Current",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Magnetic Effect of Electric Current - Overview."
+              },
+              {
+                "id": "phy-c2-l1-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Magnetic Effect of Electric Current",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Magnetic Effect of Electric Current."
+              },
+              {
+                "id": "phy-c2-l1-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Magnetic Field Around Conductors",
+          "title_ml": "Magnetic Field Around Conductors",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Magnetic Field Around Conductors - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c2-l2-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Magnetic Field Around Conductors",
+                  "Magnetic Effect of Electric Current - Overview",
+                  "Magnetic Effect of Electric Current",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Magnetic Field Around Conductors."
+              },
+              {
+                "id": "phy-c2-l2-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Magnetic Effect of Electric Current",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Magnetic Effect of Electric Current."
+              },
+              {
+                "id": "phy-c2-l2-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Solenoids and Electromagnets",
+          "title_ml": "Solenoids and Electromagnets",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Solenoids and Electromagnets - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c2-l3-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Solenoids and Electromagnets",
+                  "Magnetic Effect of Electric Current - Overview",
+                  "Magnetic Effect of Electric Current",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Solenoids and Electromagnets."
+              },
+              {
+                "id": "phy-c2-l3-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Magnetic Effect of Electric Current",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Magnetic Effect of Electric Current."
+              },
+              {
+                "id": "phy-c2-l3-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Electric Motor Applications",
+          "title_ml": "Electric Motor Applications",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Electric Motor Applications - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c2-l4-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Electric Motor Applications",
+                  "Magnetic Effect of Electric Current - Overview",
+                  "Magnetic Effect of Electric Current",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Electric Motor Applications."
+              },
+              {
+                "id": "phy-c2-l4-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Magnetic Effect of Electric Current",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Magnetic Effect of Electric Current."
+              },
+              {
+                "id": "phy-c2-l4-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Magnetic Effect - Revision",
+          "title_ml": "Magnetic Effect - Revision",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Magnetic Effect - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 8,
+            "questions": [
+              {
+                "id": "ph10-2-q1",
+                "text": "A current carrying conductor produces:",
+                "text_ml": "",
+                "options": [
+                  "Only heat",
+                  "A magnetic field",
+                  "Only light",
+                  "Only sound"
+                ],
+                "correct_answer": 1,
+                "explanation": "An electric current produces a magnetic field around the conductor.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-2-q2",
+                "text": "The magnetic field lines around a straight current carrying conductor are:",
+                "text_ml": "",
+                "options": [
+                  "Straight parallel lines",
+                  "Concentric circles",
+                  "Radial lines",
+                  "Ellipses only"
+                ],
+                "correct_answer": 1,
+                "explanation": "Around a straight conductor, magnetic field lines form concentric circles.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-2-q3",
+                "text": "A solenoid behaves like:",
+                "text_ml": "",
+                "options": [
+                  "A bar magnet",
+                  "A glass rod",
+                  "A capacitor",
+                  "An insulator"
+                ],
+                "correct_answer": 0,
+                "explanation": "A current carrying solenoid has north and south poles like a bar magnet.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-2-q4",
+                "text": "The device that converts electrical energy into mechanical energy is:",
+                "text_ml": "",
+                "options": [
+                  "Generator",
+                  "Motor",
+                  "Transformer",
+                  "Fuse"
+                ],
+                "correct_answer": 1,
+                "explanation": "An electric motor converts electrical energy into mechanical motion.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-2-q5",
+                "text": "The strength of an electromagnet can be increased by:",
+                "text_ml": "",
+                "options": [
+                  "Reducing current",
+                  "Removing the core",
+                  "Increasing turns in the coil",
+                  "Using plastic core"
+                ],
+                "correct_answer": 2,
+                "explanation": "More turns and larger current increase the magnetic field of an electromagnet.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-2-q6",
+                "text": "The direction of force on a current carrying conductor in a magnetic field is found using:",
+                "text_ml": "",
+                "options": [
+                  "Fleming's left hand rule",
+                  "Ohm's law",
+                  "Joule's law",
+                  "Snell's law"
+                ],
+                "correct_answer": 0,
+                "explanation": "Fleming's left hand rule gives the direction of force in a motor effect.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-2-q7",
+                "text": "The magnetic field inside a long solenoid is nearly:",
+                "text_ml": "",
+                "options": [
+                  "Zero",
+                  "Uniform",
+                  "Random",
+                  "Circular only"
+                ],
+                "correct_answer": 1,
+                "explanation": "Inside a long solenoid, the magnetic field is strong and nearly uniform.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-2-q8",
+                "text": "A split ring commutator in a DC motor helps to:",
+                "text_ml": "",
+                "options": [
+                  "Reverse current every half rotation",
+                  "Store charge",
+                  "Reduce magnetic field to zero",
+                  "Convert AC to heat"
+                ],
+                "correct_answer": 0,
+                "explanation": "The split ring reverses current in the coil every half turn, keeping rotation in the same direction.",
+                "marks": 1
+              }
+            ]
+          }
+        }
+      ],
       "test": {
         "title": "Magnetic Effect of Electric Current - Chapter Test",
         "duration_minutes": 15,
@@ -102,7 +856,12 @@
             "id": "ph10-2-q1",
             "text": "A current carrying conductor produces:",
             "text_ml": "",
-            "options": ["Only heat", "A magnetic field", "Only light", "Only sound"],
+            "options": [
+              "Only heat",
+              "A magnetic field",
+              "Only light",
+              "Only sound"
+            ],
             "correct_answer": 1,
             "explanation": "An electric current produces a magnetic field around the conductor.",
             "marks": 1
@@ -111,7 +870,12 @@
             "id": "ph10-2-q2",
             "text": "The magnetic field lines around a straight current carrying conductor are:",
             "text_ml": "",
-            "options": ["Straight parallel lines", "Concentric circles", "Radial lines", "Ellipses only"],
+            "options": [
+              "Straight parallel lines",
+              "Concentric circles",
+              "Radial lines",
+              "Ellipses only"
+            ],
             "correct_answer": 1,
             "explanation": "Around a straight conductor, magnetic field lines form concentric circles.",
             "marks": 1
@@ -120,7 +884,12 @@
             "id": "ph10-2-q3",
             "text": "A solenoid behaves like:",
             "text_ml": "",
-            "options": ["A bar magnet", "A glass rod", "A capacitor", "An insulator"],
+            "options": [
+              "A bar magnet",
+              "A glass rod",
+              "A capacitor",
+              "An insulator"
+            ],
             "correct_answer": 0,
             "explanation": "A current carrying solenoid has north and south poles like a bar magnet.",
             "marks": 1
@@ -129,7 +898,12 @@
             "id": "ph10-2-q4",
             "text": "The device that converts electrical energy into mechanical energy is:",
             "text_ml": "",
-            "options": ["Generator", "Motor", "Transformer", "Fuse"],
+            "options": [
+              "Generator",
+              "Motor",
+              "Transformer",
+              "Fuse"
+            ],
             "correct_answer": 1,
             "explanation": "An electric motor converts electrical energy into mechanical motion.",
             "marks": 1
@@ -138,7 +912,12 @@
             "id": "ph10-2-q5",
             "text": "The strength of an electromagnet can be increased by:",
             "text_ml": "",
-            "options": ["Reducing current", "Removing the core", "Increasing turns in the coil", "Using plastic core"],
+            "options": [
+              "Reducing current",
+              "Removing the core",
+              "Increasing turns in the coil",
+              "Using plastic core"
+            ],
             "correct_answer": 2,
             "explanation": "More turns and larger current increase the magnetic field of an electromagnet.",
             "marks": 1
@@ -147,7 +926,12 @@
             "id": "ph10-2-q6",
             "text": "The direction of force on a current carrying conductor in a magnetic field is found using:",
             "text_ml": "",
-            "options": ["Fleming's left hand rule", "Ohm's law", "Joule's law", "Snell's law"],
+            "options": [
+              "Fleming's left hand rule",
+              "Ohm's law",
+              "Joule's law",
+              "Snell's law"
+            ],
             "correct_answer": 0,
             "explanation": "Fleming's left hand rule gives the direction of force in a motor effect.",
             "marks": 1
@@ -156,7 +940,12 @@
             "id": "ph10-2-q7",
             "text": "The magnetic field inside a long solenoid is nearly:",
             "text_ml": "",
-            "options": ["Zero", "Uniform", "Random", "Circular only"],
+            "options": [
+              "Zero",
+              "Uniform",
+              "Random",
+              "Circular only"
+            ],
             "correct_answer": 1,
             "explanation": "Inside a long solenoid, the magnetic field is strong and nearly uniform.",
             "marks": 1
@@ -165,7 +954,12 @@
             "id": "ph10-2-q8",
             "text": "A split ring commutator in a DC motor helps to:",
             "text_ml": "",
-            "options": ["Reverse current every half rotation", "Store charge", "Reduce magnetic field to zero", "Convert AC to heat"],
+            "options": [
+              "Reverse current every half rotation",
+              "Store charge",
+              "Reduce magnetic field to zero",
+              "Convert AC to heat"
+            ],
             "correct_answer": 0,
             "explanation": "The split ring reverses current in the coil every half turn, keeping rotation in the same direction.",
             "marks": 1
@@ -179,6 +973,363 @@
       "title_ml": "Electromagnetic Induction",
       "description": "Induced emf, generators, alternating current, transformers and power transmission.",
       "order_index": 3,
+      "lessons": [
+        {
+          "title": "Electromagnetic Induction - Overview",
+          "title_ml": "Electromagnetic Induction - Overview",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Electromagnetic Induction - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c3-l1-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Electromagnetic Induction - Overview",
+                  "Induced EMF and Lenz's Law",
+                  "Electromagnetic Induction",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Electromagnetic Induction - Overview."
+              },
+              {
+                "id": "phy-c3-l1-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Electromagnetic Induction",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Electromagnetic Induction."
+              },
+              {
+                "id": "phy-c3-l1-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Induced EMF and Lenz's Law",
+          "title_ml": "Induced EMF and Lenz's Law",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Induced EMF and Lenz's Law - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c3-l2-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Induced EMF and Lenz's Law",
+                  "Electromagnetic Induction - Overview",
+                  "Electromagnetic Induction",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Induced EMF and Lenz's Law."
+              },
+              {
+                "id": "phy-c3-l2-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Electromagnetic Induction",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Electromagnetic Induction."
+              },
+              {
+                "id": "phy-c3-l2-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Generators and Alternating Current",
+          "title_ml": "Generators and Alternating Current",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Generators and Alternating Current - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c3-l3-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Generators and Alternating Current",
+                  "Electromagnetic Induction - Overview",
+                  "Electromagnetic Induction",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Generators and Alternating Current."
+              },
+              {
+                "id": "phy-c3-l3-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Electromagnetic Induction",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Electromagnetic Induction."
+              },
+              {
+                "id": "phy-c3-l3-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Transformers and Power Transmission",
+          "title_ml": "Transformers and Power Transmission",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Transformers and Power Transmission - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c3-l4-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Transformers and Power Transmission",
+                  "Electromagnetic Induction - Overview",
+                  "Electromagnetic Induction",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Transformers and Power Transmission."
+              },
+              {
+                "id": "phy-c3-l4-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Electromagnetic Induction",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Electromagnetic Induction."
+              },
+              {
+                "id": "phy-c3-l4-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Electromagnetic Induction - Revision",
+          "title_ml": "Electromagnetic Induction - Revision",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Electromagnetic Induction - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 8,
+            "questions": [
+              {
+                "id": "ph10-3-q1",
+                "text": "Electromagnetic induction is the production of induced current due to:",
+                "text_ml": "",
+                "options": [
+                  "Constant temperature",
+                  "Changing magnetic flux",
+                  "Static charge",
+                  "High resistance only"
+                ],
+                "correct_answer": 1,
+                "explanation": "Induced emf is produced when magnetic flux linked with a circuit changes.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-3-q2",
+                "text": "The direction of induced current is given by:",
+                "text_ml": "",
+                "options": [
+                  "Lenz's law",
+                  "Boyle's law",
+                  "Hooke's law",
+                  "Pascal's law"
+                ],
+                "correct_answer": 0,
+                "explanation": "Lenz's law states that induced current opposes the change that produces it.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-3-q3",
+                "text": "An electric generator converts:",
+                "text_ml": "",
+                "options": [
+                  "Electrical energy to heat",
+                  "Mechanical energy to electrical energy",
+                  "Chemical energy to sound",
+                  "Light energy to mechanical energy"
+                ],
+                "correct_answer": 1,
+                "explanation": "A generator uses electromagnetic induction to convert mechanical work into electrical energy.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-3-q4",
+                "text": "The current supplied by most power stations is:",
+                "text_ml": "",
+                "options": [
+                  "Direct current only",
+                  "Alternating current",
+                  "Static current",
+                  "Pulsed current only"
+                ],
+                "correct_answer": 1,
+                "explanation": "Power stations commonly generate alternating current for transmission.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-3-q5",
+                "text": "A transformer works on the principle of:",
+                "text_ml": "",
+                "options": [
+                  "Electrolysis",
+                  "Mutual induction",
+                  "Thermal expansion",
+                  "Reflection"
+                ],
+                "correct_answer": 1,
+                "explanation": "A transformer transfers energy between coils by mutual induction.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-3-q6",
+                "text": "A step-up transformer increases:",
+                "text_ml": "",
+                "options": [
+                  "Voltage",
+                  "Frequency",
+                  "Resistance of air",
+                  "Speed of light"
+                ],
+                "correct_answer": 0,
+                "explanation": "A step-up transformer has more turns in the secondary coil and increases voltage.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-3-q7",
+                "text": "Power loss in transmission lines can be reduced by transmitting at:",
+                "text_ml": "",
+                "options": [
+                  "Low voltage and high current",
+                  "High voltage and low current",
+                  "Zero voltage",
+                  "High resistance"
+                ],
+                "correct_answer": 1,
+                "explanation": "For the same power, high voltage reduces current and therefore reduces I^2R loss.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-3-q8",
+                "text": "The frequency of AC in Indian domestic supply is:",
+                "text_ml": "",
+                "options": [
+                  "25 Hz",
+                  "50 Hz",
+                  "100 Hz",
+                  "220 Hz"
+                ],
+                "correct_answer": 1,
+                "explanation": "Indian domestic AC supply has a frequency of 50 Hz.",
+                "marks": 1
+              }
+            ]
+          }
+        }
+      ],
       "test": {
         "title": "Electromagnetic Induction - Chapter Test",
         "duration_minutes": 15,
@@ -188,7 +1339,12 @@
             "id": "ph10-3-q1",
             "text": "Electromagnetic induction is the production of induced current due to:",
             "text_ml": "",
-            "options": ["Constant temperature", "Changing magnetic flux", "Static charge", "High resistance only"],
+            "options": [
+              "Constant temperature",
+              "Changing magnetic flux",
+              "Static charge",
+              "High resistance only"
+            ],
             "correct_answer": 1,
             "explanation": "Induced emf is produced when magnetic flux linked with a circuit changes.",
             "marks": 1
@@ -197,7 +1353,12 @@
             "id": "ph10-3-q2",
             "text": "The direction of induced current is given by:",
             "text_ml": "",
-            "options": ["Lenz's law", "Boyle's law", "Hooke's law", "Pascal's law"],
+            "options": [
+              "Lenz's law",
+              "Boyle's law",
+              "Hooke's law",
+              "Pascal's law"
+            ],
             "correct_answer": 0,
             "explanation": "Lenz's law states that induced current opposes the change that produces it.",
             "marks": 1
@@ -206,7 +1367,12 @@
             "id": "ph10-3-q3",
             "text": "An electric generator converts:",
             "text_ml": "",
-            "options": ["Electrical energy to heat", "Mechanical energy to electrical energy", "Chemical energy to sound", "Light energy to mechanical energy"],
+            "options": [
+              "Electrical energy to heat",
+              "Mechanical energy to electrical energy",
+              "Chemical energy to sound",
+              "Light energy to mechanical energy"
+            ],
             "correct_answer": 1,
             "explanation": "A generator uses electromagnetic induction to convert mechanical work into electrical energy.",
             "marks": 1
@@ -215,7 +1381,12 @@
             "id": "ph10-3-q4",
             "text": "The current supplied by most power stations is:",
             "text_ml": "",
-            "options": ["Direct current only", "Alternating current", "Static current", "Pulsed current only"],
+            "options": [
+              "Direct current only",
+              "Alternating current",
+              "Static current",
+              "Pulsed current only"
+            ],
             "correct_answer": 1,
             "explanation": "Power stations commonly generate alternating current for transmission.",
             "marks": 1
@@ -224,7 +1395,12 @@
             "id": "ph10-3-q5",
             "text": "A transformer works on the principle of:",
             "text_ml": "",
-            "options": ["Electrolysis", "Mutual induction", "Thermal expansion", "Reflection"],
+            "options": [
+              "Electrolysis",
+              "Mutual induction",
+              "Thermal expansion",
+              "Reflection"
+            ],
             "correct_answer": 1,
             "explanation": "A transformer transfers energy between coils by mutual induction.",
             "marks": 1
@@ -233,7 +1409,12 @@
             "id": "ph10-3-q6",
             "text": "A step-up transformer increases:",
             "text_ml": "",
-            "options": ["Voltage", "Frequency", "Resistance of air", "Speed of light"],
+            "options": [
+              "Voltage",
+              "Frequency",
+              "Resistance of air",
+              "Speed of light"
+            ],
             "correct_answer": 0,
             "explanation": "A step-up transformer has more turns in the secondary coil and increases voltage.",
             "marks": 1
@@ -242,7 +1423,12 @@
             "id": "ph10-3-q7",
             "text": "Power loss in transmission lines can be reduced by transmitting at:",
             "text_ml": "",
-            "options": ["Low voltage and high current", "High voltage and low current", "Zero voltage", "High resistance"],
+            "options": [
+              "Low voltage and high current",
+              "High voltage and low current",
+              "Zero voltage",
+              "High resistance"
+            ],
             "correct_answer": 1,
             "explanation": "For the same power, high voltage reduces current and therefore reduces I^2R loss.",
             "marks": 1
@@ -251,7 +1437,12 @@
             "id": "ph10-3-q8",
             "text": "The frequency of AC in Indian domestic supply is:",
             "text_ml": "",
-            "options": ["25 Hz", "50 Hz", "100 Hz", "220 Hz"],
+            "options": [
+              "25 Hz",
+              "50 Hz",
+              "100 Hz",
+              "220 Hz"
+            ],
             "correct_answer": 1,
             "explanation": "Indian domestic AC supply has a frequency of 50 Hz.",
             "marks": 1
@@ -265,6 +1456,363 @@
       "title_ml": "Reflection of Light",
       "description": "Reflection laws, spherical mirrors, image formation, mirror formula and magnification.",
       "order_index": 4,
+      "lessons": [
+        {
+          "title": "Reflection of Light - Overview",
+          "title_ml": "Reflection of Light - Overview",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Reflection of Light - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c4-l1-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Reflection of Light - Overview",
+                  "Laws of Reflection",
+                  "Reflection of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Reflection of Light - Overview."
+              },
+              {
+                "id": "phy-c4-l1-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Reflection of Light",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Reflection of Light."
+              },
+              {
+                "id": "phy-c4-l1-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Laws of Reflection",
+          "title_ml": "Laws of Reflection",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Laws of Reflection - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c4-l2-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Laws of Reflection",
+                  "Reflection of Light - Overview",
+                  "Reflection of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Laws of Reflection."
+              },
+              {
+                "id": "phy-c4-l2-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Reflection of Light",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Reflection of Light."
+              },
+              {
+                "id": "phy-c4-l2-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Spherical Mirrors and Image Formation",
+          "title_ml": "Spherical Mirrors and Image Formation",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Spherical Mirrors and Image Formation - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c4-l3-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Spherical Mirrors and Image Formation",
+                  "Reflection of Light - Overview",
+                  "Reflection of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Spherical Mirrors and Image Formation."
+              },
+              {
+                "id": "phy-c4-l3-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Reflection of Light",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Reflection of Light."
+              },
+              {
+                "id": "phy-c4-l3-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Mirror Formula and Magnification",
+          "title_ml": "Mirror Formula and Magnification",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Mirror Formula and Magnification - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c4-l4-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Mirror Formula and Magnification",
+                  "Reflection of Light - Overview",
+                  "Reflection of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Mirror Formula and Magnification."
+              },
+              {
+                "id": "phy-c4-l4-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Reflection of Light",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Reflection of Light."
+              },
+              {
+                "id": "phy-c4-l4-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Reflection of Light - Revision",
+          "title_ml": "Reflection of Light - Revision",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Reflection of Light - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 8,
+            "questions": [
+              {
+                "id": "ph10-4-q1",
+                "text": "The angle of incidence is equal to:",
+                "text_ml": "",
+                "options": [
+                  "Angle of refraction",
+                  "Angle of reflection",
+                  "Focal length",
+                  "Radius of curvature"
+                ],
+                "correct_answer": 1,
+                "explanation": "According to the law of reflection, angle of incidence equals angle of reflection.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-4-q2",
+                "text": "The image formed by a plane mirror is:",
+                "text_ml": "",
+                "options": [
+                  "Real and inverted",
+                  "Virtual and erect",
+                  "Real and enlarged",
+                  "Virtual and inverted"
+                ],
+                "correct_answer": 1,
+                "explanation": "A plane mirror forms a virtual, erect image of the same size as the object.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-4-q3",
+                "text": "A concave mirror can form:",
+                "text_ml": "",
+                "options": [
+                  "Only virtual images",
+                  "Only real images",
+                  "Real or virtual images",
+                  "No images"
+                ],
+                "correct_answer": 2,
+                "explanation": "A concave mirror forms real images for many object positions and a virtual image when the object is between pole and focus.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-4-q4",
+                "text": "The focus of a convex mirror is:",
+                "text_ml": "",
+                "options": [
+                  "Real and in front",
+                  "Virtual and behind the mirror",
+                  "At the pole",
+                  "At infinity only"
+                ],
+                "correct_answer": 1,
+                "explanation": "A convex mirror has a virtual focus behind the mirror.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-4-q5",
+                "text": "The relation between focal length and radius of curvature of a spherical mirror is:",
+                "text_ml": "",
+                "options": [
+                  "f = R",
+                  "f = R/2",
+                  "f = 2R",
+                  "f = R^2"
+                ],
+                "correct_answer": 1,
+                "explanation": "For a spherical mirror, focal length is half the radius of curvature.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-4-q6",
+                "text": "Convex mirrors are used as rear-view mirrors because they:",
+                "text_ml": "",
+                "options": [
+                  "Give a wider field of view",
+                  "Always magnify objects",
+                  "Form only real images",
+                  "Do not reflect light"
+                ],
+                "correct_answer": 0,
+                "explanation": "Convex mirrors form diminished erect images and provide a wider field of view.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-4-q7",
+                "text": "The mirror formula is:",
+                "text_ml": "",
+                "options": [
+                  "1/f = 1/u + 1/v",
+                  "f = u + v",
+                  "R = uv",
+                  "m = u/v"
+                ],
+                "correct_answer": 0,
+                "explanation": "The mirror formula relates focal length, object distance and image distance: 1/f = 1/u + 1/v.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-4-q8",
+                "text": "A real image is formed when reflected rays:",
+                "text_ml": "",
+                "options": [
+                  "Actually meet",
+                  "Appear to diverge from behind the mirror",
+                  "Travel parallel forever",
+                  "Are absorbed"
+                ],
+                "correct_answer": 0,
+                "explanation": "A real image is formed by actual convergence of reflected rays.",
+                "marks": 1
+              }
+            ]
+          }
+        }
+      ],
       "test": {
         "title": "Reflection of Light - Chapter Test",
         "duration_minutes": 15,
@@ -274,7 +1822,12 @@
             "id": "ph10-4-q1",
             "text": "The angle of incidence is equal to:",
             "text_ml": "",
-            "options": ["Angle of refraction", "Angle of reflection", "Focal length", "Radius of curvature"],
+            "options": [
+              "Angle of refraction",
+              "Angle of reflection",
+              "Focal length",
+              "Radius of curvature"
+            ],
             "correct_answer": 1,
             "explanation": "According to the law of reflection, angle of incidence equals angle of reflection.",
             "marks": 1
@@ -283,7 +1836,12 @@
             "id": "ph10-4-q2",
             "text": "The image formed by a plane mirror is:",
             "text_ml": "",
-            "options": ["Real and inverted", "Virtual and erect", "Real and enlarged", "Virtual and inverted"],
+            "options": [
+              "Real and inverted",
+              "Virtual and erect",
+              "Real and enlarged",
+              "Virtual and inverted"
+            ],
             "correct_answer": 1,
             "explanation": "A plane mirror forms a virtual, erect image of the same size as the object.",
             "marks": 1
@@ -292,7 +1850,12 @@
             "id": "ph10-4-q3",
             "text": "A concave mirror can form:",
             "text_ml": "",
-            "options": ["Only virtual images", "Only real images", "Real or virtual images", "No images"],
+            "options": [
+              "Only virtual images",
+              "Only real images",
+              "Real or virtual images",
+              "No images"
+            ],
             "correct_answer": 2,
             "explanation": "A concave mirror forms real images for many object positions and a virtual image when the object is between pole and focus.",
             "marks": 1
@@ -301,7 +1864,12 @@
             "id": "ph10-4-q4",
             "text": "The focus of a convex mirror is:",
             "text_ml": "",
-            "options": ["Real and in front", "Virtual and behind the mirror", "At the pole", "At infinity only"],
+            "options": [
+              "Real and in front",
+              "Virtual and behind the mirror",
+              "At the pole",
+              "At infinity only"
+            ],
             "correct_answer": 1,
             "explanation": "A convex mirror has a virtual focus behind the mirror.",
             "marks": 1
@@ -310,7 +1878,12 @@
             "id": "ph10-4-q5",
             "text": "The relation between focal length and radius of curvature of a spherical mirror is:",
             "text_ml": "",
-            "options": ["f = R", "f = R/2", "f = 2R", "f = R^2"],
+            "options": [
+              "f = R",
+              "f = R/2",
+              "f = 2R",
+              "f = R^2"
+            ],
             "correct_answer": 1,
             "explanation": "For a spherical mirror, focal length is half the radius of curvature.",
             "marks": 1
@@ -319,7 +1892,12 @@
             "id": "ph10-4-q6",
             "text": "Convex mirrors are used as rear-view mirrors because they:",
             "text_ml": "",
-            "options": ["Give a wider field of view", "Always magnify objects", "Form only real images", "Do not reflect light"],
+            "options": [
+              "Give a wider field of view",
+              "Always magnify objects",
+              "Form only real images",
+              "Do not reflect light"
+            ],
             "correct_answer": 0,
             "explanation": "Convex mirrors form diminished erect images and provide a wider field of view.",
             "marks": 1
@@ -328,7 +1906,12 @@
             "id": "ph10-4-q7",
             "text": "The mirror formula is:",
             "text_ml": "",
-            "options": ["1/f = 1/u + 1/v", "f = u + v", "R = uv", "m = u/v"],
+            "options": [
+              "1/f = 1/u + 1/v",
+              "f = u + v",
+              "R = uv",
+              "m = u/v"
+            ],
             "correct_answer": 0,
             "explanation": "The mirror formula relates focal length, object distance and image distance: 1/f = 1/u + 1/v.",
             "marks": 1
@@ -337,7 +1920,12 @@
             "id": "ph10-4-q8",
             "text": "A real image is formed when reflected rays:",
             "text_ml": "",
-            "options": ["Actually meet", "Appear to diverge from behind the mirror", "Travel parallel forever", "Are absorbed"],
+            "options": [
+              "Actually meet",
+              "Appear to diverge from behind the mirror",
+              "Travel parallel forever",
+              "Are absorbed"
+            ],
             "correct_answer": 0,
             "explanation": "A real image is formed by actual convergence of reflected rays.",
             "marks": 1
@@ -351,6 +1939,363 @@
       "title_ml": "Refraction of Light",
       "description": "Refraction, refractive index, lenses, image formation, lens formula and power.",
       "order_index": 5,
+      "lessons": [
+        {
+          "title": "Refraction of Light - Overview",
+          "title_ml": "Refraction of Light - Overview",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Refraction of Light - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c5-l1-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Refraction of Light - Overview",
+                  "Refraction and Refractive Index",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Refraction of Light - Overview."
+              },
+              {
+                "id": "phy-c5-l1-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Refraction of Light",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Refraction of Light."
+              },
+              {
+                "id": "phy-c5-l1-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Refraction and Refractive Index",
+          "title_ml": "Refraction and Refractive Index",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Refraction and Refractive Index - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c5-l2-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Refraction and Refractive Index",
+                  "Refraction of Light - Overview",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Refraction and Refractive Index."
+              },
+              {
+                "id": "phy-c5-l2-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Refraction of Light",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Refraction of Light."
+              },
+              {
+                "id": "phy-c5-l2-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Lenses and Image Formation",
+          "title_ml": "Lenses and Image Formation",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Lenses and Image Formation - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c5-l3-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Lenses and Image Formation",
+                  "Refraction of Light - Overview",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Lenses and Image Formation."
+              },
+              {
+                "id": "phy-c5-l3-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Refraction of Light",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Refraction of Light."
+              },
+              {
+                "id": "phy-c5-l3-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Lens Formula and Power",
+          "title_ml": "Lens Formula and Power",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Lens Formula and Power - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c5-l4-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Lens Formula and Power",
+                  "Refraction of Light - Overview",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Lens Formula and Power."
+              },
+              {
+                "id": "phy-c5-l4-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Refraction of Light",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Refraction of Light."
+              },
+              {
+                "id": "phy-c5-l4-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Refraction of Light - Revision",
+          "title_ml": "Refraction of Light - Revision",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Refraction of Light - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 8,
+            "questions": [
+              {
+                "id": "ph10-5-q1",
+                "text": "Refraction is the bending of light when it:",
+                "text_ml": "",
+                "options": [
+                  "Reflects from a mirror",
+                  "Passes from one medium to another",
+                  "Travels in vacuum only",
+                  "Is absorbed completely"
+                ],
+                "correct_answer": 1,
+                "explanation": "Light bends at the boundary between two media because its speed changes.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-5-q2",
+                "text": "When light travels from air to glass, it bends:",
+                "text_ml": "",
+                "options": [
+                  "Away from the normal",
+                  "Towards the normal",
+                  "Along the surface",
+                  "Back into air always"
+                ],
+                "correct_answer": 1,
+                "explanation": "Glass is optically denser than air, so light bends towards the normal.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-5-q3",
+                "text": "A convex lens is also called a:",
+                "text_ml": "",
+                "options": [
+                  "Diverging lens",
+                  "Converging lens",
+                  "Plane mirror",
+                  "Prism only"
+                ],
+                "correct_answer": 1,
+                "explanation": "A convex lens converges parallel rays to its focus.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-5-q4",
+                "text": "A concave lens usually forms an image that is:",
+                "text_ml": "",
+                "options": [
+                  "Real and enlarged",
+                  "Virtual, erect and diminished",
+                  "Real and inverted",
+                  "Same size and real"
+                ],
+                "correct_answer": 1,
+                "explanation": "A concave lens diverges light and forms a virtual, erect, diminished image for a real object.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-5-q5",
+                "text": "Power of a lens is measured in:",
+                "text_ml": "",
+                "options": [
+                  "Metre",
+                  "Dioptre",
+                  "Tesla",
+                  "Newton"
+                ],
+                "correct_answer": 1,
+                "explanation": "Lens power is measured in dioptre.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-5-q6",
+                "text": "The power of a lens with focal length 0.5 m is:",
+                "text_ml": "",
+                "options": [
+                  "0.5 D",
+                  "1 D",
+                  "2 D",
+                  "5 D"
+                ],
+                "correct_answer": 2,
+                "explanation": "Power P = 1/f in metres = 1/0.5 = 2 D.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-5-q7",
+                "text": "The refractive index of a medium equals:",
+                "text_ml": "",
+                "options": [
+                  "Speed of light in medium / speed in vacuum",
+                  "Speed of light in vacuum / speed in medium",
+                  "Mass / volume",
+                  "Image distance / object distance"
+                ],
+                "correct_answer": 1,
+                "explanation": "Absolute refractive index n = c/v.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-5-q8",
+                "text": "Total internal reflection occurs when light travels from:",
+                "text_ml": "",
+                "options": [
+                  "Rarer to denser medium at any angle",
+                  "Denser to rarer medium beyond critical angle",
+                  "Vacuum to air only",
+                  "Mirror to air"
+                ],
+                "correct_answer": 1,
+                "explanation": "Total internal reflection occurs from denser to rarer medium when incidence angle exceeds the critical angle.",
+                "marks": 1
+              }
+            ]
+          }
+        }
+      ],
       "test": {
         "title": "Refraction of Light - Chapter Test",
         "duration_minutes": 15,
@@ -360,7 +2305,12 @@
             "id": "ph10-5-q1",
             "text": "Refraction is the bending of light when it:",
             "text_ml": "",
-            "options": ["Reflects from a mirror", "Passes from one medium to another", "Travels in vacuum only", "Is absorbed completely"],
+            "options": [
+              "Reflects from a mirror",
+              "Passes from one medium to another",
+              "Travels in vacuum only",
+              "Is absorbed completely"
+            ],
             "correct_answer": 1,
             "explanation": "Light bends at the boundary between two media because its speed changes.",
             "marks": 1
@@ -369,7 +2319,12 @@
             "id": "ph10-5-q2",
             "text": "When light travels from air to glass, it bends:",
             "text_ml": "",
-            "options": ["Away from the normal", "Towards the normal", "Along the surface", "Back into air always"],
+            "options": [
+              "Away from the normal",
+              "Towards the normal",
+              "Along the surface",
+              "Back into air always"
+            ],
             "correct_answer": 1,
             "explanation": "Glass is optically denser than air, so light bends towards the normal.",
             "marks": 1
@@ -378,7 +2333,12 @@
             "id": "ph10-5-q3",
             "text": "A convex lens is also called a:",
             "text_ml": "",
-            "options": ["Diverging lens", "Converging lens", "Plane mirror", "Prism only"],
+            "options": [
+              "Diverging lens",
+              "Converging lens",
+              "Plane mirror",
+              "Prism only"
+            ],
             "correct_answer": 1,
             "explanation": "A convex lens converges parallel rays to its focus.",
             "marks": 1
@@ -387,7 +2347,12 @@
             "id": "ph10-5-q4",
             "text": "A concave lens usually forms an image that is:",
             "text_ml": "",
-            "options": ["Real and enlarged", "Virtual, erect and diminished", "Real and inverted", "Same size and real"],
+            "options": [
+              "Real and enlarged",
+              "Virtual, erect and diminished",
+              "Real and inverted",
+              "Same size and real"
+            ],
             "correct_answer": 1,
             "explanation": "A concave lens diverges light and forms a virtual, erect, diminished image for a real object.",
             "marks": 1
@@ -396,7 +2361,12 @@
             "id": "ph10-5-q5",
             "text": "Power of a lens is measured in:",
             "text_ml": "",
-            "options": ["Metre", "Dioptre", "Tesla", "Newton"],
+            "options": [
+              "Metre",
+              "Dioptre",
+              "Tesla",
+              "Newton"
+            ],
             "correct_answer": 1,
             "explanation": "Lens power is measured in dioptre.",
             "marks": 1
@@ -405,7 +2375,12 @@
             "id": "ph10-5-q6",
             "text": "The power of a lens with focal length 0.5 m is:",
             "text_ml": "",
-            "options": ["0.5 D", "1 D", "2 D", "5 D"],
+            "options": [
+              "0.5 D",
+              "1 D",
+              "2 D",
+              "5 D"
+            ],
             "correct_answer": 2,
             "explanation": "Power P = 1/f in metres = 1/0.5 = 2 D.",
             "marks": 1
@@ -414,7 +2389,12 @@
             "id": "ph10-5-q7",
             "text": "The refractive index of a medium equals:",
             "text_ml": "",
-            "options": ["Speed of light in medium / speed in vacuum", "Speed of light in vacuum / speed in medium", "Mass / volume", "Image distance / object distance"],
+            "options": [
+              "Speed of light in medium / speed in vacuum",
+              "Speed of light in vacuum / speed in medium",
+              "Mass / volume",
+              "Image distance / object distance"
+            ],
             "correct_answer": 1,
             "explanation": "Absolute refractive index n = c/v.",
             "marks": 1
@@ -423,7 +2403,12 @@
             "id": "ph10-5-q8",
             "text": "Total internal reflection occurs when light travels from:",
             "text_ml": "",
-            "options": ["Rarer to denser medium at any angle", "Denser to rarer medium beyond critical angle", "Vacuum to air only", "Mirror to air"],
+            "options": [
+              "Rarer to denser medium at any angle",
+              "Denser to rarer medium beyond critical angle",
+              "Vacuum to air only",
+              "Mirror to air"
+            ],
             "correct_answer": 1,
             "explanation": "Total internal reflection occurs from denser to rarer medium when incidence angle exceeds the critical angle.",
             "marks": 1
@@ -437,6 +2422,363 @@
       "title_ml": "Vision and the World of Colours",
       "description": "Human eye, defects of vision, dispersion, scattering and colour phenomena.",
       "order_index": 6,
+      "lessons": [
+        {
+          "title": "Vision and Colours - Overview",
+          "title_ml": "Vision and Colours - Overview",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Vision and Colours - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c6-l1-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Vision and Colours - Overview",
+                  "Human Eye and Image Formation",
+                  "Vision and the World of Colours",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Vision and Colours - Overview."
+              },
+              {
+                "id": "phy-c6-l1-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Vision and the World of Colours",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Vision and the World of Colours."
+              },
+              {
+                "id": "phy-c6-l1-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Human Eye and Image Formation",
+          "title_ml": "Human Eye and Image Formation",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Human Eye and Image Formation - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c6-l2-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Human Eye and Image Formation",
+                  "Vision and Colours - Overview",
+                  "Vision and the World of Colours",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Human Eye and Image Formation."
+              },
+              {
+                "id": "phy-c6-l2-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Vision and the World of Colours",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Vision and the World of Colours."
+              },
+              {
+                "id": "phy-c6-l2-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Defects of Vision and Correction",
+          "title_ml": "Defects of Vision and Correction",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Defects of Vision and Correction - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c6-l3-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Defects of Vision and Correction",
+                  "Vision and Colours - Overview",
+                  "Vision and the World of Colours",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Defects of Vision and Correction."
+              },
+              {
+                "id": "phy-c6-l3-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Vision and the World of Colours",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Vision and the World of Colours."
+              },
+              {
+                "id": "phy-c6-l3-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Dispersion and Scattering",
+          "title_ml": "Dispersion and Scattering",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Dispersion and Scattering - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c6-l4-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Dispersion and Scattering",
+                  "Vision and Colours - Overview",
+                  "Vision and the World of Colours",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Dispersion and Scattering."
+              },
+              {
+                "id": "phy-c6-l4-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Vision and the World of Colours",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Vision and the World of Colours."
+              },
+              {
+                "id": "phy-c6-l4-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Vision and Colours - Revision",
+          "title_ml": "Vision and Colours - Revision",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Vision and Colours - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 8,
+            "questions": [
+              {
+                "id": "ph10-6-q1",
+                "text": "The part of the eye that acts like a lens is:",
+                "text_ml": "",
+                "options": [
+                  "Retina",
+                  "Eye lens",
+                  "Optic nerve",
+                  "Iris"
+                ],
+                "correct_answer": 1,
+                "explanation": "The eye lens focuses light on the retina.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-6-q2",
+                "text": "The image formed on the retina is:",
+                "text_ml": "",
+                "options": [
+                  "Real and inverted",
+                  "Virtual and erect",
+                  "Virtual and enlarged",
+                  "No image"
+                ],
+                "correct_answer": 0,
+                "explanation": "The eye lens forms a real and inverted image on the retina.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-6-q3",
+                "text": "Myopia is corrected using:",
+                "text_ml": "",
+                "options": [
+                  "Convex lens",
+                  "Concave lens",
+                  "Plane glass",
+                  "Cylindrical mirror"
+                ],
+                "correct_answer": 1,
+                "explanation": "Myopia or short-sightedness is corrected using a concave lens.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-6-q4",
+                "text": "Hypermetropia is corrected using:",
+                "text_ml": "",
+                "options": [
+                  "Concave lens",
+                  "Convex lens",
+                  "Plane mirror",
+                  "Prism only"
+                ],
+                "correct_answer": 1,
+                "explanation": "Hypermetropia or long-sightedness is corrected using a convex lens.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-6-q5",
+                "text": "Splitting of white light into its component colours is called:",
+                "text_ml": "",
+                "options": [
+                  "Reflection",
+                  "Dispersion",
+                  "Diffusion",
+                  "Magnetisation"
+                ],
+                "correct_answer": 1,
+                "explanation": "Dispersion separates white light into different colours.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-6-q6",
+                "text": "The blue colour of the sky is mainly due to:",
+                "text_ml": "",
+                "options": [
+                  "Reflection by oceans",
+                  "Scattering of sunlight",
+                  "Absorption by clouds",
+                  "Total internal reflection"
+                ],
+                "correct_answer": 1,
+                "explanation": "Shorter wavelength blue light is scattered more by the atmosphere.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-6-q7",
+                "text": "The band of colours obtained from white light is called:",
+                "text_ml": "",
+                "options": [
+                  "Spectrum",
+                  "Shadow",
+                  "Focus",
+                  "Axis"
+                ],
+                "correct_answer": 0,
+                "explanation": "A spectrum is the ordered band of colours formed by dispersion.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-6-q8",
+                "text": "The screen of the eye on which image is formed is the:",
+                "text_ml": "",
+                "options": [
+                  "Cornea",
+                  "Pupil",
+                  "Retina",
+                  "Iris"
+                ],
+                "correct_answer": 2,
+                "explanation": "The retina is the light-sensitive screen of the eye.",
+                "marks": 1
+              }
+            ]
+          }
+        }
+      ],
       "test": {
         "title": "Vision and the World of Colours - Chapter Test",
         "duration_minutes": 15,
@@ -446,7 +2788,12 @@
             "id": "ph10-6-q1",
             "text": "The part of the eye that acts like a lens is:",
             "text_ml": "",
-            "options": ["Retina", "Eye lens", "Optic nerve", "Iris"],
+            "options": [
+              "Retina",
+              "Eye lens",
+              "Optic nerve",
+              "Iris"
+            ],
             "correct_answer": 1,
             "explanation": "The eye lens focuses light on the retina.",
             "marks": 1
@@ -455,7 +2802,12 @@
             "id": "ph10-6-q2",
             "text": "The image formed on the retina is:",
             "text_ml": "",
-            "options": ["Real and inverted", "Virtual and erect", "Virtual and enlarged", "No image"],
+            "options": [
+              "Real and inverted",
+              "Virtual and erect",
+              "Virtual and enlarged",
+              "No image"
+            ],
             "correct_answer": 0,
             "explanation": "The eye lens forms a real and inverted image on the retina.",
             "marks": 1
@@ -464,7 +2816,12 @@
             "id": "ph10-6-q3",
             "text": "Myopia is corrected using:",
             "text_ml": "",
-            "options": ["Convex lens", "Concave lens", "Plane glass", "Cylindrical mirror"],
+            "options": [
+              "Convex lens",
+              "Concave lens",
+              "Plane glass",
+              "Cylindrical mirror"
+            ],
             "correct_answer": 1,
             "explanation": "Myopia or short-sightedness is corrected using a concave lens.",
             "marks": 1
@@ -473,7 +2830,12 @@
             "id": "ph10-6-q4",
             "text": "Hypermetropia is corrected using:",
             "text_ml": "",
-            "options": ["Concave lens", "Convex lens", "Plane mirror", "Prism only"],
+            "options": [
+              "Concave lens",
+              "Convex lens",
+              "Plane mirror",
+              "Prism only"
+            ],
             "correct_answer": 1,
             "explanation": "Hypermetropia or long-sightedness is corrected using a convex lens.",
             "marks": 1
@@ -482,7 +2844,12 @@
             "id": "ph10-6-q5",
             "text": "Splitting of white light into its component colours is called:",
             "text_ml": "",
-            "options": ["Reflection", "Dispersion", "Diffusion", "Magnetisation"],
+            "options": [
+              "Reflection",
+              "Dispersion",
+              "Diffusion",
+              "Magnetisation"
+            ],
             "correct_answer": 1,
             "explanation": "Dispersion separates white light into different colours.",
             "marks": 1
@@ -491,7 +2858,12 @@
             "id": "ph10-6-q6",
             "text": "The blue colour of the sky is mainly due to:",
             "text_ml": "",
-            "options": ["Reflection by oceans", "Scattering of sunlight", "Absorption by clouds", "Total internal reflection"],
+            "options": [
+              "Reflection by oceans",
+              "Scattering of sunlight",
+              "Absorption by clouds",
+              "Total internal reflection"
+            ],
             "correct_answer": 1,
             "explanation": "Shorter wavelength blue light is scattered more by the atmosphere.",
             "marks": 1
@@ -500,7 +2872,12 @@
             "id": "ph10-6-q7",
             "text": "The band of colours obtained from white light is called:",
             "text_ml": "",
-            "options": ["Spectrum", "Shadow", "Focus", "Axis"],
+            "options": [
+              "Spectrum",
+              "Shadow",
+              "Focus",
+              "Axis"
+            ],
             "correct_answer": 0,
             "explanation": "A spectrum is the ordered band of colours formed by dispersion.",
             "marks": 1
@@ -509,7 +2886,12 @@
             "id": "ph10-6-q8",
             "text": "The screen of the eye on which image is formed is the:",
             "text_ml": "",
-            "options": ["Cornea", "Pupil", "Retina", "Iris"],
+            "options": [
+              "Cornea",
+              "Pupil",
+              "Retina",
+              "Iris"
+            ],
             "correct_answer": 2,
             "explanation": "The retina is the light-sensitive screen of the eye.",
             "marks": 1
@@ -523,6 +2905,363 @@
       "title_ml": "Energy Management",
       "description": "Energy sources, conservation, efficiency, sustainable use and environmental impact.",
       "order_index": 7,
+      "lessons": [
+        {
+          "title": "Energy Management - Overview",
+          "title_ml": "Energy Management - Overview",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Energy Management - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c7-l1-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Energy Management - Overview",
+                  "Energy Sources and Conversion",
+                  "Energy Management",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Energy Management - Overview."
+              },
+              {
+                "id": "phy-c7-l1-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Energy Management",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Energy Management."
+              },
+              {
+                "id": "phy-c7-l1-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Energy Sources and Conversion",
+          "title_ml": "Energy Sources and Conversion",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Energy Sources and Conversion - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c7-l2-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Energy Sources and Conversion",
+                  "Energy Management - Overview",
+                  "Energy Management",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Energy Sources and Conversion."
+              },
+              {
+                "id": "phy-c7-l2-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Energy Management",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Energy Management."
+              },
+              {
+                "id": "phy-c7-l2-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Efficiency and Conservation",
+          "title_ml": "Efficiency and Conservation",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Efficiency and Conservation - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c7-l3-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Efficiency and Conservation",
+                  "Energy Management - Overview",
+                  "Energy Management",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Efficiency and Conservation."
+              },
+              {
+                "id": "phy-c7-l3-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Energy Management",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Energy Management."
+              },
+              {
+                "id": "phy-c7-l3-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Sustainable Energy Use",
+          "title_ml": "Sustainable Energy Use",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Sustainable Energy Use - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "phy-c7-l4-q1",
+                "text": "Which lesson is this test checking?",
+                "text_ml": "Which lesson is this test checking?",
+                "options": [
+                  "Sustainable Energy Use",
+                  "Energy Management - Overview",
+                  "Energy Management",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "This test is allocated to the lesson: Sustainable Energy Use."
+              },
+              {
+                "id": "phy-c7-l4-q2",
+                "text": "This lesson belongs to which chapter?",
+                "text_ml": "This lesson belongs to which chapter?",
+                "options": [
+                  "Energy Management",
+                  "Reflection of Light",
+                  "Refraction of Light",
+                  "Energy Management"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The lesson is part of the chapter Energy Management."
+              },
+              {
+                "id": "phy-c7-l4-q3",
+                "text": "What should you do before taking this lesson test?",
+                "text_ml": "What should you do before taking this lesson test?",
+                "options": [
+                  "Complete the allocated lesson carefully",
+                  "Skip the video and guess answers",
+                  "Open a different chapter",
+                  "Ignore the lesson concepts"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Lesson tests unlock after completing the allocated lesson, so review that lesson first."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Energy Management - Revision",
+          "title_ml": "Energy Management - Revision",
+          "youtube_video_id": "M7lc1UVf-VE",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Energy Management - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 8,
+            "questions": [
+              {
+                "id": "ph10-7-q1",
+                "text": "Which of the following is a renewable source of energy?",
+                "text_ml": "",
+                "options": [
+                  "Coal",
+                  "Petroleum",
+                  "Solar energy",
+                  "Natural gas"
+                ],
+                "correct_answer": 2,
+                "explanation": "Solar energy is renewable because it is naturally replenished.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-7-q2",
+                "text": "The main aim of energy management is to:",
+                "text_ml": "",
+                "options": [
+                  "Waste more energy",
+                  "Use energy efficiently",
+                  "Increase pollution",
+                  "Stop all machines"
+                ],
+                "correct_answer": 1,
+                "explanation": "Energy management focuses on efficient and responsible use of energy.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-7-q3",
+                "text": "LED lamps are preferred because they:",
+                "text_ml": "",
+                "options": [
+                  "Consume more power",
+                  "Have low efficiency",
+                  "Save electrical energy",
+                  "Produce only heat"
+                ],
+                "correct_answer": 2,
+                "explanation": "LED lamps are energy efficient and reduce electricity consumption.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-7-q4",
+                "text": "Fossil fuels cause environmental concern mainly because they:",
+                "text_ml": "",
+                "options": [
+                  "Produce oxygen",
+                  "Emit pollutants and greenhouse gases",
+                  "Are unlimited",
+                  "Do not burn"
+                ],
+                "correct_answer": 1,
+                "explanation": "Burning fossil fuels releases pollutants and greenhouse gases such as carbon dioxide.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-7-q5",
+                "text": "The star rating on electrical appliances indicates:",
+                "text_ml": "",
+                "options": [
+                  "Colour",
+                  "Energy efficiency",
+                  "Weight",
+                  "Manufacturing date only"
+                ],
+                "correct_answer": 1,
+                "explanation": "A higher star rating generally means better energy efficiency.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-7-q6",
+                "text": "Which action helps conserve electrical energy at home?",
+                "text_ml": "",
+                "options": [
+                  "Keeping unused lights on",
+                  "Using efficient appliances",
+                  "Using damaged wiring",
+                  "Avoiding natural light"
+                ],
+                "correct_answer": 1,
+                "explanation": "Efficient appliances reduce energy consumption for the same useful output.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-7-q7",
+                "text": "Hydroelectric power plants mainly convert:",
+                "text_ml": "",
+                "options": [
+                  "Chemical energy to heat",
+                  "Energy of flowing water to electrical energy",
+                  "Solar energy to sound",
+                  "Nuclear energy to light"
+                ],
+                "correct_answer": 1,
+                "explanation": "Hydroelectric plants use the mechanical energy of flowing water to generate electricity.",
+                "marks": 1
+              },
+              {
+                "id": "ph10-7-q8",
+                "text": "Sustainable energy use means:",
+                "text_ml": "",
+                "options": [
+                  "Using resources without considering the future",
+                  "Meeting present needs without harming future needs",
+                  "Using only coal",
+                  "Stopping all energy use"
+                ],
+                "correct_answer": 1,
+                "explanation": "Sustainable use balances present energy needs with environmental protection and future availability.",
+                "marks": 1
+              }
+            ]
+          }
+        }
+      ],
       "test": {
         "title": "Energy Management - Chapter Test",
         "duration_minutes": 15,
@@ -532,7 +3271,12 @@
             "id": "ph10-7-q1",
             "text": "Which of the following is a renewable source of energy?",
             "text_ml": "",
-            "options": ["Coal", "Petroleum", "Solar energy", "Natural gas"],
+            "options": [
+              "Coal",
+              "Petroleum",
+              "Solar energy",
+              "Natural gas"
+            ],
             "correct_answer": 2,
             "explanation": "Solar energy is renewable because it is naturally replenished.",
             "marks": 1
@@ -541,7 +3285,12 @@
             "id": "ph10-7-q2",
             "text": "The main aim of energy management is to:",
             "text_ml": "",
-            "options": ["Waste more energy", "Use energy efficiently", "Increase pollution", "Stop all machines"],
+            "options": [
+              "Waste more energy",
+              "Use energy efficiently",
+              "Increase pollution",
+              "Stop all machines"
+            ],
             "correct_answer": 1,
             "explanation": "Energy management focuses on efficient and responsible use of energy.",
             "marks": 1
@@ -550,7 +3299,12 @@
             "id": "ph10-7-q3",
             "text": "LED lamps are preferred because they:",
             "text_ml": "",
-            "options": ["Consume more power", "Have low efficiency", "Save electrical energy", "Produce only heat"],
+            "options": [
+              "Consume more power",
+              "Have low efficiency",
+              "Save electrical energy",
+              "Produce only heat"
+            ],
             "correct_answer": 2,
             "explanation": "LED lamps are energy efficient and reduce electricity consumption.",
             "marks": 1
@@ -559,7 +3313,12 @@
             "id": "ph10-7-q4",
             "text": "Fossil fuels cause environmental concern mainly because they:",
             "text_ml": "",
-            "options": ["Produce oxygen", "Emit pollutants and greenhouse gases", "Are unlimited", "Do not burn"],
+            "options": [
+              "Produce oxygen",
+              "Emit pollutants and greenhouse gases",
+              "Are unlimited",
+              "Do not burn"
+            ],
             "correct_answer": 1,
             "explanation": "Burning fossil fuels releases pollutants and greenhouse gases such as carbon dioxide.",
             "marks": 1
@@ -568,7 +3327,12 @@
             "id": "ph10-7-q5",
             "text": "The star rating on electrical appliances indicates:",
             "text_ml": "",
-            "options": ["Colour", "Energy efficiency", "Weight", "Manufacturing date only"],
+            "options": [
+              "Colour",
+              "Energy efficiency",
+              "Weight",
+              "Manufacturing date only"
+            ],
             "correct_answer": 1,
             "explanation": "A higher star rating generally means better energy efficiency.",
             "marks": 1
@@ -577,7 +3341,12 @@
             "id": "ph10-7-q6",
             "text": "Which action helps conserve electrical energy at home?",
             "text_ml": "",
-            "options": ["Keeping unused lights on", "Using efficient appliances", "Using damaged wiring", "Avoiding natural light"],
+            "options": [
+              "Keeping unused lights on",
+              "Using efficient appliances",
+              "Using damaged wiring",
+              "Avoiding natural light"
+            ],
             "correct_answer": 1,
             "explanation": "Efficient appliances reduce energy consumption for the same useful output.",
             "marks": 1
@@ -586,7 +3355,12 @@
             "id": "ph10-7-q7",
             "text": "Hydroelectric power plants mainly convert:",
             "text_ml": "",
-            "options": ["Chemical energy to heat", "Energy of flowing water to electrical energy", "Solar energy to sound", "Nuclear energy to light"],
+            "options": [
+              "Chemical energy to heat",
+              "Energy of flowing water to electrical energy",
+              "Solar energy to sound",
+              "Nuclear energy to light"
+            ],
             "correct_answer": 1,
             "explanation": "Hydroelectric plants use the mechanical energy of flowing water to generate electricity.",
             "marks": 1
@@ -595,7 +3369,12 @@
             "id": "ph10-7-q8",
             "text": "Sustainable energy use means:",
             "text_ml": "",
-            "options": ["Using resources without considering the future", "Meeting present needs without harming future needs", "Using only coal", "Stopping all energy use"],
+            "options": [
+              "Using resources without considering the future",
+              "Meeting present needs without harming future needs",
+              "Using only coal",
+              "Stopping all energy use"
+            ],
             "correct_answer": 1,
             "explanation": "Sustainable use balances present energy needs with environmental protection and future availability.",
             "marks": 1

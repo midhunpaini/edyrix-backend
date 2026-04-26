@@ -40,6 +40,7 @@ async def watch_heartbeat(
 
     now = datetime.now(timezone.utc)
     is_completed = body.percentage >= 80
+    current_time_seconds = max(0, body.current_time_seconds)
 
     result = await db.execute(
         select(WatchHistory).where(
@@ -50,6 +51,7 @@ async def watch_heartbeat(
     wh = result.scalar_one_or_none()
     if wh:
         wh.watch_percentage = max(wh.watch_percentage, body.percentage)
+        wh.current_time_seconds = current_time_seconds
         wh.is_completed = wh.is_completed or is_completed
         wh.last_watched_at = now
     else:
@@ -57,6 +59,7 @@ async def watch_heartbeat(
             user_id=user.id,
             lesson_id=body.lesson_id,
             watch_percentage=body.percentage,
+            current_time_seconds=current_time_seconds,
             is_completed=is_completed,
             last_watched_at=now,
         )
@@ -94,6 +97,7 @@ async def get_progress_summary(
         chapters_total = len(chapter_ids)
 
         chapters_completed = 0
+        subject_lesson_ids = []
         for ch_id in chapter_ids:
             lesson_ids_r = await db.execute(
                 select(Lesson.id).where(
@@ -101,6 +105,7 @@ async def get_progress_summary(
                 )
             )
             lesson_ids = [r[0] for r in lesson_ids_r.all()]
+            subject_lesson_ids.extend(lesson_ids)
             if not lesson_ids:
                 continue
             completed_r = await db.execute(
@@ -113,7 +118,15 @@ async def get_progress_summary(
             if (completed_r.scalar() or 0) == len(lesson_ids):
                 chapters_completed += 1
 
-        pct = round(chapters_completed * 100 / chapters_total) if chapters_total else 0
+        pct = 0
+        if subject_lesson_ids:
+            watched_total_result = await db.execute(
+                select(func.coalesce(func.sum(WatchHistory.watch_percentage), 0)).where(
+                    WatchHistory.user_id == user.id,
+                    WatchHistory.lesson_id.in_(subject_lesson_ids),
+                )
+            )
+            pct = round(float(watched_total_result.scalar() or 0) / len(subject_lesson_ids))
         overall_pcts.append(pct)
         subject_progresses.append(
             SubjectProgress(

@@ -35,6 +35,7 @@ services:
       <<: *local-db-env
     volumes:
       - ./app:/app/app
+      - ./seed_data:/app/seed_data:ro
       - ./alembic:/app/alembic
       - ./alembic.ini:/app/alembic.ini:ro
     deploy:

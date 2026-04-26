@@ -94,6 +94,7 @@ class QuestionInput(BaseModel):
 
 class CreateTestRequest(BaseModel):
     chapter_id: UUID
+    lesson_id: UUID | None = None
     title: str
     duration_minutes: int = 30
     total_marks: int
@@ -104,7 +105,9 @@ class TestAdminResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: UUID
+    subject_id: UUID
     chapter_id: UUID
+    lesson_id: UUID | None
     title: str
     duration_minutes: int
     total_marks: int

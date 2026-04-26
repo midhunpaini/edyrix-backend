@@ -62,7 +62,7 @@ class Chapter(Base):
     notes: Mapped[list["Note"]] = relationship(
         "Note", back_populates="chapter", cascade="all, delete-orphan"
     )
-    test: Mapped["Test | None"] = relationship("Test", back_populates="chapter", uselist=False)  # type: ignore[name-defined]
+    tests: Mapped[list["Test"]] = relationship("Test", back_populates="chapter")  # type: ignore[name-defined]
 
 
 class Lesson(Base):
@@ -84,6 +84,7 @@ class Lesson(Base):
     created_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False, default=_utcnow)
 
     chapter: Mapped["Chapter"] = relationship("Chapter", back_populates="lessons")
+    tests: Mapped[list["Test"]] = relationship("Test", back_populates="lesson")  # type: ignore[name-defined]
 
 
 class Note(Base):

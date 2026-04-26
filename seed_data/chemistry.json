@@ -1,0 +1,2896 @@
+{
+  "subject_slug": "chemistry",
+  "chapters": [
+    {
+      "title": "Periodic Table and Electronic Configuration",
+      "description": "Modern periodic table, electronic configuration, blocks, groups, periods and periodic trends.",
+      "lessons": [
+        {
+          "title": "Periodic Table and Electronic Configuration - Overview",
+          "title_ml": "Periodic Table and Electronic Configuration - Overview",
+          "youtube_video_id": "K92V3NfOCF0",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Periodic Table and Electronic Configuration - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c1-l1-q1",
+                "text": "Which feature mainly decides the period of an element?",
+                "text_ml": "",
+                "options": [
+                  "Number of shells",
+                  "Atomic mass",
+                  "Number of neutrons",
+                  "Density"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The period number corresponds to the number of occupied electron shells."
+              },
+              {
+                "id": "chem-c1-l1-q2",
+                "text": "Elements in the same group usually have similar chemical properties because they have the same:",
+                "text_ml": "",
+                "options": [
+                  "Atomic mass",
+                  "Number of valence electrons",
+                  "Number of neutrons",
+                  "Physical state"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "Valence electrons control most chemical properties, so group members behave similarly."
+              },
+              {
+                "id": "chem-c1-l1-q3",
+                "text": "The maximum number of electrons that can be accommodated in the second shell is:",
+                "text_ml": "",
+                "options": [
+                  "2",
+                  "8",
+                  "18",
+                  "32"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "By the 2n^2 rule, the second shell can hold 8 electrons."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Electronic Configuration and Shells",
+          "title_ml": "Electronic Configuration and Shells",
+          "youtube_video_id": "K92V3NfOCF0",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Electronic Configuration and Shells - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c1-l2-q1",
+                "text": "Elements in the same group usually have similar chemical properties because they have the same:",
+                "text_ml": "",
+                "options": [
+                  "Atomic mass",
+                  "Number of valence electrons",
+                  "Number of neutrons",
+                  "Physical state"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "Valence electrons control most chemical properties, so group members behave similarly."
+              },
+              {
+                "id": "chem-c1-l2-q2",
+                "text": "The maximum number of electrons that can be accommodated in the second shell is:",
+                "text_ml": "",
+                "options": [
+                  "2",
+                  "8",
+                  "18",
+                  "32"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "By the 2n^2 rule, the second shell can hold 8 electrons."
+              },
+              {
+                "id": "chem-c1-l2-q3",
+                "text": "An element ending in p subshell belongs to which block?",
+                "text_ml": "",
+                "options": [
+                  "s block",
+                  "p block",
+                  "d block",
+                  "f block"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "The block is named from the subshell into which the last electron enters."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Groups, Periods and Blocks",
+          "title_ml": "Groups, Periods and Blocks",
+          "youtube_video_id": "K92V3NfOCF0",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Groups, Periods and Blocks - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c1-l3-q1",
+                "text": "The maximum number of electrons that can be accommodated in the second shell is:",
+                "text_ml": "",
+                "options": [
+                  "2",
+                  "8",
+                  "18",
+                  "32"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "By the 2n^2 rule, the second shell can hold 8 electrons."
+              },
+              {
+                "id": "chem-c1-l3-q2",
+                "text": "An element ending in p subshell belongs to which block?",
+                "text_ml": "",
+                "options": [
+                  "s block",
+                  "p block",
+                  "d block",
+                  "f block"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "The block is named from the subshell into which the last electron enters."
+              },
+              {
+                "id": "chem-c1-l3-q3",
+                "text": "Across a period from left to right, atomic size generally:",
+                "text_ml": "",
+                "options": [
+                  "Increases",
+                  "Decreases",
+                  "Does not change",
+                  "Becomes zero"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "Effective nuclear charge increases across a period, pulling electrons closer."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Periodic Trends",
+          "title_ml": "Periodic Trends",
+          "youtube_video_id": "K92V3NfOCF0",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Periodic Trends - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c1-l4-q1",
+                "text": "An element ending in p subshell belongs to which block?",
+                "text_ml": "",
+                "options": [
+                  "s block",
+                  "p block",
+                  "d block",
+                  "f block"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "The block is named from the subshell into which the last electron enters."
+              },
+              {
+                "id": "chem-c1-l4-q2",
+                "text": "Across a period from left to right, atomic size generally:",
+                "text_ml": "",
+                "options": [
+                  "Increases",
+                  "Decreases",
+                  "Does not change",
+                  "Becomes zero"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "Effective nuclear charge increases across a period, pulling electrons closer."
+              },
+              {
+                "id": "chem-c1-l4-q3",
+                "text": "Which element has electronic configuration 2,8,1?",
+                "text_ml": "",
+                "options": [
+                  "Sodium",
+                  "Magnesium",
+                  "Aluminium",
+                  "Neon"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Sodium has atomic number 11 and configuration 2,8,1."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Periodic Table and Electronic Configuration - Revision",
+          "title_ml": "Periodic Table and Electronic Configuration - Revision",
+          "youtube_video_id": "K92V3NfOCF0",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Periodic Table and Electronic Configuration - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c1-l5-q1",
+                "text": "Across a period from left to right, atomic size generally:",
+                "text_ml": "",
+                "options": [
+                  "Increases",
+                  "Decreases",
+                  "Does not change",
+                  "Becomes zero"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "Effective nuclear charge increases across a period, pulling electrons closer."
+              },
+              {
+                "id": "chem-c1-l5-q2",
+                "text": "Which element has electronic configuration 2,8,1?",
+                "text_ml": "",
+                "options": [
+                  "Sodium",
+                  "Magnesium",
+                  "Aluminium",
+                  "Neon"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Sodium has atomic number 11 and configuration 2,8,1."
+              },
+              {
+                "id": "chem-c1-l5-q3",
+                "text": "The modern periodic table is arranged mainly according to increasing:",
+                "text_ml": "",
+                "options": [
+                  "Atomic number",
+                  "Atomic mass",
+                  "Valency",
+                  "Melting point"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Modern periodic law is based on atomic number."
+              }
+            ]
+          }
+        }
+      ],
+      "chapter_number": 1,
+      "title_ml": "Periodic Table and Electronic Configuration",
+      "order_index": 1,
+      "test": {
+        "title": "Periodic Table and Electronic Configuration - Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ch10-1-q1",
+            "text": "Which feature mainly decides the period of an element?",
+            "text_ml": "",
+            "options": [
+              "Number of shells",
+              "Atomic mass",
+              "Number of neutrons",
+              "Density"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "The period number corresponds to the number of occupied electron shells."
+          },
+          {
+            "id": "ch10-1-q2",
+            "text": "Elements in the same group usually have similar chemical properties because they have the same:",
+            "text_ml": "",
+            "options": [
+              "Atomic mass",
+              "Number of valence electrons",
+              "Number of neutrons",
+              "Physical state"
+            ],
+            "correct_answer": 1,
+            "marks": 1,
+            "explanation": "Valence electrons control most chemical properties, so group members behave similarly."
+          },
+          {
+            "id": "ch10-1-q3",
+            "text": "The maximum number of electrons that can be accommodated in the second shell is:",
+            "text_ml": "",
+            "options": [
+              "2",
+              "8",
+              "18",
+              "32"
+            ],
+            "correct_answer": 1,
+            "marks": 1,
+            "explanation": "By the 2n^2 rule, the second shell can hold 8 electrons."
+          },
+          {
+            "id": "ch10-1-q4",
+            "text": "An element ending in p subshell belongs to which block?",
+            "text_ml": "",
+            "options": [
+              "s block",
+              "p block",
+              "d block",
+              "f block"
+            ],
+            "correct_answer": 1,
+            "marks": 1,
+            "explanation": "The block is named from the subshell into which the last electron enters."
+          },
+          {
+            "id": "ch10-1-q5",
+            "text": "Across a period from left to right, atomic size generally:",
+            "text_ml": "",
+            "options": [
+              "Increases",
+              "Decreases",
+              "Does not change",
+              "Becomes zero"
+            ],
+            "correct_answer": 1,
+            "marks": 1,
+            "explanation": "Effective nuclear charge increases across a period, pulling electrons closer."
+          },
+          {
+            "id": "ch10-1-q6",
+            "text": "Which element has electronic configuration 2,8,1?",
+            "text_ml": "",
+            "options": [
+              "Sodium",
+              "Magnesium",
+              "Aluminium",
+              "Neon"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Sodium has atomic number 11 and configuration 2,8,1."
+          },
+          {
+            "id": "ch10-1-q7",
+            "text": "The modern periodic table is arranged mainly according to increasing:",
+            "text_ml": "",
+            "options": [
+              "Atomic number",
+              "Atomic mass",
+              "Valency",
+              "Melting point"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Modern periodic law is based on atomic number."
+          },
+          {
+            "id": "ch10-1-q8",
+            "text": "Metals are generally found on which side of the periodic table?",
+            "text_ml": "",
+            "options": [
+              "Left and centre",
+              "Only far right",
+              "Only noble gas group",
+              "Only top row"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Most metals occupy the left side and centre of the periodic table."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Gas Laws and Mole Concept",
+      "description": "Gas laws, pressure-volume-temperature relations, Avogadro's law, mole concept and molar volume.",
+      "lessons": [
+        {
+          "title": "Gas Laws and Mole Concept - Overview",
+          "title_ml": "Gas Laws and Mole Concept - Overview",
+          "youtube_video_id": "1Qd_P0Yk3JU",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Gas Laws and Mole Concept - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c2-l1-q1",
+                "text": "At constant temperature, the volume of a fixed mass of gas is inversely proportional to its:",
+                "text_ml": "",
+                "options": [
+                  "Pressure",
+                  "Mass",
+                  "Colour",
+                  "Chemical formula"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Boyle's law states that V is inversely proportional to P at constant temperature."
+              },
+              {
+                "id": "chem-c2-l1-q2",
+                "text": "Charles's law relates the volume of a gas to its:",
+                "text_ml": "",
+                "options": [
+                  "Temperature",
+                  "Atomic number",
+                  "Valency",
+                  "Solubility"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "At constant pressure, gas volume is directly proportional to absolute temperature."
+              },
+              {
+                "id": "chem-c2-l1-q3",
+                "text": "One mole of any substance contains:",
+                "text_ml": "",
+                "options": [
+                  "6.022 x 10^23 particles",
+                  "22.4 particles",
+                  "12 particles",
+                  "1 particle only"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "One mole contains Avogadro's number of particles."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Boyle's Law and Charles's Law",
+          "title_ml": "Boyle's Law and Charles's Law",
+          "youtube_video_id": "1Qd_P0Yk3JU",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Boyle's Law and Charles's Law - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c2-l2-q1",
+                "text": "Charles's law relates the volume of a gas to its:",
+                "text_ml": "",
+                "options": [
+                  "Temperature",
+                  "Atomic number",
+                  "Valency",
+                  "Solubility"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "At constant pressure, gas volume is directly proportional to absolute temperature."
+              },
+              {
+                "id": "chem-c2-l2-q2",
+                "text": "One mole of any substance contains:",
+                "text_ml": "",
+                "options": [
+                  "6.022 x 10^23 particles",
+                  "22.4 particles",
+                  "12 particles",
+                  "1 particle only"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "One mole contains Avogadro's number of particles."
+              },
+              {
+                "id": "chem-c2-l2-q3",
+                "text": "The molar volume of an ideal gas at STP is approximately:",
+                "text_ml": "",
+                "options": [
+                  "2.24 L",
+                  "22.4 L",
+                  "224 L",
+                  "0.224 L"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "One mole of an ideal gas occupies about 22.4 L at STP."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Avogadro's Law and Molar Volume",
+          "title_ml": "Avogadro's Law and Molar Volume",
+          "youtube_video_id": "1Qd_P0Yk3JU",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Avogadro's Law and Molar Volume - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c2-l3-q1",
+                "text": "One mole of any substance contains:",
+                "text_ml": "",
+                "options": [
+                  "6.022 x 10^23 particles",
+                  "22.4 particles",
+                  "12 particles",
+                  "1 particle only"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "One mole contains Avogadro's number of particles."
+              },
+              {
+                "id": "chem-c2-l3-q2",
+                "text": "The molar volume of an ideal gas at STP is approximately:",
+                "text_ml": "",
+                "options": [
+                  "2.24 L",
+                  "22.4 L",
+                  "224 L",
+                  "0.224 L"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "One mole of an ideal gas occupies about 22.4 L at STP."
+              },
+              {
+                "id": "chem-c2-l3-q3",
+                "text": "The SI unit commonly used for amount of substance is:",
+                "text_ml": "",
+                "options": [
+                  "Mole",
+                  "Gram",
+                  "Litre",
+                  "Pascal"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Amount of substance is measured in mole."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Mole, Molar Mass and Number of Particles",
+          "title_ml": "Mole, Molar Mass and Number of Particles",
+          "youtube_video_id": "1Qd_P0Yk3JU",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Mole, Molar Mass and Number of Particles - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c2-l4-q1",
+                "text": "The molar volume of an ideal gas at STP is approximately:",
+                "text_ml": "",
+                "options": [
+                  "2.24 L",
+                  "22.4 L",
+                  "224 L",
+                  "0.224 L"
+                ],
+                "correct_answer": 1,
+                "marks": 1,
+                "explanation": "One mole of an ideal gas occupies about 22.4 L at STP."
+              },
+              {
+                "id": "chem-c2-l4-q2",
+                "text": "The SI unit commonly used for amount of substance is:",
+                "text_ml": "",
+                "options": [
+                  "Mole",
+                  "Gram",
+                  "Litre",
+                  "Pascal"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Amount of substance is measured in mole."
+              },
+              {
+                "id": "chem-c2-l4-q3",
+                "text": "If pressure on a gas is increased at constant temperature, its volume:",
+                "text_ml": "",
+                "options": [
+                  "Decreases",
+                  "Increases",
+                  "Remains always double",
+                  "Becomes mass"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Boyle's law predicts reduced volume when pressure increases."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Gas Laws and Mole Concept - Revision",
+          "title_ml": "Gas Laws and Mole Concept - Revision",
+          "youtube_video_id": "1Qd_P0Yk3JU",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Gas Laws and Mole Concept - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c2-l5-q1",
+                "text": "The SI unit commonly used for amount of substance is:",
+                "text_ml": "",
+                "options": [
+                  "Mole",
+                  "Gram",
+                  "Litre",
+                  "Pascal"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Amount of substance is measured in mole."
+              },
+              {
+                "id": "chem-c2-l5-q2",
+                "text": "If pressure on a gas is increased at constant temperature, its volume:",
+                "text_ml": "",
+                "options": [
+                  "Decreases",
+                  "Increases",
+                  "Remains always double",
+                  "Becomes mass"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Boyle's law predicts reduced volume when pressure increases."
+              },
+              {
+                "id": "chem-c2-l5-q3",
+                "text": "Molar mass of carbon dioxide, CO2, is:",
+                "text_ml": "",
+                "options": [
+                  "28 g/mol",
+                  "32 g/mol",
+                  "44 g/mol",
+                  "16 g/mol"
+                ],
+                "correct_answer": 2,
+                "marks": 1,
+                "explanation": "CO2 has mass 12 + 2 x 16 = 44 g/mol."
+              }
+            ]
+          }
+        }
+      ],
+      "chapter_number": 2,
+      "title_ml": "Gas Laws and Mole Concept",
+      "order_index": 2,
+      "test": {
+        "title": "Gas Laws and Mole Concept - Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ch10-2-q1",
+            "text": "At constant temperature, the volume of a fixed mass of gas is inversely proportional to its:",
+            "text_ml": "",
+            "options": [
+              "Pressure",
+              "Mass",
+              "Colour",
+              "Chemical formula"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Boyle's law states that V is inversely proportional to P at constant temperature."
+          },
+          {
+            "id": "ch10-2-q2",
+            "text": "Charles's law relates the volume of a gas to its:",
+            "text_ml": "",
+            "options": [
+              "Temperature",
+              "Atomic number",
+              "Valency",
+              "Solubility"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "At constant pressure, gas volume is directly proportional to absolute temperature."
+          },
+          {
+            "id": "ch10-2-q3",
+            "text": "One mole of any substance contains:",
+            "text_ml": "",
+            "options": [
+              "6.022 x 10^23 particles",
+              "22.4 particles",
+              "12 particles",
+              "1 particle only"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "One mole contains Avogadro's number of particles."
+          },
+          {
+            "id": "ch10-2-q4",
+            "text": "The molar volume of an ideal gas at STP is approximately:",
+            "text_ml": "",
+            "options": [
+              "2.24 L",
+              "22.4 L",
+              "224 L",
+              "0.224 L"
+            ],
+            "correct_answer": 1,
+            "marks": 1,
+            "explanation": "One mole of an ideal gas occupies about 22.4 L at STP."
+          },
+          {
+            "id": "ch10-2-q5",
+            "text": "The SI unit commonly used for amount of substance is:",
+            "text_ml": "",
+            "options": [
+              "Mole",
+              "Gram",
+              "Litre",
+              "Pascal"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Amount of substance is measured in mole."
+          },
+          {
+            "id": "ch10-2-q6",
+            "text": "If pressure on a gas is increased at constant temperature, its volume:",
+            "text_ml": "",
+            "options": [
+              "Decreases",
+              "Increases",
+              "Remains always double",
+              "Becomes mass"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Boyle's law predicts reduced volume when pressure increases."
+          },
+          {
+            "id": "ch10-2-q7",
+            "text": "Molar mass of carbon dioxide, CO2, is:",
+            "text_ml": "",
+            "options": [
+              "28 g/mol",
+              "32 g/mol",
+              "44 g/mol",
+              "16 g/mol"
+            ],
+            "correct_answer": 2,
+            "marks": 1,
+            "explanation": "CO2 has mass 12 + 2 x 16 = 44 g/mol."
+          },
+          {
+            "id": "ch10-2-q8",
+            "text": "Equal volumes of gases at the same temperature and pressure contain equal numbers of molecules. This is:",
+            "text_ml": "",
+            "options": [
+              "Avogadro's law",
+              "Ohm's law",
+              "Faraday's law",
+              "Law of conservation of mass"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Avogadro's law connects gas volume and number of molecules."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Reactivity Series and Electrochemistry",
+      "description": "Reactivity series, displacement reactions, galvanic cells, electrolysis and electrochemical applications.",
+      "lessons": [
+        {
+          "title": "Reactivity Series and Electrochemistry - Overview",
+          "title_ml": "Reactivity Series and Electrochemistry - Overview",
+          "youtube_video_id": "YNHAPsnBQVM",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Reactivity Series and Electrochemistry - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c3-l1-q1",
+                "text": "Which metal is more reactive than copper?",
+                "text_ml": "",
+                "options": [
+                  "Zinc",
+                  "Silver",
+                  "Gold",
+                  "Platinum"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Zinc is above copper in the reactivity series and can displace copper from its salts."
+              },
+              {
+                "id": "chem-c3-l1-q2",
+                "text": "A metal higher in the reactivity series can displace a metal lower from its:",
+                "text_ml": "",
+                "options": [
+                  "Salt solution",
+                  "Nucleus",
+                  "Isotope",
+                  "Alloy only"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Displacement reactions occur when a more reactive metal displaces a less reactive metal from a salt solution."
+              },
+              {
+                "id": "chem-c3-l1-q3",
+                "text": "In a galvanic cell, chemical energy is converted into:",
+                "text_ml": "",
+                "options": [
+                  "Electrical energy",
+                  "Sound only",
+                  "Nuclear energy",
+                  "Gravitational energy"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Galvanic cells produce electrical energy from spontaneous chemical reactions."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Reactivity Series and Displacement",
+          "title_ml": "Reactivity Series and Displacement",
+          "youtube_video_id": "YNHAPsnBQVM",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Reactivity Series and Displacement - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c3-l2-q1",
+                "text": "A metal higher in the reactivity series can displace a metal lower from its:",
+                "text_ml": "",
+                "options": [
+                  "Salt solution",
+                  "Nucleus",
+                  "Isotope",
+                  "Alloy only"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Displacement reactions occur when a more reactive metal displaces a less reactive metal from a salt solution."
+              },
+              {
+                "id": "chem-c3-l2-q2",
+                "text": "In a galvanic cell, chemical energy is converted into:",
+                "text_ml": "",
+                "options": [
+                  "Electrical energy",
+                  "Sound only",
+                  "Nuclear energy",
+                  "Gravitational energy"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Galvanic cells produce electrical energy from spontaneous chemical reactions."
+              },
+              {
+                "id": "chem-c3-l2-q3",
+                "text": "The electrode at which oxidation occurs is called the:",
+                "text_ml": "",
+                "options": [
+                  "Anode",
+                  "Cathode",
+                  "Electrolyte",
+                  "Salt bridge"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Oxidation occurs at the anode."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Galvanic Cells and Electrodes",
+          "title_ml": "Galvanic Cells and Electrodes",
+          "youtube_video_id": "YNHAPsnBQVM",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Galvanic Cells and Electrodes - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c3-l3-q1",
+                "text": "In a galvanic cell, chemical energy is converted into:",
+                "text_ml": "",
+                "options": [
+                  "Electrical energy",
+                  "Sound only",
+                  "Nuclear energy",
+                  "Gravitational energy"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Galvanic cells produce electrical energy from spontaneous chemical reactions."
+              },
+              {
+                "id": "chem-c3-l3-q2",
+                "text": "The electrode at which oxidation occurs is called the:",
+                "text_ml": "",
+                "options": [
+                  "Anode",
+                  "Cathode",
+                  "Electrolyte",
+                  "Salt bridge"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Oxidation occurs at the anode."
+              },
+              {
+                "id": "chem-c3-l3-q3",
+                "text": "Electrolysis is carried out using:",
+                "text_ml": "",
+                "options": [
+                  "Direct current",
+                  "Sunlight only",
+                  "A magnet only",
+                  "Distilled water only"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Electrolysis uses direct current to drive a non-spontaneous chemical reaction."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Electrolysis and Electroplating",
+          "title_ml": "Electrolysis and Electroplating",
+          "youtube_video_id": "YNHAPsnBQVM",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Electrolysis and Electroplating - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c3-l4-q1",
+                "text": "The electrode at which oxidation occurs is called the:",
+                "text_ml": "",
+                "options": [
+                  "Anode",
+                  "Cathode",
+                  "Electrolyte",
+                  "Salt bridge"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Oxidation occurs at the anode."
+              },
+              {
+                "id": "chem-c3-l4-q2",
+                "text": "Electrolysis is carried out using:",
+                "text_ml": "",
+                "options": [
+                  "Direct current",
+                  "Sunlight only",
+                  "A magnet only",
+                  "Distilled water only"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Electrolysis uses direct current to drive a non-spontaneous chemical reaction."
+              },
+              {
+                "id": "chem-c3-l4-q3",
+                "text": "Electroplating is used mainly to:",
+                "text_ml": "",
+                "options": [
+                  "Coat one metal over another",
+                  "Make gases invisible",
+                  "Decrease atomic number",
+                  "Remove all electrons from atoms"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Electroplating deposits a thin layer of one metal on another object."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Reactivity Series and Electrochemistry - Revision",
+          "title_ml": "Reactivity Series and Electrochemistry - Revision",
+          "youtube_video_id": "YNHAPsnBQVM",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Reactivity Series and Electrochemistry - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c3-l5-q1",
+                "text": "Electrolysis is carried out using:",
+                "text_ml": "",
+                "options": [
+                  "Direct current",
+                  "Sunlight only",
+                  "A magnet only",
+                  "Distilled water only"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Electrolysis uses direct current to drive a non-spontaneous chemical reaction."
+              },
+              {
+                "id": "chem-c3-l5-q2",
+                "text": "Electroplating is used mainly to:",
+                "text_ml": "",
+                "options": [
+                  "Coat one metal over another",
+                  "Make gases invisible",
+                  "Decrease atomic number",
+                  "Remove all electrons from atoms"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Electroplating deposits a thin layer of one metal on another object."
+              },
+              {
+                "id": "chem-c3-l5-q3",
+                "text": "Which ion gains electrons during reduction?",
+                "text_ml": "",
+                "options": [
+                  "Cation",
+                  "Neutron",
+                  "Proton only",
+                  "Molecule only"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Positive ions commonly gain electrons at the cathode during reduction."
+              }
+            ]
+          }
+        }
+      ],
+      "chapter_number": 3,
+      "title_ml": "Reactivity Series and Electrochemistry",
+      "order_index": 3,
+      "test": {
+        "title": "Reactivity Series and Electrochemistry - Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ch10-3-q1",
+            "text": "Which metal is more reactive than copper?",
+            "text_ml": "",
+            "options": [
+              "Zinc",
+              "Silver",
+              "Gold",
+              "Platinum"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Zinc is above copper in the reactivity series and can displace copper from its salts."
+          },
+          {
+            "id": "ch10-3-q2",
+            "text": "A metal higher in the reactivity series can displace a metal lower from its:",
+            "text_ml": "",
+            "options": [
+              "Salt solution",
+              "Nucleus",
+              "Isotope",
+              "Alloy only"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Displacement reactions occur when a more reactive metal displaces a less reactive metal from a salt solution."
+          },
+          {
+            "id": "ch10-3-q3",
+            "text": "In a galvanic cell, chemical energy is converted into:",
+            "text_ml": "",
+            "options": [
+              "Electrical energy",
+              "Sound only",
+              "Nuclear energy",
+              "Gravitational energy"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Galvanic cells produce electrical energy from spontaneous chemical reactions."
+          },
+          {
+            "id": "ch10-3-q4",
+            "text": "The electrode at which oxidation occurs is called the:",
+            "text_ml": "",
+            "options": [
+              "Anode",
+              "Cathode",
+              "Electrolyte",
+              "Salt bridge"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Oxidation occurs at the anode."
+          },
+          {
+            "id": "ch10-3-q5",
+            "text": "Electrolysis is carried out using:",
+            "text_ml": "",
+            "options": [
+              "Direct current",
+              "Sunlight only",
+              "A magnet only",
+              "Distilled water only"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Electrolysis uses direct current to drive a non-spontaneous chemical reaction."
+          },
+          {
+            "id": "ch10-3-q6",
+            "text": "Electroplating is used mainly to:",
+            "text_ml": "",
+            "options": [
+              "Coat one metal over another",
+              "Make gases invisible",
+              "Decrease atomic number",
+              "Remove all electrons from atoms"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Electroplating deposits a thin layer of one metal on another object."
+          },
+          {
+            "id": "ch10-3-q7",
+            "text": "Which ion gains electrons during reduction?",
+            "text_ml": "",
+            "options": [
+              "Cation",
+              "Neutron",
+              "Proton only",
+              "Molecule only"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Positive ions commonly gain electrons at the cathode during reduction."
+          },
+          {
+            "id": "ch10-3-q8",
+            "text": "The salt bridge in a cell helps to:",
+            "text_ml": "",
+            "options": [
+              "Maintain electrical neutrality",
+              "Stop ion movement",
+              "Increase atomic mass",
+              "Prevent all reactions"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "A salt bridge allows ion movement and maintains charge balance."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Production of Metals",
+      "description": "Occurrence of metals, concentration of ores, extraction, refining and corrosion prevention.",
+      "lessons": [
+        {
+          "title": "Production of Metals - Overview",
+          "title_ml": "Production of Metals - Overview",
+          "youtube_video_id": "nNeG60sxzn4",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Production of Metals - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c4-l1-q1",
+                "text": "A naturally occurring substance from which a metal can be economically extracted is called an:",
+                "text_ml": "",
+                "options": [
+                  "Ore",
+                  "Alloy",
+                  "Polymer",
+                  "Electrolyte only"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "An ore is a mineral deposit from which metal extraction is economical."
+              },
+              {
+                "id": "chem-c4-l1-q2",
+                "text": "Highly reactive metals such as sodium are commonly extracted by:",
+                "text_ml": "",
+                "options": [
+                  "Electrolysis",
+                  "Simple heating in air",
+                  "Hand picking only",
+                  "Dissolving in water"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Highly reactive metals need electrolytic extraction from molten compounds."
+              },
+              {
+                "id": "chem-c4-l1-q3",
+                "text": "The process of removing impurities from ore before extraction is:",
+                "text_ml": "",
+                "options": [
+                  "Concentration",
+                  "Rusting",
+                  "Polymerisation",
+                  "Neutralisation"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ore concentration enriches useful mineral content by removing gangue."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Minerals, Ores and Concentration",
+          "title_ml": "Minerals, Ores and Concentration",
+          "youtube_video_id": "nNeG60sxzn4",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Minerals, Ores and Concentration - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c4-l2-q1",
+                "text": "Highly reactive metals such as sodium are commonly extracted by:",
+                "text_ml": "",
+                "options": [
+                  "Electrolysis",
+                  "Simple heating in air",
+                  "Hand picking only",
+                  "Dissolving in water"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Highly reactive metals need electrolytic extraction from molten compounds."
+              },
+              {
+                "id": "chem-c4-l2-q2",
+                "text": "The process of removing impurities from ore before extraction is:",
+                "text_ml": "",
+                "options": [
+                  "Concentration",
+                  "Rusting",
+                  "Polymerisation",
+                  "Neutralisation"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ore concentration enriches useful mineral content by removing gangue."
+              },
+              {
+                "id": "chem-c4-l2-q3",
+                "text": "The main ore of aluminium is:",
+                "text_ml": "",
+                "options": [
+                  "Bauxite",
+                  "Haematite",
+                  "Calamine",
+                  "Galena"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Bauxite is the chief ore of aluminium."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Extraction by Reduction and Electrolysis",
+          "title_ml": "Extraction by Reduction and Electrolysis",
+          "youtube_video_id": "nNeG60sxzn4",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Extraction by Reduction and Electrolysis - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c4-l3-q1",
+                "text": "The process of removing impurities from ore before extraction is:",
+                "text_ml": "",
+                "options": [
+                  "Concentration",
+                  "Rusting",
+                  "Polymerisation",
+                  "Neutralisation"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ore concentration enriches useful mineral content by removing gangue."
+              },
+              {
+                "id": "chem-c4-l3-q2",
+                "text": "The main ore of aluminium is:",
+                "text_ml": "",
+                "options": [
+                  "Bauxite",
+                  "Haematite",
+                  "Calamine",
+                  "Galena"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Bauxite is the chief ore of aluminium."
+              },
+              {
+                "id": "chem-c4-l3-q3",
+                "text": "Corrosion of iron is commonly known as:",
+                "text_ml": "",
+                "options": [
+                  "Rusting",
+                  "Galvanisation",
+                  "Electroplating",
+                  "Crystallisation"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Rusting is the corrosion of iron in the presence of oxygen and moisture."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Refining, Alloys and Corrosion",
+          "title_ml": "Refining, Alloys and Corrosion",
+          "youtube_video_id": "nNeG60sxzn4",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Refining, Alloys and Corrosion - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c4-l4-q1",
+                "text": "The main ore of aluminium is:",
+                "text_ml": "",
+                "options": [
+                  "Bauxite",
+                  "Haematite",
+                  "Calamine",
+                  "Galena"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Bauxite is the chief ore of aluminium."
+              },
+              {
+                "id": "chem-c4-l4-q2",
+                "text": "Corrosion of iron is commonly known as:",
+                "text_ml": "",
+                "options": [
+                  "Rusting",
+                  "Galvanisation",
+                  "Electroplating",
+                  "Crystallisation"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Rusting is the corrosion of iron in the presence of oxygen and moisture."
+              },
+              {
+                "id": "chem-c4-l4-q3",
+                "text": "Coating iron with zinc to prevent rusting is called:",
+                "text_ml": "",
+                "options": [
+                  "Galvanisation",
+                  "Roasting",
+                  "Calcination",
+                  "Distillation"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Galvanisation protects iron by a zinc coating."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Production of Metals - Revision",
+          "title_ml": "Production of Metals - Revision",
+          "youtube_video_id": "nNeG60sxzn4",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Production of Metals - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c4-l5-q1",
+                "text": "Corrosion of iron is commonly known as:",
+                "text_ml": "",
+                "options": [
+                  "Rusting",
+                  "Galvanisation",
+                  "Electroplating",
+                  "Crystallisation"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Rusting is the corrosion of iron in the presence of oxygen and moisture."
+              },
+              {
+                "id": "chem-c4-l5-q2",
+                "text": "Coating iron with zinc to prevent rusting is called:",
+                "text_ml": "",
+                "options": [
+                  "Galvanisation",
+                  "Roasting",
+                  "Calcination",
+                  "Distillation"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Galvanisation protects iron by a zinc coating."
+              },
+              {
+                "id": "chem-c4-l5-q3",
+                "text": "An alloy is best described as:",
+                "text_ml": "",
+                "options": [
+                  "A mixture of metals or a metal with another element",
+                  "A pure noble gas",
+                  "A salt solution only",
+                  "A non-metal oxide"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Alloys are mixtures designed to improve useful properties."
+              }
+            ]
+          }
+        }
+      ],
+      "chapter_number": 4,
+      "title_ml": "Production of Metals",
+      "order_index": 4,
+      "test": {
+        "title": "Production of Metals - Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ch10-4-q1",
+            "text": "A naturally occurring substance from which a metal can be economically extracted is called an:",
+            "text_ml": "",
+            "options": [
+              "Ore",
+              "Alloy",
+              "Polymer",
+              "Electrolyte only"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "An ore is a mineral deposit from which metal extraction is economical."
+          },
+          {
+            "id": "ch10-4-q2",
+            "text": "Highly reactive metals such as sodium are commonly extracted by:",
+            "text_ml": "",
+            "options": [
+              "Electrolysis",
+              "Simple heating in air",
+              "Hand picking only",
+              "Dissolving in water"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Highly reactive metals need electrolytic extraction from molten compounds."
+          },
+          {
+            "id": "ch10-4-q3",
+            "text": "The process of removing impurities from ore before extraction is:",
+            "text_ml": "",
+            "options": [
+              "Concentration",
+              "Rusting",
+              "Polymerisation",
+              "Neutralisation"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Ore concentration enriches useful mineral content by removing gangue."
+          },
+          {
+            "id": "ch10-4-q4",
+            "text": "The main ore of aluminium is:",
+            "text_ml": "",
+            "options": [
+              "Bauxite",
+              "Haematite",
+              "Calamine",
+              "Galena"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Bauxite is the chief ore of aluminium."
+          },
+          {
+            "id": "ch10-4-q5",
+            "text": "Corrosion of iron is commonly known as:",
+            "text_ml": "",
+            "options": [
+              "Rusting",
+              "Galvanisation",
+              "Electroplating",
+              "Crystallisation"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Rusting is the corrosion of iron in the presence of oxygen and moisture."
+          },
+          {
+            "id": "ch10-4-q6",
+            "text": "Coating iron with zinc to prevent rusting is called:",
+            "text_ml": "",
+            "options": [
+              "Galvanisation",
+              "Roasting",
+              "Calcination",
+              "Distillation"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Galvanisation protects iron by a zinc coating."
+          },
+          {
+            "id": "ch10-4-q7",
+            "text": "An alloy is best described as:",
+            "text_ml": "",
+            "options": [
+              "A mixture of metals or a metal with another element",
+              "A pure noble gas",
+              "A salt solution only",
+              "A non-metal oxide"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Alloys are mixtures designed to improve useful properties."
+          },
+          {
+            "id": "ch10-4-q8",
+            "text": "Electrolytic refining uses an impure metal as the:",
+            "text_ml": "",
+            "options": [
+              "Anode",
+              "Cathode",
+              "Electrolyte",
+              "Salt bridge"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "In electrolytic refining, impure metal is made the anode and pure metal deposits on the cathode."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Compounds of Non-Metals",
+      "description": "Important compounds of hydrogen, nitrogen, sulphur and chlorine, their preparation, properties and uses.",
+      "lessons": [
+        {
+          "title": "Compounds of Non-Metals - Overview",
+          "title_ml": "Compounds of Non-Metals - Overview",
+          "youtube_video_id": "3ynFBsk2Uqg",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Compounds of Non-Metals - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c5-l1-q1",
+                "text": "The aqueous solution of hydrogen chloride is called:",
+                "text_ml": "",
+                "options": [
+                  "Hydrochloric acid",
+                  "Sulphuric acid",
+                  "Nitric acid",
+                  "Acetic acid"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Hydrogen chloride dissolved in water forms hydrochloric acid."
+              },
+              {
+                "id": "chem-c5-l1-q2",
+                "text": "Ammonia has the chemical formula:",
+                "text_ml": "",
+                "options": [
+                  "NH3",
+                  "NO2",
+                  "N2O",
+                  "HNO3"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ammonia contains one nitrogen atom and three hydrogen atoms."
+              },
+              {
+                "id": "chem-c5-l1-q3",
+                "text": "Ammonia turns moist red litmus paper:",
+                "text_ml": "",
+                "options": [
+                  "Blue",
+                  "Red",
+                  "Black",
+                  "Colourless permanently"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ammonia is basic and turns red litmus blue."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Hydrogen Chloride and Hydrochloric Acid",
+          "title_ml": "Hydrogen Chloride and Hydrochloric Acid",
+          "youtube_video_id": "3ynFBsk2Uqg",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Hydrogen Chloride and Hydrochloric Acid - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c5-l2-q1",
+                "text": "Ammonia has the chemical formula:",
+                "text_ml": "",
+                "options": [
+                  "NH3",
+                  "NO2",
+                  "N2O",
+                  "HNO3"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ammonia contains one nitrogen atom and three hydrogen atoms."
+              },
+              {
+                "id": "chem-c5-l2-q2",
+                "text": "Ammonia turns moist red litmus paper:",
+                "text_ml": "",
+                "options": [
+                  "Blue",
+                  "Red",
+                  "Black",
+                  "Colourless permanently"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ammonia is basic and turns red litmus blue."
+              },
+              {
+                "id": "chem-c5-l2-q3",
+                "text": "Sulphuric acid is represented by:",
+                "text_ml": "",
+                "options": [
+                  "H2SO4",
+                  "HCl",
+                  "NH3",
+                  "NaOH"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The formula of sulphuric acid is H2SO4."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Ammonia and Nitrogen Compounds",
+          "title_ml": "Ammonia and Nitrogen Compounds",
+          "youtube_video_id": "3ynFBsk2Uqg",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Ammonia and Nitrogen Compounds - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c5-l3-q1",
+                "text": "Ammonia turns moist red litmus paper:",
+                "text_ml": "",
+                "options": [
+                  "Blue",
+                  "Red",
+                  "Black",
+                  "Colourless permanently"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ammonia is basic and turns red litmus blue."
+              },
+              {
+                "id": "chem-c5-l3-q2",
+                "text": "Sulphuric acid is represented by:",
+                "text_ml": "",
+                "options": [
+                  "H2SO4",
+                  "HCl",
+                  "NH3",
+                  "NaOH"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The formula of sulphuric acid is H2SO4."
+              },
+              {
+                "id": "chem-c5-l3-q3",
+                "text": "Concentrated sulphuric acid is a strong:",
+                "text_ml": "",
+                "options": [
+                  "Dehydrating agent",
+                  "Reducing sugar",
+                  "Noble gas",
+                  "Metal ore"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Concentrated sulphuric acid removes water from many substances."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Sulphuric Acid and Industrial Compounds",
+          "title_ml": "Sulphuric Acid and Industrial Compounds",
+          "youtube_video_id": "3ynFBsk2Uqg",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Sulphuric Acid and Industrial Compounds - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c5-l4-q1",
+                "text": "Sulphuric acid is represented by:",
+                "text_ml": "",
+                "options": [
+                  "H2SO4",
+                  "HCl",
+                  "NH3",
+                  "NaOH"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The formula of sulphuric acid is H2SO4."
+              },
+              {
+                "id": "chem-c5-l4-q2",
+                "text": "Concentrated sulphuric acid is a strong:",
+                "text_ml": "",
+                "options": [
+                  "Dehydrating agent",
+                  "Reducing sugar",
+                  "Noble gas",
+                  "Metal ore"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Concentrated sulphuric acid removes water from many substances."
+              },
+              {
+                "id": "chem-c5-l4-q3",
+                "text": "Chlorine is commonly used in water treatment because it:",
+                "text_ml": "",
+                "options": [
+                  "Kills microbes",
+                  "Increases hardness",
+                  "Forms sugar",
+                  "Removes all oxygen"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Chlorine disinfects water by killing harmful microorganisms."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Compounds of Non-Metals - Revision",
+          "title_ml": "Compounds of Non-Metals - Revision",
+          "youtube_video_id": "3ynFBsk2Uqg",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Compounds of Non-Metals - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c5-l5-q1",
+                "text": "Concentrated sulphuric acid is a strong:",
+                "text_ml": "",
+                "options": [
+                  "Dehydrating agent",
+                  "Reducing sugar",
+                  "Noble gas",
+                  "Metal ore"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Concentrated sulphuric acid removes water from many substances."
+              },
+              {
+                "id": "chem-c5-l5-q2",
+                "text": "Chlorine is commonly used in water treatment because it:",
+                "text_ml": "",
+                "options": [
+                  "Kills microbes",
+                  "Increases hardness",
+                  "Forms sugar",
+                  "Removes all oxygen"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Chlorine disinfects water by killing harmful microorganisms."
+              },
+              {
+                "id": "chem-c5-l5-q3",
+                "text": "Which gas gives dense white fumes with hydrogen chloride?",
+                "text_ml": "",
+                "options": [
+                  "Ammonia",
+                  "Oxygen",
+                  "Carbon dioxide",
+                  "Hydrogen"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ammonia reacts with hydrogen chloride to form white fumes of ammonium chloride."
+              }
+            ]
+          }
+        }
+      ],
+      "chapter_number": 5,
+      "title_ml": "Compounds of Non-Metals",
+      "order_index": 5,
+      "test": {
+        "title": "Compounds of Non-Metals - Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ch10-5-q1",
+            "text": "The aqueous solution of hydrogen chloride is called:",
+            "text_ml": "",
+            "options": [
+              "Hydrochloric acid",
+              "Sulphuric acid",
+              "Nitric acid",
+              "Acetic acid"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Hydrogen chloride dissolved in water forms hydrochloric acid."
+          },
+          {
+            "id": "ch10-5-q2",
+            "text": "Ammonia has the chemical formula:",
+            "text_ml": "",
+            "options": [
+              "NH3",
+              "NO2",
+              "N2O",
+              "HNO3"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Ammonia contains one nitrogen atom and three hydrogen atoms."
+          },
+          {
+            "id": "ch10-5-q3",
+            "text": "Ammonia turns moist red litmus paper:",
+            "text_ml": "",
+            "options": [
+              "Blue",
+              "Red",
+              "Black",
+              "Colourless permanently"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Ammonia is basic and turns red litmus blue."
+          },
+          {
+            "id": "ch10-5-q4",
+            "text": "Sulphuric acid is represented by:",
+            "text_ml": "",
+            "options": [
+              "H2SO4",
+              "HCl",
+              "NH3",
+              "NaOH"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "The formula of sulphuric acid is H2SO4."
+          },
+          {
+            "id": "ch10-5-q5",
+            "text": "Concentrated sulphuric acid is a strong:",
+            "text_ml": "",
+            "options": [
+              "Dehydrating agent",
+              "Reducing sugar",
+              "Noble gas",
+              "Metal ore"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Concentrated sulphuric acid removes water from many substances."
+          },
+          {
+            "id": "ch10-5-q6",
+            "text": "Chlorine is commonly used in water treatment because it:",
+            "text_ml": "",
+            "options": [
+              "Kills microbes",
+              "Increases hardness",
+              "Forms sugar",
+              "Removes all oxygen"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Chlorine disinfects water by killing harmful microorganisms."
+          },
+          {
+            "id": "ch10-5-q7",
+            "text": "Which gas gives dense white fumes with hydrogen chloride?",
+            "text_ml": "",
+            "options": [
+              "Ammonia",
+              "Oxygen",
+              "Carbon dioxide",
+              "Hydrogen"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Ammonia reacts with hydrogen chloride to form white fumes of ammonium chloride."
+          },
+          {
+            "id": "ch10-5-q8",
+            "text": "Fertiliser manufacture commonly uses compounds of:",
+            "text_ml": "",
+            "options": [
+              "Nitrogen",
+              "Neon",
+              "Argon",
+              "Helium"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Nitrogen compounds such as ammonia and ammonium salts are important fertiliser materials."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Nomenclature of Organic Compounds and Isomerism",
+      "description": "Organic compounds, functional groups, IUPAC nomenclature, homologous series and structural isomerism.",
+      "lessons": [
+        {
+          "title": "Nomenclature of Organic Compounds and Isomerism - Overview",
+          "title_ml": "Nomenclature of Organic Compounds and Isomerism - Overview",
+          "youtube_video_id": "3AgRcspMr4Y",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Nomenclature of Organic Compounds and Isomerism - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c6-l1-q1",
+                "text": "The simplest alkane is:",
+                "text_ml": "",
+                "options": [
+                  "Methane",
+                  "Ethene",
+                  "Ethyne",
+                  "Propanol"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Methane, CH4, is the first member of the alkane series."
+              },
+              {
+                "id": "chem-c6-l1-q2",
+                "text": "The general formula of alkanes is:",
+                "text_ml": "",
+                "options": [
+                  "CnH2n+2",
+                  "CnH2n",
+                  "CnH2n-2",
+                  "CnH2nO2"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Alkanes are saturated hydrocarbons with formula CnH2n+2."
+              },
+              {
+                "id": "chem-c6-l1-q3",
+                "text": "The functional group of alcohols is:",
+                "text_ml": "",
+                "options": [
+                  "-OH",
+                  "-COOH",
+                  "-CHO",
+                  "-Cl"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Alcohols contain the hydroxyl functional group, -OH."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Hydrocarbons and Homologous Series",
+          "title_ml": "Hydrocarbons and Homologous Series",
+          "youtube_video_id": "3AgRcspMr4Y",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Hydrocarbons and Homologous Series - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c6-l2-q1",
+                "text": "The general formula of alkanes is:",
+                "text_ml": "",
+                "options": [
+                  "CnH2n+2",
+                  "CnH2n",
+                  "CnH2n-2",
+                  "CnH2nO2"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Alkanes are saturated hydrocarbons with formula CnH2n+2."
+              },
+              {
+                "id": "chem-c6-l2-q2",
+                "text": "The functional group of alcohols is:",
+                "text_ml": "",
+                "options": [
+                  "-OH",
+                  "-COOH",
+                  "-CHO",
+                  "-Cl"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Alcohols contain the hydroxyl functional group, -OH."
+              },
+              {
+                "id": "chem-c6-l2-q3",
+                "text": "Compounds with the same molecular formula but different structural formulae are called:",
+                "text_ml": "",
+                "options": [
+                  "Isomers",
+                  "Isotopes",
+                  "Ions",
+                  "Alloys"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Structural isomers have the same molecular formula but different atom arrangements."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Functional Groups and IUPAC Names",
+          "title_ml": "Functional Groups and IUPAC Names",
+          "youtube_video_id": "3AgRcspMr4Y",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Functional Groups and IUPAC Names - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c6-l3-q1",
+                "text": "The functional group of alcohols is:",
+                "text_ml": "",
+                "options": [
+                  "-OH",
+                  "-COOH",
+                  "-CHO",
+                  "-Cl"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Alcohols contain the hydroxyl functional group, -OH."
+              },
+              {
+                "id": "chem-c6-l3-q2",
+                "text": "Compounds with the same molecular formula but different structural formulae are called:",
+                "text_ml": "",
+                "options": [
+                  "Isomers",
+                  "Isotopes",
+                  "Ions",
+                  "Alloys"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Structural isomers have the same molecular formula but different atom arrangements."
+              },
+              {
+                "id": "chem-c6-l3-q3",
+                "text": "The IUPAC name of C2H6 is:",
+                "text_ml": "",
+                "options": [
+                  "Ethane",
+                  "Methane",
+                  "Propane",
+                  "Ethene"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "A two-carbon saturated hydrocarbon is named ethane."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Structural Isomerism",
+          "title_ml": "Structural Isomerism",
+          "youtube_video_id": "3AgRcspMr4Y",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Structural Isomerism - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c6-l4-q1",
+                "text": "Compounds with the same molecular formula but different structural formulae are called:",
+                "text_ml": "",
+                "options": [
+                  "Isomers",
+                  "Isotopes",
+                  "Ions",
+                  "Alloys"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Structural isomers have the same molecular formula but different atom arrangements."
+              },
+              {
+                "id": "chem-c6-l4-q2",
+                "text": "The IUPAC name of C2H6 is:",
+                "text_ml": "",
+                "options": [
+                  "Ethane",
+                  "Methane",
+                  "Propane",
+                  "Ethene"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "A two-carbon saturated hydrocarbon is named ethane."
+              },
+              {
+                "id": "chem-c6-l4-q3",
+                "text": "A carbon-carbon double bond is found in:",
+                "text_ml": "",
+                "options": [
+                  "Alkenes",
+                  "Alkanes",
+                  "Alcohols only",
+                  "Carboxylic acids only"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Alkenes contain at least one C=C bond."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Nomenclature and Isomerism - Revision",
+          "title_ml": "Nomenclature and Isomerism - Revision",
+          "youtube_video_id": "3AgRcspMr4Y",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Nomenclature and Isomerism - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c6-l5-q1",
+                "text": "The IUPAC name of C2H6 is:",
+                "text_ml": "",
+                "options": [
+                  "Ethane",
+                  "Methane",
+                  "Propane",
+                  "Ethene"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "A two-carbon saturated hydrocarbon is named ethane."
+              },
+              {
+                "id": "chem-c6-l5-q2",
+                "text": "A carbon-carbon double bond is found in:",
+                "text_ml": "",
+                "options": [
+                  "Alkenes",
+                  "Alkanes",
+                  "Alcohols only",
+                  "Carboxylic acids only"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Alkenes contain at least one C=C bond."
+              },
+              {
+                "id": "chem-c6-l5-q3",
+                "text": "The prefix 'prop-' in organic nomenclature indicates:",
+                "text_ml": "",
+                "options": [
+                  "Three carbon atoms",
+                  "Two carbon atoms",
+                  "Four oxygen atoms",
+                  "One chlorine atom"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "The root prop- denotes a chain of three carbon atoms."
+              }
+            ]
+          }
+        }
+      ],
+      "chapter_number": 6,
+      "title_ml": "Nomenclature of Organic Compounds and Isomerism",
+      "order_index": 6,
+      "test": {
+        "title": "Nomenclature of Organic Compounds and Isomerism - Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ch10-6-q1",
+            "text": "The simplest alkane is:",
+            "text_ml": "",
+            "options": [
+              "Methane",
+              "Ethene",
+              "Ethyne",
+              "Propanol"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Methane, CH4, is the first member of the alkane series."
+          },
+          {
+            "id": "ch10-6-q2",
+            "text": "The general formula of alkanes is:",
+            "text_ml": "",
+            "options": [
+              "CnH2n+2",
+              "CnH2n",
+              "CnH2n-2",
+              "CnH2nO2"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Alkanes are saturated hydrocarbons with formula CnH2n+2."
+          },
+          {
+            "id": "ch10-6-q3",
+            "text": "The functional group of alcohols is:",
+            "text_ml": "",
+            "options": [
+              "-OH",
+              "-COOH",
+              "-CHO",
+              "-Cl"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Alcohols contain the hydroxyl functional group, -OH."
+          },
+          {
+            "id": "ch10-6-q4",
+            "text": "Compounds with the same molecular formula but different structural formulae are called:",
+            "text_ml": "",
+            "options": [
+              "Isomers",
+              "Isotopes",
+              "Ions",
+              "Alloys"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Structural isomers have the same molecular formula but different atom arrangements."
+          },
+          {
+            "id": "ch10-6-q5",
+            "text": "The IUPAC name of C2H6 is:",
+            "text_ml": "",
+            "options": [
+              "Ethane",
+              "Methane",
+              "Propane",
+              "Ethene"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "A two-carbon saturated hydrocarbon is named ethane."
+          },
+          {
+            "id": "ch10-6-q6",
+            "text": "A carbon-carbon double bond is found in:",
+            "text_ml": "",
+            "options": [
+              "Alkenes",
+              "Alkanes",
+              "Alcohols only",
+              "Carboxylic acids only"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Alkenes contain at least one C=C bond."
+          },
+          {
+            "id": "ch10-6-q7",
+            "text": "The prefix 'prop-' in organic nomenclature indicates:",
+            "text_ml": "",
+            "options": [
+              "Three carbon atoms",
+              "Two carbon atoms",
+              "Four oxygen atoms",
+              "One chlorine atom"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "The root prop- denotes a chain of three carbon atoms."
+          },
+          {
+            "id": "ch10-6-q8",
+            "text": "Members of a homologous series differ by:",
+            "text_ml": "",
+            "options": [
+              "CH2 unit",
+              "One proton only",
+              "One neutron only",
+              "One water molecule always"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Successive members of a homologous series usually differ by a CH2 group."
+          }
+        ]
+      }
+    },
+    {
+      "title": "Chemical Reactions of Organic Compounds",
+      "description": "Combustion, substitution, addition, oxidation, polymerisation and reactions of common organic compounds.",
+      "lessons": [
+        {
+          "title": "Chemical Reactions of Organic Compounds - Overview",
+          "title_ml": "Chemical Reactions of Organic Compounds - Overview",
+          "youtube_video_id": "9dUxq8eolSs",
+          "duration_seconds": 600,
+          "is_free": true,
+          "order_index": 1,
+          "test": {
+            "title": "Chemical Reactions of Organic Compounds - Overview - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c7-l1-q1",
+                "text": "Complete combustion of hydrocarbons mainly produces carbon dioxide and:",
+                "text_ml": "",
+                "options": [
+                  "Water",
+                  "Ammonia",
+                  "Sodium chloride",
+                  "Hydrogen chloride"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Complete combustion of hydrocarbons forms carbon dioxide and water."
+              },
+              {
+                "id": "chem-c7-l1-q2",
+                "text": "A reaction in which hydrogen atoms in methane are replaced by chlorine is:",
+                "text_ml": "",
+                "options": [
+                  "Substitution",
+                  "Addition",
+                  "Neutralisation",
+                  "Precipitation"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Alkanes undergo substitution reactions with chlorine in sunlight."
+              },
+              {
+                "id": "chem-c7-l1-q3",
+                "text": "Unsaturated hydrocarbons commonly undergo:",
+                "text_ml": "",
+                "options": [
+                  "Addition reactions",
+                  "Only rusting",
+                  "Only sublimation",
+                  "No reaction"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Double or triple bonds allow addition reactions."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Combustion and Substitution Reactions",
+          "title_ml": "Combustion and Substitution Reactions",
+          "youtube_video_id": "9dUxq8eolSs",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 2,
+          "test": {
+            "title": "Combustion and Substitution Reactions - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c7-l2-q1",
+                "text": "A reaction in which hydrogen atoms in methane are replaced by chlorine is:",
+                "text_ml": "",
+                "options": [
+                  "Substitution",
+                  "Addition",
+                  "Neutralisation",
+                  "Precipitation"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Alkanes undergo substitution reactions with chlorine in sunlight."
+              },
+              {
+                "id": "chem-c7-l2-q2",
+                "text": "Unsaturated hydrocarbons commonly undergo:",
+                "text_ml": "",
+                "options": [
+                  "Addition reactions",
+                  "Only rusting",
+                  "Only sublimation",
+                  "No reaction"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Double or triple bonds allow addition reactions."
+              },
+              {
+                "id": "chem-c7-l2-q3",
+                "text": "Polyethene is formed by polymerisation of:",
+                "text_ml": "",
+                "options": [
+                  "Ethene",
+                  "Ethane",
+                  "Methane",
+                  "Ethanol"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ethene monomers join to form polyethene."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Addition and Polymerisation",
+          "title_ml": "Addition and Polymerisation",
+          "youtube_video_id": "9dUxq8eolSs",
+          "duration_seconds": 720,
+          "is_free": false,
+          "order_index": 3,
+          "test": {
+            "title": "Addition and Polymerisation - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c7-l3-q1",
+                "text": "Unsaturated hydrocarbons commonly undergo:",
+                "text_ml": "",
+                "options": [
+                  "Addition reactions",
+                  "Only rusting",
+                  "Only sublimation",
+                  "No reaction"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Double or triple bonds allow addition reactions."
+              },
+              {
+                "id": "chem-c7-l3-q2",
+                "text": "Polyethene is formed by polymerisation of:",
+                "text_ml": "",
+                "options": [
+                  "Ethene",
+                  "Ethane",
+                  "Methane",
+                  "Ethanol"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ethene monomers join to form polyethene."
+              },
+              {
+                "id": "chem-c7-l3-q3",
+                "text": "Oxidation of ethanol can produce:",
+                "text_ml": "",
+                "options": [
+                  "Ethanoic acid",
+                  "Methane",
+                  "Sodium metal",
+                  "Ammonia"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ethanol can be oxidised to ethanoic acid under suitable conditions."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Oxidation and Reactions of Alcohols",
+          "title_ml": "Oxidation and Reactions of Alcohols",
+          "youtube_video_id": "9dUxq8eolSs",
+          "duration_seconds": 660,
+          "is_free": false,
+          "order_index": 4,
+          "test": {
+            "title": "Oxidation and Reactions of Alcohols - Test",
+            "duration_minutes": 8,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c7-l4-q1",
+                "text": "Polyethene is formed by polymerisation of:",
+                "text_ml": "",
+                "options": [
+                  "Ethene",
+                  "Ethane",
+                  "Methane",
+                  "Ethanol"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ethene monomers join to form polyethene."
+              },
+              {
+                "id": "chem-c7-l4-q2",
+                "text": "Oxidation of ethanol can produce:",
+                "text_ml": "",
+                "options": [
+                  "Ethanoic acid",
+                  "Methane",
+                  "Sodium metal",
+                  "Ammonia"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ethanol can be oxidised to ethanoic acid under suitable conditions."
+              },
+              {
+                "id": "chem-c7-l4-q3",
+                "text": "The presence of a double bond can be tested using decolourisation of:",
+                "text_ml": "",
+                "options": [
+                  "Bromine water",
+                  "Lime water only",
+                  "Salt water",
+                  "Sugar solution"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Unsaturated compounds decolourise bromine water by addition."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Chemical Reactions of Organic Compounds - Revision",
+          "title_ml": "Chemical Reactions of Organic Compounds - Revision",
+          "youtube_video_id": "9dUxq8eolSs",
+          "duration_seconds": 540,
+          "is_free": false,
+          "order_index": 5,
+          "test": {
+            "title": "Chemical Reactions of Organic Compounds - Revision - Test",
+            "duration_minutes": 15,
+            "total_marks": 3,
+            "questions": [
+              {
+                "id": "chem-c7-l5-q1",
+                "text": "Oxidation of ethanol can produce:",
+                "text_ml": "",
+                "options": [
+                  "Ethanoic acid",
+                  "Methane",
+                  "Sodium metal",
+                  "Ammonia"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Ethanol can be oxidised to ethanoic acid under suitable conditions."
+              },
+              {
+                "id": "chem-c7-l5-q2",
+                "text": "The presence of a double bond can be tested using decolourisation of:",
+                "text_ml": "",
+                "options": [
+                  "Bromine water",
+                  "Lime water only",
+                  "Salt water",
+                  "Sugar solution"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Unsaturated compounds decolourise bromine water by addition."
+              },
+              {
+                "id": "chem-c7-l5-q3",
+                "text": "Burning organic compounds in limited oxygen can produce:",
+                "text_ml": "",
+                "options": [
+                  "Carbon monoxide or soot",
+                  "Only oxygen",
+                  "Only nitrogen",
+                  "Sodium hydroxide"
+                ],
+                "correct_answer": 0,
+                "marks": 1,
+                "explanation": "Incomplete combustion can produce carbon monoxide and carbon particles."
+              }
+            ]
+          }
+        }
+      ],
+      "chapter_number": 7,
+      "title_ml": "Chemical Reactions of Organic Compounds",
+      "order_index": 7,
+      "test": {
+        "title": "Chemical Reactions of Organic Compounds - Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ch10-7-q1",
+            "text": "Complete combustion of hydrocarbons mainly produces carbon dioxide and:",
+            "text_ml": "",
+            "options": [
+              "Water",
+              "Ammonia",
+              "Sodium chloride",
+              "Hydrogen chloride"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Complete combustion of hydrocarbons forms carbon dioxide and water."
+          },
+          {
+            "id": "ch10-7-q2",
+            "text": "A reaction in which hydrogen atoms in methane are replaced by chlorine is:",
+            "text_ml": "",
+            "options": [
+              "Substitution",
+              "Addition",
+              "Neutralisation",
+              "Precipitation"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Alkanes undergo substitution reactions with chlorine in sunlight."
+          },
+          {
+            "id": "ch10-7-q3",
+            "text": "Unsaturated hydrocarbons commonly undergo:",
+            "text_ml": "",
+            "options": [
+              "Addition reactions",
+              "Only rusting",
+              "Only sublimation",
+              "No reaction"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Double or triple bonds allow addition reactions."
+          },
+          {
+            "id": "ch10-7-q4",
+            "text": "Polyethene is formed by polymerisation of:",
+            "text_ml": "",
+            "options": [
+              "Ethene",
+              "Ethane",
+              "Methane",
+              "Ethanol"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Ethene monomers join to form polyethene."
+          },
+          {
+            "id": "ch10-7-q5",
+            "text": "Oxidation of ethanol can produce:",
+            "text_ml": "",
+            "options": [
+              "Ethanoic acid",
+              "Methane",
+              "Sodium metal",
+              "Ammonia"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Ethanol can be oxidised to ethanoic acid under suitable conditions."
+          },
+          {
+            "id": "ch10-7-q6",
+            "text": "The presence of a double bond can be tested using decolourisation of:",
+            "text_ml": "",
+            "options": [
+              "Bromine water",
+              "Lime water only",
+              "Salt water",
+              "Sugar solution"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Unsaturated compounds decolourise bromine water by addition."
+          },
+          {
+            "id": "ch10-7-q7",
+            "text": "Burning organic compounds in limited oxygen can produce:",
+            "text_ml": "",
+            "options": [
+              "Carbon monoxide or soot",
+              "Only oxygen",
+              "Only nitrogen",
+              "Sodium hydroxide"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Incomplete combustion can produce carbon monoxide and carbon particles."
+          },
+          {
+            "id": "ch10-7-q8",
+            "text": "Natural rubber is an example of a:",
+            "text_ml": "",
+            "options": [
+              "Polymer",
+              "Noble gas",
+              "Simple salt",
+              "Metal ore"
+            ],
+            "correct_answer": 0,
+            "marks": 1,
+            "explanation": "Rubber is a polymer made of repeating molecular units."
+          }
+        ]
+      }
+    }
+  ]
+}
