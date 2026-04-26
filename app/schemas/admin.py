@@ -66,12 +66,38 @@ class PublishToggleResponse(BaseModel):
     is_published: bool
 
 
+class QuestionInput(BaseModel):
+    """A single MCQ question as submitted by the admin."""
+
+    id: str
+    text: str
+    text_ml: str = ""
+    options: list[str]
+    correct_answer: int
+    explanation: str = ""
+    marks: int = 1
+
+    @field_validator("options")
+    @classmethod
+    def four_options(cls, v: list[str]) -> list[str]:
+        if len(v) != 4:
+            raise ValueError("Each question must have exactly 4 options")
+        return v
+
+    @field_validator("correct_answer")
+    @classmethod
+    def valid_index(cls, v: int) -> int:
+        if v not in range(4):
+            raise ValueError("correct_answer must be 0, 1, 2, or 3")
+        return v
+
+
 class CreateTestRequest(BaseModel):
     chapter_id: UUID
     title: str
     duration_minutes: int = 30
     total_marks: int
-    questions: list[dict]
+    questions: list[QuestionInput]
 
 
 class TestAdminResponse(BaseModel):

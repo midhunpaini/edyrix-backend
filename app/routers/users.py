@@ -60,16 +60,15 @@ async def get_stats(
     )
     videos_completed: int = completed_result.scalar() or 0
 
-    attempts_result = await db.execute(
-        select(TestAttempt).where(TestAttempt.user_id == user.id)
+    agg_result = await db.execute(
+        select(
+            func.count(TestAttempt.id),
+            func.coalesce(func.avg(TestAttempt.percentage), 0),
+        ).where(TestAttempt.user_id == user.id)
     )
-    attempts = attempts_result.scalars().all()
-    tests_taken = len(attempts)
-    avg_score = (
-        round(sum(float(a.percentage or 0) for a in attempts) / tests_taken, 1)
-        if tests_taken
-        else 0.0
-    )
+    tests_taken_raw, avg_pct_raw = agg_result.first()
+    tests_taken: int = tests_taken_raw or 0
+    avg_score = round(float(avg_pct_raw or 0), 1)
 
     active_subjects_result = await db.execute(
         select(Subject.slug)

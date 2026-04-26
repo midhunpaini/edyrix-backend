@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
     FRONTEND_URL: str = "http://localhost:5173"
+    ADMIN_URL: str = "http://localhost:5174"
 
     # Database
     DATABASE_URL: str

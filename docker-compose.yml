@@ -1,10 +1,10 @@
 services:
   backend:
     build:
-      context: ./backend
+      context: .
       dockerfile: Dockerfile
     env_file:
-      - ./backend/.env
+      - .env
     ports:
       - "8000:8000"
     healthcheck:

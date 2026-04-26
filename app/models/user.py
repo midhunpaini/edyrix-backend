@@ -21,10 +21,11 @@ class User(Base):
     __table_args__ = (CheckConstraint("current_class BETWEEN 7 AND 10", name="ck_users_class"),)
 
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    firebase_uid: Mapped[str] = mapped_column(String(128), unique=True, nullable=False)
+    firebase_uid: Mapped[str | None] = mapped_column(String(128), unique=True, nullable=True)
     phone: Mapped[str | None] = mapped_column(String(15), unique=True, nullable=True)
     email: Mapped[str | None] = mapped_column(String(255), unique=True, nullable=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
+    password_hash: Mapped[str | None] = mapped_column(String(255), nullable=True)
     avatar_url: Mapped[str | None] = mapped_column(Text, nullable=True)
     role: Mapped[str] = mapped_column(String(20), nullable=False, default="student")
     current_class: Mapped[int | None] = mapped_column(Integer, nullable=True)

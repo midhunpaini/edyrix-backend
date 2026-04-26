@@ -4,6 +4,11 @@ from uuid import UUID
 from pydantic import BaseModel, ConfigDict, field_validator
 
 
+class AdminLoginRequest(BaseModel):
+    email: str
+    password: str
+
+
 class FirebaseGoogleRequest(BaseModel):
     firebase_token: str
 
@@ -20,8 +25,8 @@ class PhoneSendOTPRequest(BaseModel):
 
 
 class PhoneVerifyRequest(BaseModel):
-    phone: str
     firebase_token: str
+    phone: str | None = None
 
 
 class UserResponse(BaseModel):

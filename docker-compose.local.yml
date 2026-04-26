@@ -1,27 +1,34 @@
 services:
   backend:
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    ports:
+      - "8010:8000"
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
+    env_file:
+      - .env
     environment:
       DATABASE_URL: ${LOCAL_DATABASE_URL:-postgresql+asyncpg://postgres:postgres@postgres:5432/edurix}
       REDIS_URL: ${LOCAL_REDIS_URL:-redis://redis:6379/0}
     volumes:
-      - ./backend/app:/app/app
-      - ./backend/alembic:/app/alembic
-      - ./backend/alembic.ini:/app/alembic.ini:ro
+      - ./app:/app/app
+      - ./alembic:/app/alembic
+      - ./alembic.ini:/app/alembic.ini:ro
 
   postgres:
-    image: postgres:15-alpine
+    image: postgres:16-alpine
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-edurix}
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     ports:
-      - "5433:5432"
+      - "5453:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -35,7 +42,7 @@ services:
   redis:
     image: redis:7-alpine
     ports:
-      - "6380:6379"
+      - "6390:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s

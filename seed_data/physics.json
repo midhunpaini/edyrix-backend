@@ -1,0 +1,607 @@
+{
+  "subject_slug": "physics",
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "title": "Sound Waves",
+      "title_ml": "ശബ്ദ തരംഗങ്ങൾ",
+      "description": "Wave motion, properties of sound, reflection, resonance and reverberation",
+      "order_index": 1,
+      "test": {
+        "title": "Sound Waves — Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ph-1-q1",
+            "text": "Which of the following waves requires a material medium for propagation?",
+            "text_ml": "",
+            "options": ["Light waves", "Sound waves", "X-rays", "Gamma rays"],
+            "correct_answer": 1,
+            "explanation": "Sound is a mechanical wave that requires a material medium (solid, liquid, or gas) to propagate. Electromagnetic waves like light, X-rays and gamma rays can travel through vacuum.",
+            "marks": 1
+          },
+          {
+            "id": "ph-1-q2",
+            "text": "A tuning fork produces 256 oscillations in 2 seconds. What is its frequency?",
+            "text_ml": "",
+            "options": ["64 Hz", "128 Hz", "256 Hz", "512 Hz"],
+            "correct_answer": 1,
+            "explanation": "Frequency = Number of oscillations / Time = 256 / 2 = 128 Hz.",
+            "marks": 1
+          },
+          {
+            "id": "ph-1-q3",
+            "text": "Which property of a sound wave determines its loudness?",
+            "text_ml": "",
+            "options": ["Frequency", "Wavelength", "Amplitude", "Speed"],
+            "correct_answer": 2,
+            "explanation": "Loudness is determined by the amplitude of a sound wave. Greater amplitude means greater loudness (intensity).",
+            "marks": 1
+          },
+          {
+            "id": "ph-1-q4",
+            "text": "The minimum time gap between the original sound and its echo so that they can be heard separately is:",
+            "text_ml": "",
+            "options": ["0.01 second", "0.1 second", "1 second", "10 seconds"],
+            "correct_answer": 1,
+            "explanation": "The human ear can distinguish between two sounds only if the time gap between them is at least 0.1 second (1/10th of a second). This is the persistence of hearing.",
+            "marks": 1
+          },
+          {
+            "id": "ph-1-q5",
+            "text": "Sound travels fastest through which medium?",
+            "text_ml": "",
+            "options": ["Air at 0°C", "Water", "Steel", "Vacuum"],
+            "correct_answer": 2,
+            "explanation": "Sound travels fastest through solids because the particles are closely packed and the elastic restoring force is greatest. Speed in steel (~5200 m/s) > water (~1500 m/s) > air (~343 m/s).",
+            "marks": 1
+          },
+          {
+            "id": "ph-1-q6",
+            "text": "Which phenomenon is responsible for the prolonged sound heard in a large empty hall after the source stops?",
+            "text_ml": "",
+            "options": ["Echo", "Resonance", "Reverberation", "Reflection"],
+            "correct_answer": 2,
+            "explanation": "Reverberation is the persistence of sound in a large enclosed space due to repeated reflections from the walls, floor and ceiling after the source has stopped.",
+            "marks": 1
+          },
+          {
+            "id": "ph-1-q7",
+            "text": "Transverse waves vibrate in which direction relative to wave propagation?",
+            "text_ml": "",
+            "options": ["Along the direction of propagation", "Perpendicular to the direction of propagation", "At 45° to the direction of propagation", "In circular motion"],
+            "correct_answer": 1,
+            "explanation": "In transverse waves, particles vibrate perpendicular (at right angles) to the direction of wave propagation. Example: light waves, water ripples.",
+            "marks": 1
+          },
+          {
+            "id": "ph-1-q8",
+            "text": "Which of the following is an example of resonance in daily life?",
+            "text_ml": "",
+            "options": ["Hearing an echo in mountains", "Marching soldiers breaking a bridge", "Sound bouncing off a wall", "Lightning and thunder"],
+            "correct_answer": 1,
+            "explanation": "Soldiers are ordered to break step while crossing a bridge because their regular marching frequency could match the natural frequency of the bridge causing resonance, leading to collapse.",
+            "marks": 1
+          }
+        ]
+      }
+    },
+    {
+      "chapter_number": 2,
+      "title": "Lenses",
+      "title_ml": "ലെൻസുകൾ",
+      "description": "Convex and concave lenses, ray diagrams, lens formula and power of a lens",
+      "order_index": 2,
+      "test": {
+        "title": "Lenses — Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ph-2-q1",
+            "text": "A convex lens is also called a:",
+            "text_ml": "",
+            "options": ["Diverging lens", "Converging lens", "Concave lens", "Plano-concave lens"],
+            "correct_answer": 1,
+            "explanation": "A convex lens converges (brings together) parallel rays of light to a focal point, so it is called a converging lens.",
+            "marks": 1
+          },
+          {
+            "id": "ph-2-q2",
+            "text": "The focal length of a convex lens is 25 cm. What is its power?",
+            "text_ml": "",
+            "options": ["0.04 D", "0.25 D", "4 D", "25 D"],
+            "correct_answer": 2,
+            "explanation": "Power (P) = 1 / focal length (in metres) = 1 / 0.25 m = 4 dioptre (D).",
+            "marks": 1
+          },
+          {
+            "id": "ph-2-q3",
+            "text": "When an object is placed at the centre of curvature of a convex lens, the image formed is:",
+            "text_ml": "",
+            "options": ["Virtual, magnified, upright", "Real, same size, inverted", "Real, magnified, inverted", "Virtual, same size, upright"],
+            "correct_answer": 1,
+            "explanation": "When the object is at 2F (centre of curvature), the image is also at 2F on the other side — real, inverted, and the same size as the object.",
+            "marks": 1
+          },
+          {
+            "id": "ph-2-q4",
+            "text": "A person cannot see distant objects clearly. Which lens is used to correct this defect?",
+            "text_ml": "",
+            "options": ["Convex lens", "Concave lens", "Cylindrical lens", "Bifocal lens"],
+            "correct_answer": 1,
+            "explanation": "Myopia (short-sightedness) is corrected using a concave (diverging) lens that shifts the image of distant objects back onto the retina.",
+            "marks": 1
+          },
+          {
+            "id": "ph-2-q5",
+            "text": "The lens formula is:",
+            "text_ml": "",
+            "options": ["1/f = 1/v + 1/u", "1/f = 1/v - 1/u", "f = v - u", "f = v × u"],
+            "correct_answer": 1,
+            "explanation": "The lens formula is 1/f = 1/v − 1/u, where f = focal length, v = image distance, u = object distance (all measured from the optical centre).",
+            "marks": 1
+          },
+          {
+            "id": "ph-2-q6",
+            "text": "Which device uses a convex lens to produce a magnified, upright, virtual image?",
+            "text_ml": "",
+            "options": ["Camera", "Projector", "Simple microscope (magnifying glass)", "Human eye"],
+            "correct_answer": 2,
+            "explanation": "A simple microscope (magnifying glass) is a single convex lens used to produce a magnified, erect and virtual image when the object is placed within the focal length.",
+            "marks": 1
+          },
+          {
+            "id": "ph-2-q7",
+            "text": "Two lenses of power +3 D and −1 D are placed in contact. The resultant power is:",
+            "text_ml": "",
+            "options": ["+4 D", "+2 D", "−2 D", "+3 D"],
+            "correct_answer": 1,
+            "explanation": "When lenses are placed in contact, the total power is the algebraic sum: P = P₁ + P₂ = 3 + (−1) = +2 D.",
+            "marks": 1
+          },
+          {
+            "id": "ph-2-q8",
+            "text": "The image formed by a concave lens is always:",
+            "text_ml": "",
+            "options": ["Real and inverted", "Virtual, upright and diminished", "Real and magnified", "Virtual and magnified"],
+            "correct_answer": 1,
+            "explanation": "A concave (diverging) lens always forms a virtual, upright and diminished image, regardless of object position.",
+            "marks": 1
+          }
+        ]
+      }
+    },
+    {
+      "chapter_number": 3,
+      "title": "The World of Colours and Vision",
+      "title_ml": "വർണങ്ങളുടെ ലോകം",
+      "description": "Dispersion of light, electromagnetic spectrum, scattering of light, colour vision and defects",
+      "order_index": 3,
+      "test": {
+        "title": "The World of Colours and Vision — Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ph-3-q1",
+            "text": "The splitting of white light into its component colours by a prism is called:",
+            "text_ml": "",
+            "options": ["Reflection", "Refraction", "Dispersion", "Scattering"],
+            "correct_answer": 2,
+            "explanation": "Dispersion is the separation of white light into its constituent colours (VIBGYOR) when it passes through a prism, due to different wavelengths bending at different angles.",
+            "marks": 1
+          },
+          {
+            "id": "ph-3-q2",
+            "text": "Which colour of light has the highest frequency in the visible spectrum?",
+            "text_ml": "",
+            "options": ["Red", "Orange", "Green", "Violet"],
+            "correct_answer": 3,
+            "explanation": "Violet light has the shortest wavelength and therefore the highest frequency among visible colours. Red has the longest wavelength and lowest frequency.",
+            "marks": 1
+          },
+          {
+            "id": "ph-3-q3",
+            "text": "Why does the sky appear blue during daytime?",
+            "text_ml": "",
+            "options": ["The sky reflects ocean water", "Blue light has the highest wavelength", "Short wavelength blue light is scattered more by atmospheric particles (Rayleigh scattering)", "The sun emits only blue light during day"],
+            "correct_answer": 2,
+            "explanation": "Rayleigh scattering causes shorter wavelengths (blue) to scatter much more than longer wavelengths (red) when sunlight passes through the atmosphere, making the sky appear blue.",
+            "marks": 1
+          },
+          {
+            "id": "ph-3-q4",
+            "text": "The Tyndall effect is observed when light passes through:",
+            "text_ml": "",
+            "options": ["Pure water", "A glass slab", "A colloidal solution", "A vacuum"],
+            "correct_answer": 2,
+            "explanation": "The Tyndall effect (scattering of light to make the beam visible) occurs when light passes through a colloidal solution whose particles are large enough to scatter light.",
+            "marks": 1
+          },
+          {
+            "id": "ph-3-q5",
+            "text": "The primary colours of light are:",
+            "text_ml": "",
+            "options": ["Red, Yellow, Blue", "Red, Green, Blue", "Cyan, Magenta, Yellow", "Red, Orange, Violet"],
+            "correct_answer": 1,
+            "explanation": "The primary colours of light are Red, Green and Blue (RGB). When all three are combined in equal intensities they produce white light.",
+            "marks": 1
+          },
+          {
+            "id": "ph-3-q6",
+            "text": "Why does the sun appear red/orange at sunrise and sunset?",
+            "text_ml": "",
+            "options": ["The sun produces more red light at those times", "At low angles sunlight travels through more atmosphere; blue is scattered away, leaving red", "Temperature of the sun is lower at sunrise", "Reflection from clouds makes it red"],
+            "correct_answer": 1,
+            "explanation": "At sunrise and sunset, sunlight travels through a much thicker layer of atmosphere. Blue and violet light are scattered away, and the longer-wavelength red and orange light reaches our eyes.",
+            "marks": 1
+          },
+          {
+            "id": "ph-3-q7",
+            "text": "A person who cannot distinguish between red and green colours suffers from:",
+            "text_ml": "",
+            "options": ["Myopia", "Hypermetropia", "Colour blindness", "Astigmatism"],
+            "correct_answer": 2,
+            "explanation": "Red-green colour blindness is the most common form of colour blindness, caused by missing or defective cone cells in the retina. It is more common in males and is a sex-linked genetic condition.",
+            "marks": 1
+          },
+          {
+            "id": "ph-3-q8",
+            "text": "Which part of the electromagnetic spectrum has wavelength just beyond the red end of visible light?",
+            "text_ml": "",
+            "options": ["Ultraviolet rays", "X-rays", "Infrared rays", "Gamma rays"],
+            "correct_answer": 2,
+            "explanation": "Infrared radiation lies just beyond the red end (long wavelength side) of the visible spectrum. Ultraviolet lies beyond the violet end (short wavelength side).",
+            "marks": 1
+          }
+        ]
+      }
+    },
+    {
+      "chapter_number": 4,
+      "title": "Magnetic Effect of Electric Current",
+      "title_ml": "വൈദ്യുത പ്രവാഹത്തിന്റെ കാന്തിക ഫലം",
+      "description": "Oersted's experiment, magnetic field due to current, electromagnets, force on a current-carrying conductor, electric motor",
+      "order_index": 4,
+      "test": {
+        "title": "Magnetic Effect of Electric Current — Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ph-4-q1",
+            "text": "Oersted's experiment demonstrated that:",
+            "text_ml": "",
+            "options": ["Changing magnetic field produces electric current", "Electric current produces a magnetic field", "Heat is produced by electric current", "Light is produced by magnetic fields"],
+            "correct_answer": 1,
+            "explanation": "In 1820, Oersted observed that a compass needle deflects when placed near a current-carrying wire, proving that electric current creates a magnetic field around it.",
+            "marks": 1
+          },
+          {
+            "id": "ph-4-q2",
+            "text": "Fleming's Left Hand Rule is used to find the direction of:",
+            "text_ml": "",
+            "options": ["Induced EMF", "Force on a current-carrying conductor in a magnetic field", "Current in a generator", "Magnetic field around a wire"],
+            "correct_answer": 1,
+            "explanation": "Fleming's Left Hand Rule gives the direction of force (motion) on a current-carrying conductor placed in a magnetic field. It is used for electric motors.",
+            "marks": 1
+          },
+          {
+            "id": "ph-4-q3",
+            "text": "The working principle of an electric motor is based on:",
+            "text_ml": "",
+            "options": ["Electromagnetic induction", "Magnetic effect of electric current", "Heating effect of electric current", "Chemical effect of current"],
+            "correct_answer": 1,
+            "explanation": "An electric motor works on the principle that a current-carrying conductor experiences a force when placed in a magnetic field (the motor effect — magnetic effect of current).",
+            "marks": 1
+          },
+          {
+            "id": "ph-4-q4",
+            "text": "A soft iron core is used in an electromagnet because:",
+            "text_ml": "",
+            "options": ["It is cheaper than steel", "It becomes a strong magnet easily and loses magnetism when current stops", "It is lighter than steel", "It conducts electricity better"],
+            "correct_answer": 1,
+            "explanation": "Soft iron has high permeability (becomes strongly magnetised) and low retentivity (loses magnetism quickly when current is removed), making it ideal for electromagnets.",
+            "marks": 1
+          },
+          {
+            "id": "ph-4-q5",
+            "text": "A 100 W bulb and a 40 W bulb are connected in series to the mains. Which bulb glows brighter?",
+            "text_ml": "",
+            "options": ["100 W bulb", "40 W bulb", "Both glow equally bright", "Neither glows"],
+            "correct_answer": 1,
+            "explanation": "In series, current is the same. P = I²R. The 40 W bulb has higher resistance (R = V²/P, so lower P means higher R at same voltage). Higher resistance means more power dissipated as heat and light.",
+            "marks": 1
+          },
+          {
+            "id": "ph-4-q6",
+            "text": "The device used to detect the presence and direction of electric current is:",
+            "text_ml": "",
+            "options": ["Ammeter", "Voltmeter", "Galvanometer", "Ohmmeter"],
+            "correct_answer": 2,
+            "explanation": "A galvanometer is a sensitive instrument that detects the presence and direction of small electric currents based on the magnetic effect of current.",
+            "marks": 1
+          },
+          {
+            "id": "ph-4-q7",
+            "text": "If the current in a wire is reversed, the magnetic field around it:",
+            "text_ml": "",
+            "options": ["Disappears", "Doubles in strength", "Reverses in direction", "Remains unchanged"],
+            "correct_answer": 2,
+            "explanation": "The direction of the magnetic field around a current-carrying wire depends on the direction of current flow (Right Hand Thumb Rule). Reversing current reverses the field direction.",
+            "marks": 1
+          },
+          {
+            "id": "ph-4-q8",
+            "text": "Which factor does NOT increase the strength of an electromagnet?",
+            "text_ml": "",
+            "options": ["Increasing the number of turns in the coil", "Increasing the current", "Using a soft iron core", "Increasing the resistance of the wire"],
+            "correct_answer": 3,
+            "explanation": "The strength of an electromagnet increases with more turns, greater current, and use of a soft iron core. Increasing resistance reduces current, which would weaken the electromagnet.",
+            "marks": 1
+          }
+        ]
+      }
+    },
+    {
+      "chapter_number": 5,
+      "title": "Electric Energy: Consumption and Conservation",
+      "title_ml": "വൈദ്യുത ഊർജം: ഉപഭോഗവും സംരക്ഷണവും",
+      "description": "Joule's law, electric power, units of electrical energy (kWh), power transmission and energy conservation",
+      "order_index": 5,
+      "test": {
+        "title": "Electric Energy — Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ph-5-q1",
+            "text": "The SI unit of electric power is:",
+            "text_ml": "",
+            "options": ["Joule", "Watt", "Volt", "Ampere"],
+            "correct_answer": 1,
+            "explanation": "The SI unit of electric power is the watt (W), defined as 1 joule of energy consumed or produced per second. P = V × I.",
+            "marks": 1
+          },
+          {
+            "id": "ph-5-q2",
+            "text": "According to Joule's law, the heat produced in a conductor is proportional to:",
+            "text_ml": "",
+            "options": ["Current (I)", "Square of current (I²)", "Voltage alone", "Resistance alone"],
+            "correct_answer": 1,
+            "explanation": "Joule's law states: H = I²Rt. Heat produced is proportional to the square of the current, the resistance, and the time for which current flows.",
+            "marks": 1
+          },
+          {
+            "id": "ph-5-q3",
+            "text": "1 kilowatt-hour (kWh) is equal to:",
+            "text_ml": "",
+            "options": ["1000 J", "3,600 J", "3,600,000 J", "1,000,000 J"],
+            "correct_answer": 2,
+            "explanation": "1 kWh = 1000 W × 3600 s = 3,600,000 J = 3.6 × 10⁶ J. This is the unit used by electricity meters (1 unit of electricity = 1 kWh).",
+            "marks": 1
+          },
+          {
+            "id": "ph-5-q4",
+            "text": "Why is electricity transmitted at very high voltages over long distances?",
+            "text_ml": "",
+            "options": ["To increase the speed of electricity", "To reduce current, which minimises power loss (I²R) in transmission lines", "To increase the power at the generating station", "To make transmission lines cheaper"],
+            "correct_answer": 1,
+            "explanation": "Power loss = I²R. By transmitting at high voltage, the current is reduced for the same power. Since loss ∝ I², reducing I drastically reduces energy wasted as heat in the lines.",
+            "marks": 1
+          },
+          {
+            "id": "ph-5-q5",
+            "text": "A 60 W bulb is used for 5 hours daily. How many units (kWh) does it consume in 30 days?",
+            "text_ml": "",
+            "options": ["3 units", "9 units", "18 units", "90 units"],
+            "correct_answer": 1,
+            "explanation": "Energy = Power × Time = 60 W × (5 × 30) h = 60 × 150 = 9000 Wh = 9 kWh = 9 units.",
+            "marks": 1
+          },
+          {
+            "id": "ph-5-q6",
+            "text": "A fuse wire in an electric circuit melts when:",
+            "text_ml": "",
+            "options": ["Voltage increases suddenly", "Current exceeds the safe limit specified for the fuse", "Resistance of the circuit increases", "The circuit is switched off"],
+            "correct_answer": 1,
+            "explanation": "A fuse is a safety device made of a low-melting-point alloy. When current exceeds the fuse's rated value, excessive heat melts it and breaks the circuit, protecting appliances.",
+            "marks": 1
+          },
+          {
+            "id": "ph-5-q7",
+            "text": "The purpose of earthing (grounding) in electrical installations is to:",
+            "text_ml": "",
+            "options": ["Increase the voltage supply", "Provide a path for current to dissipate safely if a fault occurs", "Reduce electricity bills", "Improve signal quality"],
+            "correct_answer": 1,
+            "explanation": "Earthing connects the metal body of appliances to the ground. If a live wire accidentally touches the metal body, current flows safely to earth preventing electric shock to users.",
+            "marks": 1
+          },
+          {
+            "id": "ph-5-q8",
+            "text": "If the transmission voltage is doubled while keeping power constant, the power loss in the line becomes:",
+            "text_ml": "",
+            "options": ["Double", "Half", "Four times", "One-quarter"],
+            "correct_answer": 3,
+            "explanation": "Power loss = I²R. If voltage doubles, current halves (for constant power P = VI). Loss = (I/2)²R = I²R/4. So loss becomes one-quarter of the original.",
+            "marks": 1
+          }
+        ]
+      }
+    },
+    {
+      "chapter_number": 6,
+      "title": "Electromagnetic Induction in Daily Life",
+      "title_ml": "ദൈനംദിന ജീവിതത്തിൽ വൈദ്യുതകാന്തിക പ്രേരണ",
+      "description": "Faraday's law, Lenz's law, AC and DC generators, transformers, mutual induction",
+      "order_index": 6,
+      "test": {
+        "title": "Electromagnetic Induction — Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ph-6-q1",
+            "text": "Electromagnetic induction is the process of:",
+            "text_ml": "",
+            "options": ["Producing magnetism from electric current", "Producing electric current from a changing magnetic field", "Converting electrical energy to mechanical energy", "Storing electric charge"],
+            "correct_answer": 1,
+            "explanation": "Electromagnetic induction, discovered by Michael Faraday, is the production of an EMF (and thus current) in a conductor when it experiences a changing magnetic field.",
+            "marks": 1
+          },
+          {
+            "id": "ph-6-q2",
+            "text": "Lenz's law states that the induced current always acts to:",
+            "text_ml": "",
+            "options": ["Assist the change that caused it", "Oppose the change in magnetic flux that caused it", "Increase the magnetic flux", "Maximise the induced EMF"],
+            "correct_answer": 1,
+            "explanation": "Lenz's law states that the direction of induced current is such that it opposes the change in magnetic flux that produced it. This is a consequence of conservation of energy.",
+            "marks": 1
+          },
+          {
+            "id": "ph-6-q3",
+            "text": "Fleming's Right Hand Rule is used to find the direction of induced current in a:",
+            "text_ml": "",
+            "options": ["Electric motor", "Generator", "Transformer", "Electromagnet"],
+            "correct_answer": 1,
+            "explanation": "Fleming's Right Hand Rule is the generator rule — it gives the direction of induced current when a conductor moves in a magnetic field, as in a generator.",
+            "marks": 1
+          },
+          {
+            "id": "ph-6-q4",
+            "text": "A step-up transformer increases:",
+            "text_ml": "",
+            "options": ["Current while decreasing voltage", "Voltage while decreasing current", "Both voltage and current", "Power output beyond input power"],
+            "correct_answer": 1,
+            "explanation": "A step-up transformer increases voltage in the secondary coil (more turns) while decreasing current proportionally. Power (P = VI) is conserved (ignoring losses).",
+            "marks": 1
+          },
+          {
+            "id": "ph-6-q5",
+            "text": "A transformer has 100 turns in the primary and 500 turns in the secondary. If the primary voltage is 220 V, the secondary voltage is:",
+            "text_ml": "",
+            "options": ["44 V", "440 V", "1100 V", "220 V"],
+            "correct_answer": 2,
+            "explanation": "V₂/V₁ = N₂/N₁ → V₂ = 220 × (500/100) = 220 × 5 = 1100 V. This is a step-up transformer.",
+            "marks": 1
+          },
+          {
+            "id": "ph-6-q6",
+            "text": "An AC generator produces alternating current because:",
+            "text_ml": "",
+            "options": ["The coil moves in a straight line", "The coil rotates in a magnetic field, reversing the direction of induced current every half turn", "The magnet reverses its poles", "The circuit resistance changes alternately"],
+            "correct_answer": 1,
+            "explanation": "As the coil rotates in the generator, the direction of movement relative to the magnetic field reverses every half rotation, reversing the direction of induced current and producing AC.",
+            "marks": 1
+          },
+          {
+            "id": "ph-6-q7",
+            "text": "Why is alternating current (AC) preferred over DC for long-distance power transmission?",
+            "text_ml": "",
+            "options": ["AC travels faster than DC", "AC voltage can be stepped up using transformers to reduce current and line losses", "AC is safer than DC", "AC can be stored in batteries more easily"],
+            "correct_answer": 1,
+            "explanation": "Transformers only work with AC. By stepping up AC voltage for transmission (reducing current and thus I²R losses) and stepping it down at the destination, long-distance transmission becomes efficient.",
+            "marks": 1
+          },
+          {
+            "id": "ph-6-q8",
+            "text": "The core of a transformer is made of laminated soft iron sheets to:",
+            "text_ml": "",
+            "options": ["Increase the primary current", "Reduce eddy current losses", "Increase the resistance of the core", "Make the transformer lighter"],
+            "correct_answer": 1,
+            "explanation": "Lamination (thin sheets insulated from each other) breaks up the large eddy current loops that would otherwise form in a solid iron core, reducing energy lost as heat.",
+            "marks": 1
+          }
+        ]
+      }
+    },
+    {
+      "chapter_number": 7,
+      "title": "Mechanical Advantage in Action",
+      "title_ml": "ക്രിയയിലെ യാന്ത്രിക മെച്ചം",
+      "description": "Simple machines, levers, pulleys, inclined planes, mechanical advantage, velocity ratio and efficiency",
+      "order_index": 7,
+      "test": {
+        "title": "Mechanical Advantage — Chapter Test",
+        "duration_minutes": 15,
+        "total_marks": 8,
+        "questions": [
+          {
+            "id": "ph-7-q1",
+            "text": "Mechanical advantage of a machine is defined as:",
+            "text_ml": "",
+            "options": ["Input force / Output force", "Output force / Input force", "Output distance / Input distance", "Input energy / Output energy"],
+            "correct_answer": 1,
+            "explanation": "Mechanical Advantage (MA) = Load / Effort = Output force / Input force. MA > 1 means the machine multiplies the input force.",
+            "marks": 1
+          },
+          {
+            "id": "ph-7-q2",
+            "text": "A class 1 lever has its:",
+            "text_ml": "",
+            "options": ["Fulcrum between effort and load", "Load between fulcrum and effort", "Effort between fulcrum and load", "Fulcrum at the effort end"],
+            "correct_answer": 0,
+            "explanation": "In a Class 1 lever, the fulcrum is between the effort and the load. Examples: seesaw, scissors, crowbar.",
+            "marks": 1
+          },
+          {
+            "id": "ph-7-q3",
+            "text": "The efficiency of a machine is always less than 100% because:",
+            "text_ml": "",
+            "options": ["Machines always increase force", "Some input energy is lost as heat due to friction", "Output energy is always greater than input", "Machines reduce speed"],
+            "correct_answer": 1,
+            "explanation": "Efficiency = (Useful output energy / Total input energy) × 100. In any real machine, friction converts some input energy to heat, so output energy is always less than input energy.",
+            "marks": 1
+          },
+          {
+            "id": "ph-7-q4",
+            "text": "A movable pulley gives a velocity ratio of:",
+            "text_ml": "",
+            "options": ["1", "2", "3", "4"],
+            "correct_answer": 1,
+            "explanation": "A single movable pulley has a velocity ratio (VR) of 2, meaning the effort moves twice the distance the load moves. This gives a theoretical MA of 2.",
+            "marks": 1
+          },
+          {
+            "id": "ph-7-q5",
+            "text": "Which of the following is an example of a Class 2 lever?",
+            "text_ml": "",
+            "options": ["Scissors", "Nutcracker (Bottle opener)", "Fishing rod", "Tweezers"],
+            "correct_answer": 1,
+            "explanation": "In a Class 2 lever, the load is between the fulcrum and the effort. A nutcracker/bottle opener is a classic example. The MA is always greater than 1.",
+            "marks": 1
+          },
+          {
+            "id": "ph-7-q6",
+            "text": "The velocity ratio (VR) of a machine is defined as:",
+            "text_ml": "",
+            "options": ["Load / Effort", "Effort distance / Load distance", "Output power / Input power", "MA × Efficiency"],
+            "correct_answer": 1,
+            "explanation": "VR = Distance moved by effort / Distance moved by load. It is a fixed value for a given machine, determined only by its geometry, not by friction.",
+            "marks": 1
+          },
+          {
+            "id": "ph-7-q7",
+            "text": "If a machine has MA = 4 and VR = 5, its efficiency is:",
+            "text_ml": "",
+            "options": ["20%", "45%", "80%", "125%"],
+            "correct_answer": 2,
+            "explanation": "Efficiency = (MA / VR) × 100 = (4/5) × 100 = 80%.",
+            "marks": 1
+          },
+          {
+            "id": "ph-7-q8",
+            "text": "An inclined plane is used to:",
+            "text_ml": "",
+            "options": ["Increase the force needed to lift an object", "Reduce the effort needed to raise a load by increasing the distance over which it acts", "Increase the height an object can reach", "Decrease the work done"],
+            "correct_answer": 1,
+            "explanation": "An inclined plane allows a heavy load to be raised with less effort by moving it along a longer slope. Work done is the same (conservation of energy), but effort is reduced.",
+            "marks": 1
+          }
+        ]
+      }
+    }
+  ]
+}

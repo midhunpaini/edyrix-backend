@@ -41,6 +41,7 @@ COPY --from=builder /app/app ./app
 COPY --from=builder /app/alembic ./alembic
 COPY --from=builder /app/alembic.ini ./alembic.ini
 COPY --from=builder /app/pyproject.toml ./pyproject.toml
+COPY --from=builder /app/start.sh ./start.sh
 
 # Put venv binaries on PATH so uvicorn is found directly
 ENV PATH="/app/.venv/bin:$PATH"
@@ -49,11 +50,8 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Run as non-root for security
-RUN useradd --create-home --shell /bin/bash appuser
+RUN useradd --create-home --shell /bin/bash appuser && chmod +x start.sh
 USER appuser
 
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", \
-     "--host", "0.0.0.0", \
-     "--port", "8000", \
-     "--workers", "2"]
+CMD ["./start.sh"]

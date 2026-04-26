@@ -139,4 +139,4 @@ async def list_plans(db: AsyncSession = Depends(get_db)) -> list[PlanResponse]:
         .where(Plan.is_active.is_(True))
         .order_by(Plan.order_index)
     )
-    return result.scalars().all()  # type: ignore[return-value]
+    return list(result.scalars())

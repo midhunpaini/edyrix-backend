@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.dependencies import get_current_user, get_db
 from app.models.user import FreeTrial, User
 from app.schemas.user import (
+    AdminLoginRequest,
     AuthResponse,
     FirebaseGoogleRequest,
     PhoneSendOTPRequest,
@@ -13,7 +14,9 @@ from app.schemas.user import (
     UserResponse,
 )
 from app.services.auth_service import (
+    authenticate_admin,
     create_access_token,
+    decode_access_token,
     get_or_create_user,
     invalidate_token,
     store_token_jti,
@@ -34,6 +37,21 @@ async def _issue_token_response(user: User, is_new: bool, db: AsyncSession) -> A
         user_data.free_trial_expires_at = trial.expires_at
 
     return AuthResponse(access_token=token, is_new_user=is_new, user=user_data)
+
+
+@router.post("/admin/login", response_model=AuthResponse)
+async def admin_login(
+    body: AdminLoginRequest,
+    db: AsyncSession = Depends(get_db),
+) -> AuthResponse:
+    try:
+        user = await authenticate_admin(db, body.email, body.password)
+    except ValueError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid email or password",
+        )
+    return await _issue_token_response(user, False, db)
 
 
 @router.post("/google", response_model=AuthResponse)
@@ -112,8 +130,6 @@ async def logout(
     user: User = Depends(get_current_user),
 ) -> dict[str, str]:
     auth_header = request.headers.get("Authorization", "")
-    from app.services.auth_service import decode_access_token
-
     try:
         token = auth_header.removeprefix("Bearer ")
         payload = decode_access_token(token)

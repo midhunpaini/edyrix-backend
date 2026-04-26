@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.config import settings
-from app.routers import admin, auth, content, doubts, progress, subscriptions, tests, users
+from app.routers import admin, auth, content, doubts, payments, plans, progress, subscriptions, tests, users, webhooks
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -14,7 +14,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.FRONTEND_URL],
+    allow_origins=[settings.FRONTEND_URL, settings.ADMIN_URL],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -41,4 +41,7 @@ app.include_router(progress.router, prefix="/api/v1")
 app.include_router(tests.router, prefix="/api/v1")
 app.include_router(doubts.router, prefix="/api/v1")
 app.include_router(subscriptions.router, prefix="/api/v1")
+app.include_router(plans.router, prefix="/api/v1")
+app.include_router(payments.router, prefix="/api/v1")
+app.include_router(webhooks.router, prefix="/api/v1")
 app.include_router(admin.router, prefix="/api/v1")
