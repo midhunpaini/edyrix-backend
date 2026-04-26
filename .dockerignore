@@ -1,14 +1,44 @@
+# ── Python artifacts ──────────────────────────────────────────────
 .venv
 __pycache__
 *.pyc
 *.pyo
+*.pyd
+
+# ── Caches ────────────────────────────────────────────────────────
 .pytest_cache
 .mypy_cache
 .ruff_cache
+
+# ── Secrets / env ─────────────────────────────────────────────────
 .env
 .env.*
 !.env.example
+
+# ── Tests ─────────────────────────────────────────────────────────
 tests/
+
+# ── Documentation ─────────────────────────────────────────────────
 *.md
+docs/
+
+# ── Git ───────────────────────────────────────────────────────────
 .git
 .gitignore
+.gitattributes
+
+# ── Docker files (not needed inside the image) ────────────────────
+docker-compose*.yml
+Dockerfile*
+
+# ── Deployment config ─────────────────────────────────────────────
+railway.toml
+.claude/
+
+# ── Dev utility scripts ───────────────────────────────────────────
+create_admin.py
+seed.py
+seed_data/
+
+# ── Logs ──────────────────────────────────────────────────────────
+*.log

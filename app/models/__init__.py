@@ -1,3 +1,4 @@
+from app.models.admin import AdminUser
 from app.models.auth import TokenBlacklist
 from app.models.content import Chapter, Lesson, Note, Subject
 from app.models.doubt import Doubt
@@ -7,6 +8,7 @@ from app.models.user import FCMToken, FreeTrial, User
 
 __all__ = [
     "User",
+    "AdminUser",
     "FreeTrial",
     "FCMToken",
     "Subject",

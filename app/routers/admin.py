@@ -10,6 +10,7 @@ from sqlalchemy.orm import aliased
 from app.dependencies import get_db, require_admin
 from app.exceptions import BadRequestException, ConflictException, NotFoundException
 from app.queue import enqueue
+from app.models.admin import AdminUser
 from app.models.content import Chapter, Lesson, Note, Subject
 from app.models.doubt import Doubt
 from app.models.progress import Test
@@ -93,14 +94,15 @@ async def dashboard(
         )
     ).scalar() or 0
 
+    revenue_day = func.date(Payment.created_at).label("day")
     revenue_result = await db.execute(
         select(
-            func.date_trunc("day", Payment.created_at).label("day"),
+            revenue_day,
             func.sum(Payment.amount_paise).label("total"),
         )
         .where(Payment.status == "paid", Payment.created_at >= thirty_days_ago)
-        .group_by(func.date_trunc("day", Payment.created_at))
-        .order_by(func.date_trunc("day", Payment.created_at))
+        .group_by(revenue_day)
+        .order_by(revenue_day)
     )
     revenue_days = [
         RevenueDataPoint(date=row.day.strftime("%Y-%m-%d"), amount_paise=row.total)
@@ -461,7 +463,7 @@ async def answer_doubt(
     doubt_id: uuid.UUID,
     body: AnswerDoubtRequest,
     db: AsyncSession = Depends(get_db),
-    admin: User = Depends(require_admin),
+    admin: AdminUser = Depends(require_admin),
 ) -> CommonResponse[AnswerDoubtResponse]:
     result = await db.execute(select(Doubt).where(Doubt.id == doubt_id))
     doubt = result.scalar_one_or_none()
@@ -469,7 +471,7 @@ async def answer_doubt(
         raise NotFoundException("Doubt not found")
 
     doubt.answer_text = body.answer_text
-    doubt.answered_by = admin.id
+    doubt.answered_by_admin_id = admin.id
     doubt.answered_at = datetime.now(timezone.utc)
     doubt.status = "answered"
     await db.commit()

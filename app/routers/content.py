@@ -36,10 +36,11 @@ async def _optional_user(
         payload = decode_access_token(credentials.credentials)
         jti: str | None = payload.get("jti")
         user_id: str | None = payload.get("sub")
-        if not jti or not user_id or not await is_token_valid(jti, db):
+        token_type: str | None = payload.get("typ")
+        if not jti or not user_id or token_type != "student" or not await is_token_valid(jti, db):
             return None
         result = await db.execute(
-            select(User).where(User.id == user_id, User.is_active.is_(True))
+            select(User).where(User.id == user_id, User.role == "student", User.is_active.is_(True))
         )
         return result.scalar_one_or_none()
     except Exception:

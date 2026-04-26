@@ -31,9 +31,15 @@ class Doubt(Base):
     answered_by: Mapped[uuid.UUID | None] = mapped_column(
         UUID(as_uuid=True), ForeignKey("users.id"), nullable=True
     )
+    answered_by_admin_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("admin_users.id"), nullable=True
+    )
     answer_text: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False, default=_utcnow)
     answered_at: Mapped[datetime | None] = mapped_column(TIMESTAMP(timezone=True), nullable=True)
 
     user: Mapped["User"] = relationship("User", foreign_keys=[user_id])  # type: ignore[name-defined]
     answerer: Mapped["User | None"] = relationship("User", foreign_keys=[answered_by])  # type: ignore[name-defined]
+    admin_answerer: Mapped["AdminUser | None"] = relationship(  # type: ignore[name-defined]
+        "AdminUser", foreign_keys=[answered_by_admin_id]
+    )

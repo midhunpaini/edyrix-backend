@@ -1,12 +1,31 @@
 from datetime import datetime
 from uuid import UUID
 
+from typing import Literal
+
 from pydantic import BaseModel, ConfigDict, field_validator
+
+
+AdminRole = Literal["super_admin", "admin", "support", "content_manager"]
 
 
 class AdminLoginRequest(BaseModel):
     email: str
     password: str
+
+
+class CreateAdminRequest(BaseModel):
+    email: str
+    password: str
+    name: str | None = "Admin"
+    role: AdminRole = "super_admin"
+
+    @field_validator("password")
+    @classmethod
+    def validate_password(cls, v: str) -> str:
+        if len(v) < 6:
+            raise ValueError("Password must be at least 6 characters")
+        return v
 
 
 class FirebaseGoogleRequest(BaseModel):
@@ -37,10 +56,21 @@ class UserResponse(BaseModel):
     phone: str | None
     email: str | None
     avatar_url: str | None
-    role: str
+    role: Literal["student"]
     current_class: int | None
     medium: str
     free_trial_expires_at: datetime | None = None
+    created_at: datetime
+
+
+class AdminUserResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: UUID
+    name: str
+    email: str
+    avatar_url: str | None
+    role: AdminRole
     created_at: datetime
 
 
@@ -49,6 +79,12 @@ class AuthResponse(BaseModel):
     token_type: str = "bearer"
     is_new_user: bool
     user: UserResponse
+
+
+class AdminAuthResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    user: AdminUserResponse
 
 
 class UserUpdateRequest(BaseModel):

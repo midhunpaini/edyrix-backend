@@ -11,6 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
 from app.models.auth import TokenBlacklist
+from app.models.admin import AdminUser
 from app.models.user import FreeTrial, User
 from app.redis_client import redis
 
@@ -25,18 +26,17 @@ def verify_password(plain: str, hashed: str) -> bool:
     return _pwd_context.verify(plain, hashed)
 
 
-async def authenticate_admin(db: AsyncSession, email: str, password: str) -> User:
+async def authenticate_admin(db: AsyncSession, email: str, password: str) -> AdminUser:
     result = await db.execute(
-        select(User).where(
-            User.email == email,
-            User.role == "admin",
-            User.is_active.is_(True),
+        select(AdminUser).where(
+            AdminUser.email == email.strip().lower(),
+            AdminUser.is_active.is_(True),
         )
     )
-    user = result.scalar_one_or_none()
-    if user is None or user.password_hash is None or not verify_password(password, user.password_hash):
+    admin = result.scalar_one_or_none()
+    if admin is None or not verify_password(password, admin.password_hash):
         raise ValueError("Invalid credentials")
-    return user
+    return admin
 
 
 def _ensure_firebase() -> None:
@@ -71,12 +71,13 @@ def verify_firebase_token(firebase_token: str) -> dict[str, Any]:
         raise ValueError("Invalid Firebase token") from exc
 
 
-def create_access_token(user_id: uuid.UUID, role: str) -> tuple[str, str]:
+def create_access_token(user_id: uuid.UUID, role: str, token_type: str = "student") -> tuple[str, str]:
     jti = str(uuid.uuid4())
     expire = datetime.now(timezone.utc) + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     payload = {
         "sub": str(user_id),
         "role": role,
+        "typ": token_type,
         "jti": jti,
         "exp": expire,
     }

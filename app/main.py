@@ -1,4 +1,5 @@
 import logging
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -7,17 +8,28 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 
 from app.config import settings
+from app.content_seed import seed_physics_content
+from app.dev_seed import seed_dev_user
 from app.limiter import get_client_ip, limiter
 from app.logger import logger, setup_logging
 from app.routers import admin, auth, content, doubts, payments, plans, progress, subscriptions, tests, users, webhooks
 
 setup_logging()
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await seed_dev_user()
+    await seed_physics_content()
+    yield
+
+
 app = FastAPI(
     title=settings.APP_NAME,
     version="1.0.0",
     docs_url="/docs" if not settings.is_production else None,
     redoc_url="/redoc" if not settings.is_production else None,
+    lifespan=lifespan,
 )
 
 app.state.limiter = limiter

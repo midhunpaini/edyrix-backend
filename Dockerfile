@@ -1,57 +1,76 @@
+# ── Build arguments for OCI labels ────────────────────────────────
+ARG VCS_REF=unknown
+ARG BUILD_DATE=unknown
+ARG VERSION=1.0.0
+
 # ── Stage 1: builder ──────────────────────────────────────────────
-FROM python:3.11-slim AS builder
+FROM python:3.11.9-slim AS builder
 
-# Copy uv binary from official image
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
+# Pin uv to a specific release — uv:latest produces non-reproducible builds.
+# 0.5.31 matches the lock file format revision (revision 3).
+COPY --from=ghcr.io/astral-sh/uv:0.5.31 /uv /uvx /usr/local/bin/
 
-# System deps needed to compile PyMuPDF
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libmupdf-dev \
-    mupdf-tools \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
+# Don't let uv download a separate Python (base image provides 3.11.9).
+# Use copy mode instead of hardlinks — safer on overlay2 filesystems.
+ENV UV_PYTHON_DOWNLOADS=never \
+    UV_LINK_MODE=copy
 
 WORKDIR /app
 
-# Copy dependency files first — Docker cache means deps only
-# reinstall when pyproject.toml changes, not on every code change
-COPY pyproject.toml .
-COPY uv.lock .
-COPY .python-version .
+# Dependency manifests first — Docker caches this layer until they change.
+COPY pyproject.toml uv.lock .python-version ./
 
-# Install all dependencies into /app/.venv
+# Install production deps only, honouring the frozen lockfile.
+# PyMuPDF 1.24+ ships via PyMuPDFb which bundles MuPDF as a manylinux
+# wheel — no apt-get needed for compilation.
 RUN uv sync --frozen --no-dev
 
-# Copy application source
+# App source copied after the dependency layer is cached.
 COPY . .
 
 # ── Stage 2: runtime ──────────────────────────────────────────────
-FROM python:3.11-slim AS runtime
+FROM python:3.11.9-slim AS runtime
 
-# Runtime-only system deps (no gcc, no build tools)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libmupdf-dev \
-    && rm -rf /var/lib/apt/lists/*
+ARG VCS_REF=unknown
+ARG BUILD_DATE=unknown
+ARG VERSION=1.0.0
+
+LABEL org.opencontainers.image.title="Edyrix Backend" \
+      org.opencontainers.image.description="Edyrix EdTech Platform — FastAPI Backend" \
+      org.opencontainers.image.version="${VERSION}" \
+      org.opencontainers.image.revision="${VCS_REF}" \
+      org.opencontainers.image.created="${BUILD_DATE}" \
+      org.opencontainers.image.licenses="Proprietary"
 
 WORKDIR /app
 
-# Copy the pre-built venv and app source from builder
+# No apt-get needed — PyMuPDFb bundles its own MuPDF binary in the wheel.
 COPY --from=builder /app/.venv /app/.venv
 COPY --from=builder /app/app ./app
+COPY --from=builder /app/seed_data ./seed_data
 COPY --from=builder /app/alembic ./alembic
 COPY --from=builder /app/alembic.ini ./alembic.ini
 COPY --from=builder /app/pyproject.toml ./pyproject.toml
 COPY --from=builder /app/start.sh ./start.sh
 
-# Put venv binaries on PATH so uvicorn is found directly
-ENV PATH="/app/.venv/bin:$PATH"
-ENV PYTHONPATH="/app"
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+ENV PATH="/app/.venv/bin:$PATH" \
+    PYTHONPATH="/app" \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
-# Run as non-root for security
-RUN useradd --create-home --shell /bin/bash appuser && chmod +x start.sh
+RUN useradd --create-home --shell /bin/bash appuser \
+    && chmod +x start.sh \
+    && mkdir -p /app/logs \
+    && chown appuser:appuser /app/logs
+
 USER appuser
 
 EXPOSE 8000
+
+# start-period=40s gives alembic upgrade head time to complete before probing.
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD python -c "import urllib.request, sys; \
+        r = urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=8); \
+        sys.exit(0 if r.status == 200 else 1)"
+
 CMD ["./start.sh"]
