@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from decimal import Decimal
 from uuid import UUID
 
@@ -122,6 +122,7 @@ class QuestionResult(BaseModel):
 
 
 class SubmitTestResponse(BaseModel):
+    attempt_id: UUID
     score: int
     total_marks: int
     percentage: Decimal
@@ -135,3 +136,15 @@ class TestHistoryItem(BaseModel):
     total_marks: int
     percentage: Decimal
     completed_at: datetime
+
+
+class ScoreWeek(BaseModel):
+    week_start: date
+    avg_score: Decimal
+    attempt_count: int
+
+
+class SubjectTrajectory(BaseModel):
+    subject_id: UUID
+    subject_name: str
+    weeks: list[ScoreWeek]

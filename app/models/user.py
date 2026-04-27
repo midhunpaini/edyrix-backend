@@ -1,7 +1,7 @@
 import uuid
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 
-from sqlalchemy import Boolean, CheckConstraint, ForeignKey, Integer, String, Text, UniqueConstraint
+from sqlalchemy import Boolean, CheckConstraint, Date, ForeignKey, Integer, SmallInteger, String, Text, UniqueConstraint
 from sqlalchemy.dialects.postgresql import TIMESTAMP, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -31,6 +31,8 @@ class User(Base):
     current_class: Mapped[int | None] = mapped_column(Integer, nullable=True)
     medium: Mapped[str] = mapped_column(String(20), nullable=False, default="english")
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    onboarding_complete: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    exam_date: Mapped[date | None] = mapped_column(Date, nullable=True)
     created_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False, default=_utcnow)
     updated_at: Mapped[datetime] = mapped_column(
         TIMESTAMP(timezone=True), nullable=False, default=_utcnow, onupdate=_utcnow
@@ -41,6 +43,7 @@ class User(Base):
     subscriptions: Mapped[list["Subscription"]] = relationship(  # type: ignore[name-defined]
         "Subscription", back_populates="user"
     )
+    goal: Mapped["UserGoal | None"] = relationship("UserGoal", back_populates="user", uselist=False)
 
 
 class FreeTrial(Base):
@@ -70,3 +73,34 @@ class FCMToken(Base):
     created_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False, default=_utcnow)
 
     user: Mapped["User"] = relationship("User", back_populates="fcm_tokens")
+
+
+class UserGoal(Base):
+    __tablename__ = "user_goals"
+
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), unique=True, nullable=False
+    )
+    exam_date: Mapped[date | None] = mapped_column(Date, nullable=True)
+    daily_minutes: Mapped[int] = mapped_column(SmallInteger, nullable=False, default=30)
+    target_score: Mapped[int] = mapped_column(SmallInteger, nullable=False, default=70)
+    created_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False, default=_utcnow)
+    updated_at: Mapped[datetime] = mapped_column(
+        TIMESTAMP(timezone=True), nullable=False, default=_utcnow, onupdate=_utcnow
+    )
+
+    user: Mapped["User"] = relationship("User", back_populates="goal")
+
+
+class ShareEvent(Base):
+    __tablename__ = "share_events"
+
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
+    )
+    event_type: Mapped[str] = mapped_column(String(30), nullable=False)
+    reference_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True)
+    platform: Mapped[str] = mapped_column(String(20), nullable=False, default="whatsapp")
+    created_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False, default=_utcnow)

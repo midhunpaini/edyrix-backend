@@ -8,14 +8,16 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.dependencies import get_current_user, get_db
 from app.exceptions import BadRequestException, NotFoundException
 from app.models.content import Chapter, Lesson, Subject
-from app.models.progress import WatchHistory
+from app.models.progress import ScoreTrajectory, WatchHistory
 from app.models.user import User
 from app.schemas.common import CommonResponse
 from app.schemas.progress import (
     ChapterProgressResponse,
     LessonProgress,
     ProgressSummaryResponse,
+    ScoreWeek,
     SubjectProgress,
+    SubjectTrajectory,
     WatchHeartbeatRequest,
     WatchHeartbeatResponse,
 )
@@ -186,3 +188,54 @@ async def get_chapter_progress(
             for lid in lesson_ids
         ],
     ))
+
+
+@router.get("/trajectory/{subject_id}", response_model=CommonResponse[SubjectTrajectory])
+async def get_trajectory(
+    subject_id: UUID,
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+) -> CommonResponse[SubjectTrajectory]:
+    subject_result = await db.execute(
+        select(Subject).where(Subject.id == subject_id, Subject.is_active.is_(True))
+    )
+    subject = subject_result.scalar_one_or_none()
+    if subject is None:
+        raise NotFoundException("Subject not found")
+
+    rows_result = await db.execute(
+        select(ScoreTrajectory)
+        .where(ScoreTrajectory.user_id == user.id, ScoreTrajectory.subject_id == subject_id)
+        .order_by(ScoreTrajectory.week_start)
+    )
+    rows = rows_result.scalars().all()
+    return CommonResponse.ok(SubjectTrajectory(
+        subject_id=subject_id,
+        subject_name=subject.name,
+        weeks=[ScoreWeek(week_start=r.week_start, avg_score=r.avg_score, attempt_count=r.attempt_count) for r in rows],
+    ))
+
+
+@router.get("/trajectory", response_model=CommonResponse[list[SubjectTrajectory]])
+async def get_all_trajectories(
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+) -> CommonResponse[list[SubjectTrajectory]]:
+    rows_result = await db.execute(
+        select(ScoreTrajectory, Subject)
+        .join(Subject, ScoreTrajectory.subject_id == Subject.id)
+        .where(ScoreTrajectory.user_id == user.id)
+        .order_by(ScoreTrajectory.subject_id, ScoreTrajectory.week_start)
+    )
+    rows = rows_result.all()
+
+    grouped: dict[UUID, SubjectTrajectory] = {}
+    for traj, subject in rows:
+        if traj.subject_id not in grouped:
+            grouped[traj.subject_id] = SubjectTrajectory(
+                subject_id=traj.subject_id, subject_name=subject.name, weeks=[]
+            )
+        grouped[traj.subject_id].weeks.append(
+            ScoreWeek(week_start=traj.week_start, avg_score=traj.avg_score, attempt_count=traj.attempt_count)
+        )
+    return CommonResponse.ok(list(grouped.values()))

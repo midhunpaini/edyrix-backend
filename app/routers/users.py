@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 
 from fastapi import APIRouter, Depends, status
 from sqlalchemy import func, select
@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.dependencies import get_current_user, get_db
 from app.models.content import Chapter, Lesson, Subject
-from app.models.progress import TestAttempt, WatchHistory
+from app.models.progress import ScoreTrajectory, TestAttempt, WatchHistory
 from app.models.user import FCMToken, FreeTrial, User
 from app.schemas.common import CommonResponse, MessageResponse
 from app.schemas.user import FCMTokenRequest, UserResponse, UserStatsResponse, UserUpdateRequest
@@ -41,6 +41,10 @@ async def update_me(
         user.current_class = body.current_class
     if body.medium is not None:
         user.medium = body.medium
+    if body.onboarding_complete is not None:
+        user.onboarding_complete = body.onboarding_complete
+    if body.exam_date is not None:
+        user.exam_date = body.exam_date
     user.updated_at = datetime.now(timezone.utc)
     await db.commit()
     await db.refresh(user)
@@ -52,6 +56,8 @@ async def get_stats(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
 ) -> CommonResponse[UserStatsResponse]:
+    from datetime import timedelta
+
     completed_result = await db.execute(
         select(func.count(WatchHistory.id)).where(
             WatchHistory.user_id == user.id,
@@ -80,12 +86,46 @@ async def get_stats(
     )
     subjects_active = [row[0] for row in active_subjects_result.all()]
 
+    today = date.today()
+    week_start = today - timedelta(days=today.weekday())
+    last_week_start = week_start - timedelta(weeks=1)
+
+    traj_result = await db.execute(
+        select(ScoreTrajectory)
+        .where(
+            ScoreTrajectory.user_id == user.id,
+            ScoreTrajectory.week_start.in_([week_start, last_week_start]),
+        )
+    )
+    traj_rows = {r.week_start: r for r in traj_result.scalars().all()}
+    score_this_week = float(traj_rows[week_start].avg_score) if week_start in traj_rows else 0.0
+    score_last_week = float(traj_rows[last_week_start].avg_score) if last_week_start in traj_rows else 0.0
+    score_trend = round(score_this_week - score_last_week, 1)
+
+    exam_date: date | None = user.exam_date
+    days_to_exam: int | None = None
+    if exam_date:
+        delta = (exam_date - today).days
+        days_to_exam = max(0, delta)
+
+    trial_result = await db.execute(select(FreeTrial).where(FreeTrial.user_id == user.id))
+    trial = trial_result.scalar_one_or_none()
+    trial_days_left: int | None = None
+    if trial and trial.expires_at > datetime.now(timezone.utc):
+        trial_days_left = max(0, (trial.expires_at.date() - today).days)
+
     return CommonResponse.ok(UserStatsResponse(
         videos_completed=videos_completed,
         tests_taken=tests_taken,
         avg_test_score=avg_score,
         streak_days=0,
         subjects_active=subjects_active,
+        exam_date=exam_date,
+        days_to_exam=days_to_exam,
+        score_this_week=round(score_this_week, 1),
+        score_last_week=round(score_last_week, 1),
+        score_trend=score_trend,
+        trial_days_left=trial_days_left,
     ))
 
 

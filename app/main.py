@@ -12,7 +12,7 @@ from app.content_seed import seed_content
 from app.dev_seed import seed_dev_user
 from app.limiter import get_client_ip, limiter
 from app.logger import logger, setup_logging
-from app.routers import admin, auth, content, doubts, payments, plans, progress, subscriptions, tests, users, webhooks
+from app.routers import admin, auth, content, doubts, goals, payments, plans, progress, share, subscriptions, tests, users, webhooks
 
 setup_logging()
 
@@ -77,8 +77,10 @@ async def health_check() -> dict[str, str]:
 app.include_router(auth.router, prefix="/api/v1")
 app.include_router(content.router, prefix="/api/v1")
 app.include_router(users.router, prefix="/api/v1")
+app.include_router(goals.router, prefix="/api/v1")
 app.include_router(progress.router, prefix="/api/v1")
 app.include_router(tests.router, prefix="/api/v1")
+app.include_router(share.router, prefix="/api/v1")
 app.include_router(doubts.router, prefix="/api/v1")
 app.include_router(subscriptions.router, prefix="/api/v1")
 app.include_router(plans.router, prefix="/api/v1")

@@ -22,6 +22,7 @@ from app.schemas.progress import (
     TestQuestion,
     TestSummaryResponse,
 )
+from app.services.trajectory_service import update_trajectory
 from app.utils.access_control import user_has_access
 
 router = APIRouter(prefix="/tests", tags=["tests"])
@@ -369,6 +370,34 @@ async def submit_test(
         time_taken_seconds=body.time_taken_seconds,
     )
     db.add(attempt)
+    await update_trajectory(db, user.id, subject.id, pct)
     await db.commit()
+    await db.refresh(attempt)
 
-    return CommonResponse.ok(SubmitTestResponse(score=score, total_marks=total, percentage=pct, results=results))
+    return CommonResponse.ok(SubmitTestResponse(attempt_id=attempt.id, score=score, total_marks=total, percentage=pct, results=results))
+
+
+@router.get("/{attempt_id}/share-text", response_model=CommonResponse[dict])
+async def get_share_text(
+    attempt_id: UUID,
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+) -> CommonResponse[dict]:
+    result = await db.execute(
+        select(TestAttempt, Test)
+        .join(Test, TestAttempt.test_id == Test.id)
+        .where(TestAttempt.id == attempt_id, TestAttempt.user_id == user.id)
+    )
+    row = result.first()
+    if row is None:
+        raise NotFoundException("Attempt not found")
+    attempt, test = row
+    pct = int(attempt.percentage or 0)
+    text = (
+        f"I scored {pct}% on '{test.title}' on Edyrix! "
+        f"({attempt.score}/{attempt.total_marks} marks) 🎯\n"
+        f"Study smarter for your SSLC — try Edyrix!"
+    )
+    import urllib.parse
+    wa_url = f"https://wa.me/?text={urllib.parse.quote(text)}"
+    return CommonResponse.ok({"text": text, "wa_url": wa_url})

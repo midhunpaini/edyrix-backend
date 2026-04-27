@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from uuid import UUID
 
 from typing import Literal
@@ -59,6 +59,8 @@ class UserResponse(BaseModel):
     role: Literal["student"]
     current_class: int | None
     medium: str
+    onboarding_complete: bool = False
+    exam_date: date | None = None
     free_trial_expires_at: datetime | None = None
     created_at: datetime
 
@@ -91,6 +93,8 @@ class UserUpdateRequest(BaseModel):
     name: str | None = None
     current_class: int | None = None
     medium: str | None = None
+    onboarding_complete: bool | None = None
+    exam_date: date | None = None
 
     @field_validator("current_class")
     @classmethod
@@ -107,12 +111,57 @@ class UserUpdateRequest(BaseModel):
         return v
 
 
+class UserGoalResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    exam_date: date | None
+    daily_minutes: int
+    target_score: int
+
+
+class UserGoalUpdateRequest(BaseModel):
+    exam_date: date | None = None
+    daily_minutes: int | None = None
+    target_score: int | None = None
+
+    @field_validator("daily_minutes")
+    @classmethod
+    def validate_minutes(cls, v: int | None) -> int | None:
+        if v is not None and not (5 <= v <= 480):
+            raise ValueError("daily_minutes must be between 5 and 480")
+        return v
+
+    @field_validator("target_score")
+    @classmethod
+    def validate_score(cls, v: int | None) -> int | None:
+        if v is not None and not (1 <= v <= 100):
+            raise ValueError("target_score must be between 1 and 100")
+        return v
+
+
 class UserStatsResponse(BaseModel):
     videos_completed: int
     tests_taken: int
     avg_test_score: float
     streak_days: int
     subjects_active: list[str]
+    exam_date: date | None = None
+    days_to_exam: int | None = None
+    score_this_week: float = 0.0
+    score_last_week: float = 0.0
+    score_trend: float = 0.0
+    trial_days_left: int | None = None
+
+
+class ShareRequest(BaseModel):
+    event_type: str
+    reference_id: UUID | None = None
+    platform: str = "whatsapp"
+
+
+class ShareTextResponse(BaseModel):
+    text: str
+    wa_url: str
 
 
 class FCMTokenRequest(BaseModel):
