@@ -102,6 +102,13 @@ class CreateTestRequest(BaseModel):
     questions: list[QuestionInput]
 
 
+class UpdateTestRequest(BaseModel):
+    title: str | None = None
+    duration_minutes: int | None = None
+    total_marks: int | None = None
+    questions: list[QuestionInput] | None = None
+
+
 class TestAdminResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
@@ -115,6 +122,32 @@ class TestAdminResponse(BaseModel):
     questions: list[dict]
     is_published: bool
     created_at: datetime
+
+
+class BulkLessonItem(BaseModel):
+    title: str
+    title_ml: str = ""
+    youtube_video_id: str
+    duration_seconds: int | None = None
+    is_free: bool = False
+    order_index: int = 0
+
+
+class BulkCreateLessonsRequest(BaseModel):
+    chapter_id: UUID
+    lessons: list[BulkLessonItem]
+
+    @field_validator("lessons")
+    @classmethod
+    def at_least_one(cls, v: list) -> list:
+        if not v:
+            raise ValueError("At least one lesson is required")
+        return v
+
+
+class BulkCreateLessonsResponse(BaseModel):
+    created: int
+    errors: list[str]
 
 
 class NoteUploadResponse(BaseModel):

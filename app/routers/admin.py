@@ -22,6 +22,8 @@ from app.schemas.admin import (
     AdminDoubtListResponse,
     AdminStudentItem,
     AdminStudentListResponse,
+    BulkCreateLessonsRequest,
+    BulkCreateLessonsResponse,
     ChapterAdminResponse,
     CreateChapterRequest,
     CreateSubjectRequest,
@@ -32,9 +34,10 @@ from app.schemas.admin import (
     SubjectAdminResponse,
     SubjectChaptersAdminResponse,
     TestAdminResponse,
+    UpdateTestRequest,
 )
 from app.schemas.common import CommonResponse
-from app.schemas.content import CreateLessonRequest, LessonResponse
+from app.schemas.content import CreateLessonRequest, LessonResponse, UpdateLessonRequest
 from app.schemas.doubt import AnswerDoubtRequest, AnswerDoubtResponse
 from app.services.storage_service import upload_bytes
 
@@ -49,7 +52,7 @@ _MAX_UPLOAD_BYTES = 20 * 1024 * 1024  # 20 MB
 @router.get("/dashboard", response_model=CommonResponse[AdminDashboardResponse])
 async def dashboard(
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[AdminDashboardResponse]:
     now = datetime.now(timezone.utc)
     today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -236,7 +239,7 @@ async def list_students(
 async def create_subject(
     body: CreateSubjectRequest,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[SubjectAdminResponse]:
     existing = await db.execute(select(Subject).where(Subject.slug == body.slug))
     if existing.scalar_one_or_none():
@@ -264,7 +267,7 @@ async def create_subject(
 async def create_chapter(
     body: CreateChapterRequest,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[ChapterAdminResponse]:
     subject_result = await db.execute(
         select(Subject).where(Subject.id == body.subject_id, Subject.is_active.is_(True))
@@ -290,7 +293,7 @@ async def create_chapter(
 async def toggle_chapter_publish(
     chapter_id: uuid.UUID,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[PublishToggleResponse]:
     result = await db.execute(select(Chapter).where(Chapter.id == chapter_id))
     chapter = result.scalar_one_or_none()
@@ -303,11 +306,46 @@ async def toggle_chapter_publish(
 
 # ── Content: Lessons ──────────────────────────────────────────────────────────
 
+@router.post("/lessons/bulk", response_model=CommonResponse[BulkCreateLessonsResponse], status_code=status.HTTP_201_CREATED)
+async def bulk_create_lessons(
+    body: BulkCreateLessonsRequest,
+    db: AsyncSession = Depends(get_db),
+    _: AdminUser = Depends(require_admin),
+) -> CommonResponse[BulkCreateLessonsResponse]:
+    chapter_result = await db.execute(select(Chapter).where(Chapter.id == body.chapter_id))
+    if chapter_result.scalar_one_or_none() is None:
+        raise NotFoundException("Chapter not found")
+
+    created = 0
+    errors: list[str] = []
+    for i, item in enumerate(body.lessons, start=1):
+        try:
+            lesson = Lesson(
+                chapter_id=body.chapter_id,
+                title=item.title,
+                title_ml=item.title_ml,
+                youtube_video_id=item.youtube_video_id,
+                duration_seconds=item.duration_seconds,
+                is_free=item.is_free,
+                order_index=item.order_index,
+            )
+            db.add(lesson)
+            created += 1
+        except Exception as exc:
+            errors.append(f"Row {i} ({item.title!r}): {exc}")
+
+    await db.commit()
+    return CommonResponse.ok(
+        BulkCreateLessonsResponse(created=created, errors=errors),
+        f"{created} lesson(s) created",
+    )
+
+
 @router.post("/lessons", response_model=CommonResponse[LessonResponse], status_code=status.HTTP_201_CREATED)
 async def create_lesson(
     body: CreateLessonRequest,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[LessonResponse]:
     chapter_result = await db.execute(
         select(Chapter).where(Chapter.id == body.chapter_id)
@@ -330,11 +368,43 @@ async def create_lesson(
     return CommonResponse.ok(LessonResponse.model_validate(lesson), "Lesson created")
 
 
+@router.put("/lessons/{lesson_id}", response_model=CommonResponse[LessonResponse])
+async def update_lesson(
+    lesson_id: uuid.UUID,
+    body: UpdateLessonRequest,
+    db: AsyncSession = Depends(get_db),
+    _: AdminUser = Depends(require_admin),
+) -> CommonResponse[LessonResponse]:
+    result = await db.execute(select(Lesson).where(Lesson.id == lesson_id))
+    lesson = result.scalar_one_or_none()
+    if lesson is None:
+        raise NotFoundException("Lesson not found")
+    for field, val in body.model_dump(exclude_unset=True).items():
+        setattr(lesson, field, val)
+    await db.commit()
+    await db.refresh(lesson)
+    return CommonResponse.ok(LessonResponse.model_validate(lesson))
+
+
+@router.delete("/lessons/{lesson_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_lesson(
+    lesson_id: uuid.UUID,
+    db: AsyncSession = Depends(get_db),
+    _: AdminUser = Depends(require_admin),
+) -> None:
+    result = await db.execute(select(Lesson).where(Lesson.id == lesson_id))
+    lesson = result.scalar_one_or_none()
+    if lesson is None:
+        raise NotFoundException("Lesson not found")
+    await db.delete(lesson)
+    await db.commit()
+
+
 @router.patch("/lessons/{lesson_id}/publish", response_model=CommonResponse[PublishToggleResponse])
 async def toggle_lesson_publish(
     lesson_id: uuid.UUID,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[PublishToggleResponse]:
     result = await db.execute(select(Lesson).where(Lesson.id == lesson_id))
     lesson = result.scalar_one_or_none()
@@ -351,7 +421,7 @@ async def toggle_lesson_publish(
 async def create_test(
     body: CreateTestRequest,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[TestAdminResponse]:
     chapter_result = await db.execute(select(Chapter).where(Chapter.id == body.chapter_id))
     chapter = chapter_result.scalar_one_or_none()
@@ -384,11 +454,35 @@ async def create_test(
     return CommonResponse.ok(TestAdminResponse.model_validate(test), "Test created")
 
 
+@router.put("/tests/{test_id}", response_model=CommonResponse[TestAdminResponse])
+async def update_test(
+    test_id: uuid.UUID,
+    body: UpdateTestRequest,
+    db: AsyncSession = Depends(get_db),
+    _: AdminUser = Depends(require_admin),
+) -> CommonResponse[TestAdminResponse]:
+    result = await db.execute(select(Test).where(Test.id == test_id))
+    test = result.scalar_one_or_none()
+    if test is None:
+        raise NotFoundException("Test not found")
+    if body.title is not None:
+        test.title = body.title
+    if body.duration_minutes is not None:
+        test.duration_minutes = body.duration_minutes
+    if body.total_marks is not None:
+        test.total_marks = body.total_marks
+    if body.questions is not None:
+        test.questions = [q.model_dump() for q in body.questions]
+    await db.commit()
+    await db.refresh(test)
+    return CommonResponse.ok(TestAdminResponse.model_validate(test))
+
+
 @router.patch("/tests/{test_id}/publish", response_model=CommonResponse[PublishToggleResponse])
 async def toggle_test_publish(
     test_id: uuid.UUID,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[PublishToggleResponse]:
     result = await db.execute(select(Test).where(Test.id == test_id))
     test = result.scalar_one_or_none()
@@ -408,7 +502,7 @@ async def upload_note(
     file: UploadFile = ...,
     is_premium: bool = Query(True),
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[NoteUploadResponse]:
     if file.content_type not in _ALLOWED_CONTENT_TYPES:
         raise BadRequestException("Only PDF files are allowed")
@@ -446,7 +540,7 @@ async def list_doubts(
     limit: int = Query(20, ge=1, le=100),
     status_filter: Literal["pending", "answered"] | None = Query(None, alias="status"),
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[AdminDoubtListResponse]:
     offset = (page - 1) * limit
     StudentUser = aliased(User)
@@ -521,7 +615,7 @@ async def answer_doubt(
 async def get_subject_with_chapters(
     subject_id: uuid.UUID,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[SubjectChaptersAdminResponse]:
     subject_result = await db.execute(select(Subject).where(Subject.id == subject_id))
     subject = subject_result.scalar_one_or_none()
@@ -546,7 +640,7 @@ async def get_subject_with_chapters(
 async def list_chapter_lessons(
     chapter_id: uuid.UUID,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[list[LessonResponse]]:
     chapter_result = await db.execute(select(Chapter).where(Chapter.id == chapter_id))
     if chapter_result.scalar_one_or_none() is None:
@@ -562,7 +656,7 @@ async def list_chapter_lessons(
 async def get_chapter_test_admin(
     chapter_id: uuid.UUID,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[TestAdminResponse]:
     result = await db.execute(
         select(Test).where(Test.chapter_id == chapter_id).order_by(Test.created_at, Test.id).limit(1)

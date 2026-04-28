@@ -138,6 +138,15 @@ class CreateLessonRequest(BaseModel):
     order_index: int = 0
 
 
+class UpdateLessonRequest(BaseModel):
+    title: str | None = None
+    title_ml: str | None = None
+    youtube_video_id: str | None = None
+    duration_seconds: int | None = None
+    is_free: bool | None = None
+    order_index: int | None = None
+
+
 class LessonResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
