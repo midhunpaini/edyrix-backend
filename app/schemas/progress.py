@@ -47,6 +47,7 @@ class LastAttempt(BaseModel):
     total_marks: int | None = None
     percentage: Decimal
     completed_at: datetime
+    attempt_number: int = 1
 
 
 class TestSummaryResponse(BaseModel):

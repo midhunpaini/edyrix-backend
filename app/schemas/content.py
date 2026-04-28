@@ -30,6 +30,11 @@ class ChapterSummary(BaseModel):
     chapter_number: int
     title: str
     title_ml: str
+    lessons_total: int
+    lessons_completed: int
+    progress_pct: float
+    has_started: bool
+    estimated_minutes: int = 0
     lesson_count: int
     has_test: bool
     watch_percentage: int
@@ -47,6 +52,12 @@ class SubjectDetailResponse(BaseModel):
     monthly_price_paise: int
     has_access: bool
     watch_percentage: int
+    total_lessons: int
+    completed_lessons: int
+    total_chapters: int
+    completed_chapters: int
+    subject_progress_pct: float
+    estimated_hours: float
     chapters: list[ChapterSummary]
 
 
@@ -54,11 +65,15 @@ class LessonSummary(BaseModel):
     id: UUID
     title: str
     duration_seconds: int | None
+    lesson_number: int
     is_free: bool
+    is_unlocked: bool = True
     is_locked: bool = False
     thumbnail_url: str | None
     watch_percentage: int
     is_completed: bool
+    can_take_test: bool = False
+    test_last_score: float | None = None
     test: "LessonTestSummary | None" = None
 
 
@@ -89,6 +104,7 @@ class ChapterDetailResponse(BaseModel):
     title: str
     lessons: list[LessonSummary]
     has_notes: bool
+    has_test: bool = False
     test_id: UUID | None
 
 

@@ -24,7 +24,9 @@ async def activate_subscription(
     signature: str,
     user_id: uuid.UUID,
 ) -> tuple["Subscription", "Plan"]:
-    result = await db.execute(select(Payment).where(Payment.razorpay_order_id == order_id))
+    # WITH FOR UPDATE serialises concurrent verify calls on the same order, preventing
+    # duplicate subscriptions if the user clicks "verify" twice simultaneously.
+    result = await db.execute(select(Payment).where(Payment.razorpay_order_id == order_id).with_for_update())
     payment = result.scalar_one_or_none()
     if payment is None:
         raise HTTPException(status_code=400, detail="Payment record not found")
@@ -64,11 +66,13 @@ async def activate_subscription(
 async def activate_from_webhook(
     db: AsyncSession, order_id: str, payment_id: str
 ) -> None:
+    # WITH FOR UPDATE prevents duplicate subscriptions if the webhook fires while the
+    # user's verify request is also in-flight for the same order.
     result = await db.execute(
         select(Payment).where(
             Payment.razorpay_order_id == order_id,
             Payment.status != "success",
-        )
+        ).with_for_update()
     )
     payment = result.scalar_one_or_none()
     if payment is None:

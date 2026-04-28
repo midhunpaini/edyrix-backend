@@ -100,7 +100,7 @@ async def dashboard(
             revenue_day,
             func.sum(Payment.amount_paise).label("total"),
         )
-        .where(Payment.status == "paid", Payment.created_at >= thirty_days_ago)
+        .where(Payment.status == "success", Payment.created_at >= thirty_days_ago)
         .group_by(revenue_day)
         .order_by(revenue_day)
     )
@@ -129,10 +129,29 @@ async def list_students(
     class_number: int | None = Query(None),
     subscription_status: Literal["active", "trial", "free"] | None = Query(None),
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(require_admin),
+    _: AdminUser = Depends(require_admin),
 ) -> CommonResponse[AdminStudentListResponse]:
     now = datetime.now(timezone.utc)
     offset = (page - 1) * limit
+
+    # Build a subquery for active subscription user IDs.
+    active_sub_sq = (
+        select(Subscription.user_id)
+        .where(
+            Subscription.status == "active",
+            or_(Subscription.expires_at.is_(None), Subscription.expires_at > now),
+        )
+        .distinct()
+        .subquery()
+    )
+    # Build a subquery for active trial user IDs (no active subscription).
+    active_trial_sq = (
+        select(FreeTrial.user_id)
+        .where(FreeTrial.expires_at > now)
+        .where(~FreeTrial.user_id.in_(select(active_sub_sq.c.user_id)))
+        .distinct()
+        .subquery()
+    )
 
     base = select(User).where(User.role == "student")
     if search:
@@ -142,6 +161,15 @@ async def list_students(
         )
     if class_number:
         base = base.where(User.current_class == class_number)
+    if subscription_status == "active":
+        base = base.where(User.id.in_(select(active_sub_sq.c.user_id)))
+    elif subscription_status == "trial":
+        base = base.where(User.id.in_(select(active_trial_sq.c.user_id)))
+    elif subscription_status == "free":
+        base = base.where(
+            ~User.id.in_(select(active_sub_sq.c.user_id)),
+            ~User.id.in_(select(active_trial_sq.c.user_id)),
+        )
 
     total = (
         await db.execute(select(func.count()).select_from(base.subquery()))
@@ -164,10 +192,7 @@ async def list_students(
                 select(Subscription.user_id).where(
                     Subscription.user_id.in_(user_ids),
                     Subscription.status == "active",
-                    or_(
-                        Subscription.expires_at.is_(None),
-                        Subscription.expires_at > now,
-                    ),
+                    or_(Subscription.expires_at.is_(None), Subscription.expires_at > now),
                 )
             )
         ).all()
@@ -185,29 +210,22 @@ async def list_students(
         ).all()
     }
 
-    items: list[AdminStudentItem] = []
-    for user in users:
-        if user.id in active_sub_ids:
-            sub_status = "active"
-        elif user.id in active_trial_ids:
-            sub_status = "trial"
-        else:
-            sub_status = "free"
-
-        if subscription_status and sub_status != subscription_status:
-            continue
-
-        items.append(
-            AdminStudentItem(
-                id=user.id,
-                name=user.name,
-                phone=user.phone,
-                email=user.email,
-                current_class=user.current_class,
-                subscription_status=sub_status,
-                joined_at=user.created_at,
-            )
+    items: list[AdminStudentItem] = [
+        AdminStudentItem(
+            id=user.id,
+            name=user.name,
+            phone=user.phone,
+            email=user.email,
+            current_class=user.current_class,
+            subscription_status=(
+                "active" if user.id in active_sub_ids
+                else "trial" if user.id in active_trial_ids
+                else "free"
+            ),
+            joined_at=user.created_at,
         )
+        for user in users
+    ]
 
     return CommonResponse.ok(AdminStudentListResponse(total=total, students=items))
 

@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.dependencies import get_current_user, get_db
 from app.exceptions import NotFoundException
 from app.models.content import Chapter, Lesson, Subject
-from app.models.progress import Test, TestAttempt, WatchHistory
+from app.models.progress import Test, TestAttempt
 from app.models.user import User
 from app.schemas.common import CommonResponse
 from app.schemas.progress import (
@@ -22,13 +22,17 @@ from app.schemas.progress import (
     TestQuestion,
     TestSummaryResponse,
 )
+from app.services import content_service as content_svc
 from app.services.trajectory_service import update_trajectory
 from app.utils.access_control import user_has_access
 
 router = APIRouter(prefix="/tests", tags=["tests"])
 
 
-def _last_attempt_response(attempt: TestAttempt | None) -> LastAttempt | None:
+def _last_attempt_response(
+    attempt: TestAttempt | None,
+    attempt_number: int = 1,
+) -> LastAttempt | None:
     if attempt is None:
         return None
     return LastAttempt(
@@ -36,26 +40,29 @@ def _last_attempt_response(attempt: TestAttempt | None) -> LastAttempt | None:
         total_marks=attempt.total_marks,
         percentage=attempt.percentage or Decimal(0),
         completed_at=attempt.completed_at,
+        attempt_number=attempt_number,
     )
 
 
-async def _last_attempt_map(
+async def _attempt_maps(
     db: AsyncSession,
     user: User,
     test_ids: list[UUID],
-) -> dict[UUID, TestAttempt]:
+) -> tuple[dict[UUID, TestAttempt], dict[UUID, int]]:
     if not test_ids:
-        return {}
+        return {}, {}
     result = await db.execute(
         select(TestAttempt)
         .where(TestAttempt.user_id == user.id, TestAttempt.test_id.in_(test_ids))
         .order_by(TestAttempt.completed_at.desc())
     )
-    attempts: dict[UUID, TestAttempt] = {}
+    latest_attempts: dict[UUID, TestAttempt] = {}
+    attempt_counts: dict[UUID, int] = {}
     for attempt in result.scalars().all():
-        if attempt.test_id not in attempts:
-            attempts[attempt.test_id] = attempt
-    return attempts
+        attempt_counts[attempt.test_id] = attempt_counts.get(attempt.test_id, 0) + 1
+        if attempt.test_id not in latest_attempts:
+            latest_attempts[attempt.test_id] = attempt
+    return latest_attempts, attempt_counts
 
 
 async def _unlock_state(
@@ -63,21 +70,16 @@ async def _unlock_state(
     user: User,
     lesson: Lesson,
     subject: Subject,
+    chapter: Chapter,
 ) -> tuple[bool, str | None]:
     if not lesson.is_free:
         has_access = await user_has_access(db, user, subject.id, subject.class_number)
         if not has_access:
             return False, "subscription_required"
 
-    result = await db.execute(
-        select(WatchHistory).where(
-            WatchHistory.user_id == user.id,
-            WatchHistory.lesson_id == lesson.id,
-            WatchHistory.is_completed.is_(True),
-        )
-    )
-    if result.scalar_one_or_none() is None:
+    if not await content_svc.is_test_unlocked(db, user.id, chapter.id):
         return False, "complete_lesson"
+
     return True, None
 
 
@@ -162,11 +164,11 @@ async def get_available_tests(
         .order_by(Subject.order_index, Chapter.order_index, Lesson.order_index, Test.created_at)
     )
     rows = result.all()
-    attempts = await _last_attempt_map(db, user, [test.id for test, *_ in rows])
+    attempts, attempt_counts = await _attempt_maps(db, user, [test.id for test, *_ in rows])
 
     items: list[AvailableTestItem] = []
     for test, subject, chapter, lesson in rows:
-        is_unlocked, reason = await _unlock_state(db, user, lesson, subject)
+        is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter)
         items.append(
             AvailableTestItem(
                 id=test.id,
@@ -183,7 +185,10 @@ async def get_available_tests(
                 question_count=len(test.questions),
                 is_unlocked=is_unlocked,
                 unlock_reason=reason,
-                last_attempt=_last_attempt_response(attempts.get(test.id)),
+                last_attempt=_last_attempt_response(
+                    attempts.get(test.id),
+                    attempt_counts.get(test.id, 1),
+                ),
             )
         )
     return CommonResponse.ok(items)
@@ -214,8 +219,8 @@ async def get_lesson_test(
     if row is None:
         raise NotFoundException("Test not found")
     test, subject, chapter, lesson = row
-    attempts = await _last_attempt_map(db, user, [test.id])
-    is_unlocked, reason = await _unlock_state(db, user, lesson, subject)
+    attempts, attempt_counts = await _attempt_maps(db, user, [test.id])
+    is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter)
     return CommonResponse.ok(TestSummaryResponse(
         id=test.id,
         title=test.title,
@@ -231,7 +236,10 @@ async def get_lesson_test(
         question_count=len(test.questions),
         is_unlocked=is_unlocked,
         unlock_reason=reason,
-        last_attempt=_last_attempt_response(attempts.get(test.id)),
+        last_attempt=_last_attempt_response(
+            attempts.get(test.id),
+            attempt_counts.get(test.id, 1),
+        ),
     ))
 
 
@@ -250,6 +258,9 @@ async def get_chapter_test(
             Test.chapter_id == chapter_id,
             Test.lesson_id.isnot(None),
             Test.is_published.is_(True),
+            Subject.is_active.is_(True),
+            Chapter.is_published.is_(True),
+            Lesson.is_published.is_(True),
         )
         .order_by(Lesson.order_index, Test.created_at, Test.id)
         .limit(1)
@@ -258,8 +269,8 @@ async def get_chapter_test(
     if row is None:
         raise NotFoundException("Test not found")
     test, subject, chapter, lesson = row
-    attempts = await _last_attempt_map(db, user, [test.id])
-    is_unlocked, reason = await _unlock_state(db, user, lesson, subject)
+    attempts, attempt_counts = await _attempt_maps(db, user, [test.id])
+    is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter)
 
     return CommonResponse.ok(TestSummaryResponse(
         id=test.id,
@@ -276,7 +287,10 @@ async def get_chapter_test(
         question_count=len(test.questions),
         is_unlocked=is_unlocked,
         unlock_reason=reason,
-        last_attempt=_last_attempt_response(attempts.get(test.id)),
+        last_attempt=_last_attempt_response(
+            attempts.get(test.id),
+            attempt_counts.get(test.id, 1),
+        ),
     ))
 
 
@@ -291,7 +305,7 @@ async def get_test(
         raise NotFoundException("Test not found")
     test, subject, chapter, lesson = row
 
-    is_unlocked, reason = await _unlock_state(db, user, lesson, subject)
+    is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter)
     if not is_unlocked:
         raise _locked_exception(reason, lesson, chapter)
 
@@ -333,7 +347,7 @@ async def submit_test(
         raise NotFoundException("Test not found")
     test, subject, chapter, lesson = row
 
-    is_unlocked, reason = await _unlock_state(db, user, lesson, subject)
+    is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter)
     if not is_unlocked:
         raise _locked_exception(reason, lesson, chapter)
 
@@ -358,7 +372,7 @@ async def submit_test(
         )
 
     total = test.total_marks
-    pct = Decimal(score * 100 / total).quantize(Decimal("0.01")) if total else Decimal(0)
+    pct = (Decimal(score) * 100 / Decimal(total)).quantize(Decimal("0.01")) if total else Decimal(0)
 
     attempt = TestAttempt(
         user_id=user.id,
@@ -392,7 +406,7 @@ async def get_share_text(
     if row is None:
         raise NotFoundException("Attempt not found")
     attempt, test = row
-    pct = int(attempt.percentage or 0)
+    pct = round(float(attempt.percentage or 0))
     text = (
         f"I scored {pct}% on '{test.title}' on Edyrix! "
         f"({attempt.score}/{attempt.total_marks} marks) 🎯\n"

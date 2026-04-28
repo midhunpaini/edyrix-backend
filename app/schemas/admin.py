@@ -1,7 +1,8 @@
+import uuid as _uuid
 from datetime import datetime
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class CreateSubjectRequest(BaseModel):
@@ -69,7 +70,7 @@ class PublishToggleResponse(BaseModel):
 class QuestionInput(BaseModel):
     """A single MCQ question as submitted by the admin."""
 
-    id: str
+    id: str = Field(default_factory=lambda: str(_uuid.uuid4()))
     text: str
     text_ml: str = ""
     options: list[str]
@@ -111,6 +112,7 @@ class TestAdminResponse(BaseModel):
     title: str
     duration_minutes: int
     total_marks: int
+    questions: list[dict]
     is_published: bool
     created_at: datetime
 
