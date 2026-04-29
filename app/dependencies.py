@@ -1,4 +1,3 @@
-from datetime import datetime, timezone
 from collections.abc import Callable
 from typing import AsyncGenerator
 
@@ -10,7 +9,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import AsyncSessionLocal
 from app.exceptions import ForbiddenException, UnauthorizedException
 from app.models.admin import AdminUser
-from app.models.subscription import Subscription
 from app.models.user import User
 from app.services.auth_service import decode_access_token, is_token_valid
 
@@ -51,8 +49,6 @@ async def get_current_user(
     if user is None:
         raise UnauthorizedException("User not found")
 
-    await _expire_old_subscriptions(db, user)
-
     return user
 
 
@@ -83,23 +79,6 @@ async def get_current_admin(
         raise UnauthorizedException("Admin not found")
 
     return admin
-
-
-async def _expire_old_subscriptions(db: AsyncSession, user: User) -> None:
-    now = datetime.now(timezone.utc)
-    result = await db.execute(
-        select(Subscription).where(
-            Subscription.user_id == user.id,
-            Subscription.status == "active",
-            Subscription.expires_at < now,
-            Subscription.expires_at.isnot(None),
-        )
-    )
-    expired = result.scalars().all()
-    if expired:
-        for sub in expired:
-            sub.status = "expired"
-        await db.commit()
 
 
 async def require_admin(admin: AdminUser = Depends(get_current_admin)) -> AdminUser:

@@ -41,6 +41,25 @@ async def task_cleanup_blacklist(ctx) -> None:
         await db.commit()
 
 
+async def task_expire_subscriptions(ctx) -> None:
+    """Mark overdue active subscriptions as expired — runs every hour."""
+    from sqlalchemy import update
+    from app.models.subscription import Subscription
+
+    now = datetime.now(timezone.utc)
+    async with AsyncSessionLocal() as db:
+        await db.execute(
+            update(Subscription)
+            .where(
+                Subscription.status == "active",
+                Subscription.expires_at < now,
+                Subscription.expires_at.isnot(None),
+            )
+            .values(status="expired")
+        )
+        await db.commit()
+
+
 # ── Worker settings ────────────────────────────────────────────────────────────
 
 def _redis_settings() -> RedisSettings:
@@ -56,6 +75,9 @@ def _redis_settings() -> RedisSettings:
 class WorkerSettings:
     redis_settings = _redis_settings()
     functions = [task_send_doubt_answered]
-    cron_jobs = [cron(task_cleanup_blacklist, hour={3}, minute={0})]
+    cron_jobs = [
+        cron(task_cleanup_blacklist, hour={3}, minute={0}),
+        cron(task_expire_subscriptions, minute={0}),  # every hour
+    ]
     max_jobs = 10
     job_timeout = 30

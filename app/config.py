@@ -59,6 +59,9 @@ class Settings(BaseSettings):
     RESEND_API_KEY: str
     FROM_EMAIL: str = "noreply@edyrix.in"
 
+    # Sentry (optional — leave empty in dev)
+    SENTRY_DSN: str = ""
+
     @field_validator("FIREBASE_PRIVATE_KEY")
     @classmethod
     def fix_firebase_private_key(cls, v: str) -> str:
