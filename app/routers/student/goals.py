@@ -11,7 +11,7 @@ from app.models.user import User, UserGoal
 from app.schemas.common import CommonResponse
 from app.schemas.user import UserGoalResponse, UserGoalUpdateRequest
 
-router = APIRouter(prefix="/goals", tags=["goals"])
+router = APIRouter(prefix="/goals", tags=["student:goals"])
 
 
 @router.get("/me", response_model=CommonResponse[UserGoalResponse])

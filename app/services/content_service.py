@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.content import Chapter, Lesson, Note, Subject
 from app.models.progress import Test, TestAttempt, WatchHistory
-from app.models.subscription import Plan, Subscription
+from app.models.subscription import Plan
 from app.models.user import User
 from app.schemas.content import (
     ChapterDetailResponse,
@@ -22,15 +22,7 @@ from app.schemas.content import (
     SubjectListItem,
 )
 from app.services.storage_service import generate_presigned_url
-from app.utils.access_control import user_has_access
-
-
-class AccessDenied(Exception):
-    """Raised when a user attempts to access premium content without a valid subscription."""
-
-    def __init__(self, subject_id: uuid.UUID, class_number: int) -> None:
-        self.subject_id = subject_id
-        self.class_number = class_number
+from app.utils.access_control import AccessDenied, ContentAccessPolicy
 
 
 async def get_classes(db: AsyncSession) -> list[ClassSummary]:
@@ -56,6 +48,7 @@ async def get_subjects_by_class(
     db: AsyncSession,
     class_number: int,
     user: User | None,
+    policy: ContentAccessPolicy,
 ) -> list[SubjectListItem]:
     """Return all active subjects for a class, with access and progress info for the user."""
     subjects_result = await db.execute(
@@ -79,11 +72,8 @@ async def get_subjects_by_class(
 
     items: list[SubjectListItem] = []
     for subject in subjects:
-        has_access = False
-        watch_pct = 0
-        if user:
-            has_access = await user_has_access(db, user, subject.id, class_number)
-            watch_pct = await _subject_watch_percentage(db, user.id, subject.id)
+        has_access = policy.can_access_subject(subject.id, class_number)
+        watch_pct = await _subject_watch_percentage(db, user.id, subject.id) if user else 0
 
         items.append(
             SubjectListItem(
@@ -106,6 +96,7 @@ async def get_subject_detail(
     db: AsyncSession,
     subject_id: uuid.UUID,
     user: User,
+    policy: ContentAccessPolicy,
 ) -> SubjectDetailResponse | None:
     """Return full subject detail including chapters, access status, and watch progress."""
     subject_result = await db.execute(
@@ -122,9 +113,9 @@ async def get_subject_detail(
     )
     chapters = chapters_result.scalars().all()
 
-    has_access, chapter_summaries = await asyncio.gather(
-        user_has_access(db, user, subject.id, subject.class_number),
-        asyncio.gather(*[_chapter_summary(db, ch, user.id) for ch in chapters]),
+    has_access = policy.can_access_subject(subject.id, subject.class_number)
+    chapter_summaries = await asyncio.gather(
+        *[_chapter_summary(db, ch, user.id) for ch in chapters]
     )
 
     total_chapters = len(chapter_summaries)
@@ -159,18 +150,6 @@ async def get_subject_detail(
     )
 
 
-async def _has_active_subscription(db: AsyncSession, user_id: uuid.UUID) -> bool:
-    now = datetime.now(timezone.utc)
-    result = await db.execute(
-        select(Subscription.id).where(
-            Subscription.user_id == user_id,
-            Subscription.status == "active",
-            or_(Subscription.expires_at.is_(None), Subscription.expires_at > now),
-        ).limit(1)
-    )
-    return result.scalar_one_or_none() is not None
-
-
 async def is_lesson_unlocked(
     db: AsyncSession,
     user_id: uuid.UUID,
@@ -200,6 +179,7 @@ async def is_test_unlocked(
     db: AsyncSession,
     user_id: uuid.UUID,
     chapter_id: uuid.UUID,
+    can_access_subject: bool,
 ) -> bool:
     lesson_ids_result = await db.execute(
         select(Lesson.id).where(
@@ -222,8 +202,7 @@ async def is_test_unlocked(
     if completed_count == len(lesson_ids):
         return True
 
-    has_active_subscription = await _has_active_subscription(db, user_id)
-    if not has_active_subscription:
+    if not can_access_subject:
         return False
 
     watched_any_result = await db.execute(
@@ -240,6 +219,7 @@ async def get_chapter_detail(
     db: AsyncSession,
     chapter_id: uuid.UUID,
     user: User,
+    policy: ContentAccessPolicy,
 ) -> ChapterDetailResponse | None:
     """Return chapter detail with lesson list and per-lesson watch progress."""
     chapter_result = await db.execute(
@@ -264,7 +244,7 @@ async def get_chapter_detail(
     lessons = lessons_result.scalars().all()
     lesson_ids = [lesson.id for lesson in lessons]
 
-    has_access = await user_has_access(db, user, subject.id, subject.class_number)
+    has_access = policy.can_access_subject(subject.id, subject.class_number)
 
     watch_map: dict[uuid.UUID, WatchHistory] = {}
     if lesson_ids:
@@ -320,7 +300,7 @@ async def get_chapter_detail(
     chapter_test_last_score: float | None = None
     chapter_test_unlocked = False
     if chapter_test_id is not None:
-        chapter_test_unlocked = await is_test_unlocked(db, user.id, chapter_id)
+        chapter_test_unlocked = await is_test_unlocked(db, user.id, chapter_id, has_access)
         last_attempt_result = await db.execute(
             select(TestAttempt)
             .where(
@@ -413,6 +393,7 @@ async def get_lesson_play(
     db: AsyncSession,
     lesson_id: uuid.UUID,
     user: User,
+    policy: ContentAccessPolicy,
 ) -> LessonPlayResponse | None:
     """Return the playback data for a lesson, enforcing access control on premium content."""
     result = await db.execute(
@@ -427,10 +408,7 @@ async def get_lesson_play(
 
     lesson, chapter, subject = row
 
-    if not lesson.is_free:
-        has_access = await user_has_access(db, user, subject.id, subject.class_number)
-        if not has_access:
-            raise AccessDenied(subject.id, subject.class_number)
+    policy.assert_lesson_access(lesson.is_free, subject.id, subject.class_number)
 
     wh_result = await db.execute(
         select(WatchHistory).where(
@@ -455,6 +433,7 @@ async def get_chapter_notes(
     db: AsyncSession,
     chapter_id: uuid.UUID,
     user: User,
+    policy: ContentAccessPolicy,
 ) -> NotesResponse | None:
     """Return a presigned download URL for chapter notes, enforcing access control."""
     result = await db.execute(
@@ -474,10 +453,7 @@ async def get_chapter_notes(
     if note is None:
         return None
 
-    if note.is_premium:
-        has_access = await user_has_access(db, user, subject.id, subject.class_number)
-        if not has_access:
-            raise AccessDenied(subject.id, subject.class_number)
+    policy.assert_note_access(subject.id, subject.class_number)
 
     url = await generate_presigned_url(note.r2_key, expires_in=3600)
     return NotesResponse(

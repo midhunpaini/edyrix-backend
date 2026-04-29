@@ -10,7 +10,7 @@ from app.models.subscription import Plan
 from app.schemas.common import CommonResponse
 from app.schemas.subscription import PlanResponse
 
-router = APIRouter(prefix="/plans", tags=["plans"])
+router = APIRouter(prefix="/plans", tags=["student:plans"])
 
 
 @router.get("", response_model=CommonResponse[list[PlanResponse]])

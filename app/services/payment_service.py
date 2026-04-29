@@ -61,6 +61,20 @@ def verify_payment_signature(order_id: str, payment_id: str, signature: str) -> 
     return hmac.compare_digest(expected, signature)
 
 
+async def issue_refund(razorpay_payment_id: str, amount_paise: int) -> dict:
+    """Issue a Razorpay refund and return the refund object. Raises HTTPException on failure."""
+    async with httpx.AsyncClient() as client:
+        resp = await client.post(
+            f"{_RAZORPAY_API}/payments/{razorpay_payment_id}/refund",
+            auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET),
+            json={"amount": amount_paise},
+            timeout=15.0,
+        )
+    if resp.status_code not in (200, 201):
+        raise HTTPException(status_code=400, detail=f"Razorpay refund failed: {resp.text}")
+    return resp.json()
+
+
 def verify_webhook_signature(body: bytes, signature: str) -> bool:
     expected = hmac.new(
         settings.RAZORPAY_WEBHOOK_SECRET.encode(),

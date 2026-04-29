@@ -24,9 +24,9 @@ from app.schemas.progress import (
 )
 from app.services import content_service as content_svc
 from app.services.trajectory_service import update_trajectory
-from app.utils.access_control import user_has_access
+from app.utils.access_control import ContentAccessPolicy
 
-router = APIRouter(prefix="/tests", tags=["tests"])
+router = APIRouter(prefix="/tests", tags=["student:tests"])
 
 
 def _last_attempt_response(
@@ -71,13 +71,14 @@ async def _unlock_state(
     lesson: Lesson,
     subject: Subject,
     chapter: Chapter,
+    policy: ContentAccessPolicy,
 ) -> tuple[bool, str | None]:
-    if not lesson.is_free:
-        has_access = await user_has_access(db, user, subject.id, subject.class_number)
-        if not has_access:
-            return False, "subscription_required"
+    can_access = policy.can_access_lesson(lesson.is_free, subject.id, subject.class_number)
+    if not can_access:
+        return False, "subscription_required"
 
-    if not await content_svc.is_test_unlocked(db, user.id, chapter.id):
+    can_access_subject = policy.can_access_subject(subject.id, subject.class_number)
+    if not await content_svc.is_test_unlocked(db, user.id, chapter.id, can_access_subject):
         return False, "complete_lesson"
 
     return True, None
@@ -165,10 +166,11 @@ async def get_available_tests(
     )
     rows = result.all()
     attempts, attempt_counts = await _attempt_maps(db, user, [test.id for test, *_ in rows])
+    policy = await ContentAccessPolicy.build(db, user)
 
     items: list[AvailableTestItem] = []
     for test, subject, chapter, lesson in rows:
-        is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter)
+        is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter, policy)
         items.append(
             AvailableTestItem(
                 id=test.id,
@@ -220,7 +222,8 @@ async def get_lesson_test(
         raise NotFoundException("Test not found")
     test, subject, chapter, lesson = row
     attempts, attempt_counts = await _attempt_maps(db, user, [test.id])
-    is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter)
+    policy = await ContentAccessPolicy.build(db, user)
+    is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter, policy)
     return CommonResponse.ok(TestSummaryResponse(
         id=test.id,
         title=test.title,
@@ -270,7 +273,8 @@ async def get_chapter_test(
         raise NotFoundException("Test not found")
     test, subject, chapter, lesson = row
     attempts, attempt_counts = await _attempt_maps(db, user, [test.id])
-    is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter)
+    policy = await ContentAccessPolicy.build(db, user)
+    is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter, policy)
 
     return CommonResponse.ok(TestSummaryResponse(
         id=test.id,
@@ -305,7 +309,8 @@ async def get_test(
         raise NotFoundException("Test not found")
     test, subject, chapter, lesson = row
 
-    is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter)
+    policy = await ContentAccessPolicy.build(db, user)
+    is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter, policy)
     if not is_unlocked:
         raise _locked_exception(reason, lesson, chapter)
 
@@ -347,7 +352,8 @@ async def submit_test(
         raise NotFoundException("Test not found")
     test, subject, chapter, lesson = row
 
-    is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter)
+    policy = await ContentAccessPolicy.build(db, user)
+    is_unlocked, reason = await _unlock_state(db, user, lesson, subject, chapter, policy)
     if not is_unlocked:
         raise _locked_exception(reason, lesson, chapter)
 

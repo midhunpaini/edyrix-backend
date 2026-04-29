@@ -54,6 +54,19 @@ async def upload_bytes(
     )
 
 
+async def delete_object(r2_key: str) -> None:
+    """Delete an object from R2, swallowing errors so the DB delete still commits."""
+    client = _s3_client()
+    loop = asyncio.get_running_loop()
+    try:
+        await loop.run_in_executor(
+            None,
+            functools.partial(client.delete_object, Bucket=settings.R2_BUCKET_NAME, Key=r2_key),
+        )
+    except Exception:
+        pass
+
+
 async def download_bytes(r2_key: str) -> bytes:
     """Download and return the raw bytes for an R2 object."""
     client = _s3_client()

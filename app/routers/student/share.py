@@ -6,7 +6,7 @@ from app.models.user import ShareEvent, User
 from app.schemas.common import CommonResponse, MessageResponse
 from app.schemas.user import ShareRequest
 
-router = APIRouter(prefix="/share", tags=["share"])
+router = APIRouter(prefix="/share", tags=["student:share"])
 
 
 @router.post("", response_model=CommonResponse[MessageResponse])

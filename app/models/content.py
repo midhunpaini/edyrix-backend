@@ -79,6 +79,8 @@ class Lesson(Base):
     duration_seconds: Mapped[int | None] = mapped_column(Integer, nullable=True)
     is_free: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     is_published: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    is_deleted: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    deleted_at: Mapped[datetime | None] = mapped_column(TIMESTAMP(timezone=True), nullable=True)
     thumbnail_url: Mapped[str | None] = mapped_column(Text, nullable=True)
     order_index: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     created_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False, default=_utcnow)

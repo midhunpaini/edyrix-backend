@@ -22,7 +22,7 @@ from app.schemas.progress import (
     WatchHeartbeatResponse,
 )
 
-router = APIRouter(prefix="/progress", tags=["progress"])
+router = APIRouter(prefix="/progress", tags=["student:progress"])
 
 
 @router.post("/watch", response_model=CommonResponse[WatchHeartbeatResponse])

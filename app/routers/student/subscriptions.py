@@ -15,7 +15,7 @@ from app.schemas.subscription import (
     SubscriptionDetail,
 )
 
-router = APIRouter(prefix="/subscriptions", tags=["subscriptions"])
+router = APIRouter(prefix="/subscriptions", tags=["student:subscriptions"])
 
 
 @router.get("/my", response_model=CommonResponse[MySubscriptionResponse])

@@ -16,7 +16,7 @@ from app.schemas.subscription import (
 )
 from app.services import payment_service, subscription_service
 
-router = APIRouter(prefix="/payments", tags=["payments"])
+router = APIRouter(prefix="/payments", tags=["student:payments"])
 
 
 @router.post("/create-order", response_model=CommonResponse[CreateOrderResponse], status_code=201)

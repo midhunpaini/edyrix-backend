@@ -7,7 +7,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.dependencies import get_current_user, get_db
 from app.exceptions import BadRequestException, NotFoundException
-from app.models.subscription import Plan
 from app.models.user import User
 from app.schemas.common import CommonResponse
 from app.schemas.content import (
@@ -18,11 +17,11 @@ from app.schemas.content import (
     SubjectDetailResponse,
     SubjectListItem,
 )
-from app.schemas.subscription import PlanResponse
 from app.services import content_service as svc
 from app.services.auth_service import decode_access_token, is_token_valid
+from app.utils.access_control import AccessDenied, ContentAccessPolicy
 
-router = APIRouter(tags=["content"])
+router = APIRouter(tags=["student:content"])
 _optional_bearer = HTTPBearer(auto_error=False)
 
 
@@ -60,7 +59,8 @@ async def list_subjects(
 ) -> CommonResponse[list[SubjectListItem]]:
     if class_number not in range(7, 11):
         raise BadRequestException("class_number must be 7–10")
-    return CommonResponse.ok(await svc.get_subjects_by_class(db, class_number, user))
+    policy = await ContentAccessPolicy.build(db, user) if user else ContentAccessPolicy.anonymous()
+    return CommonResponse.ok(await svc.get_subjects_by_class(db, class_number, user, policy))
 
 
 @router.get("/subjects/{subject_id}", response_model=CommonResponse[SubjectDetailResponse])
@@ -69,7 +69,8 @@ async def get_subject(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
 ) -> CommonResponse[SubjectDetailResponse]:
-    result = await svc.get_subject_detail(db, subject_id, user)
+    policy = await ContentAccessPolicy.build(db, user)
+    result = await svc.get_subject_detail(db, subject_id, user, policy)
     if result is None:
         raise NotFoundException("Subject not found")
     return CommonResponse.ok(result)
@@ -81,7 +82,8 @@ async def get_chapter(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
 ) -> CommonResponse[ChapterDetailResponse]:
-    result = await svc.get_chapter_detail(db, chapter_id, user)
+    policy = await ContentAccessPolicy.build(db, user)
+    result = await svc.get_chapter_detail(db, chapter_id, user, policy)
     if result is None:
         raise NotFoundException("Chapter not found")
     return CommonResponse.ok(result)
@@ -93,9 +95,10 @@ async def get_notes(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
 ) -> CommonResponse[NotesResponse]:
+    policy = await ContentAccessPolicy.build(db, user)
     try:
-        result = await svc.get_chapter_notes(db, chapter_id, user)
-    except svc.AccessDenied as exc:
+        result = await svc.get_chapter_notes(db, chapter_id, user, policy)
+    except AccessDenied as exc:
         slugs = await svc.get_relevant_plan_slugs(db, exc.subject_id, exc.class_number)
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -112,9 +115,10 @@ async def play_lesson(
     db: AsyncSession = Depends(get_db),
     user: User = Depends(get_current_user),
 ) -> CommonResponse[LessonPlayResponse]:
+    policy = await ContentAccessPolicy.build(db, user)
     try:
-        result = await svc.get_lesson_play(db, lesson_id, user)
-    except svc.AccessDenied as exc:
+        result = await svc.get_lesson_play(db, lesson_id, user, policy)
+    except AccessDenied as exc:
         slugs = await svc.get_relevant_plan_slugs(db, exc.subject_id, exc.class_number)
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -123,11 +127,3 @@ async def play_lesson(
     if result is None:
         raise NotFoundException("Lesson not found")
     return CommonResponse.ok(result)
-
-
-@router.get("/plans", response_model=CommonResponse[list[PlanResponse]])
-async def list_plans(db: AsyncSession = Depends(get_db)) -> CommonResponse[list[PlanResponse]]:
-    result = await db.execute(
-        select(Plan).where(Plan.is_active.is_(True)).order_by(Plan.order_index)
-    )
-    return CommonResponse.ok(list(result.scalars()))

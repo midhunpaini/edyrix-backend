@@ -1,5 +1,3 @@
-from uuid import UUID
-
 from fastapi import APIRouter, Depends, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -14,7 +12,7 @@ from app.schemas.doubt import (
     DoubtListItem,
 )
 
-router = APIRouter(prefix="/doubts", tags=["doubts"])
+router = APIRouter(prefix="/doubts", tags=["student:doubts"])
 
 
 @router.post("", response_model=CommonResponse[DoubtCreateResponse], status_code=status.HTTP_201_CREATED)

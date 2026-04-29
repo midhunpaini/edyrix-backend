@@ -11,7 +11,7 @@ from app.models.user import FCMToken, FreeTrial, User
 from app.schemas.common import CommonResponse, MessageResponse
 from app.schemas.user import FCMTokenRequest, UserResponse, UserStatsResponse, UserUpdateRequest
 
-router = APIRouter(prefix="/users", tags=["users"])
+router = APIRouter(prefix="/users", tags=["student:users"])
 
 
 @router.get("/me", response_model=CommonResponse[UserResponse])
