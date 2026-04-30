@@ -6,7 +6,8 @@ from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.dependencies import get_current_user, get_db
+from app.config import settings
+from app.dependencies import get_db
 from app.exceptions import BadRequestException, ConflictException, ForbiddenException, UnauthorizedException
 from app.limiter import check_identifier_rate_limit, limiter
 from app.models.admin import AdminUser
@@ -35,7 +36,6 @@ from app.services.auth_service import (
     store_token_jti,
     verify_firebase_token,
 )
-from app.config import settings
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 bearer_scheme = HTTPBearer()

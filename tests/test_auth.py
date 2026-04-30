@@ -6,7 +6,7 @@ any external services.
 """
 import uuid
 from datetime import datetime, timedelta, timezone
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 from jose import jwt
@@ -20,7 +20,6 @@ from app.services.auth_service import (
     is_token_valid,
     verify_password,
 )
-
 
 # ── password hashing ──────────────────────────────────────────────────────────
 

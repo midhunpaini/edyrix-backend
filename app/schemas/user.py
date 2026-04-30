@@ -1,10 +1,8 @@
 from datetime import date, datetime
+from typing import Literal
 from uuid import UUID
 
-from typing import Literal
-
 from pydantic import BaseModel, ConfigDict, field_validator
-
 
 AdminRole = Literal["super_admin", "admin", "support", "content_manager"]
 

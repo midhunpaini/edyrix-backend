@@ -1,11 +1,10 @@
+from passlib.context import CryptContext
 from sqlalchemy import select
 
 from app.config import settings
 from app.database import AsyncSessionLocal
 from app.logger import logger
 from app.models.user import FreeTrial, User
-from passlib.context import CryptContext
-
 
 DEV_EMAIL = "midhunpk2@gmail.com"
 DEV_PASSWORD = "asd123.."

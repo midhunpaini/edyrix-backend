@@ -160,7 +160,7 @@ async def get_chapter_progress(
         select(Lesson).where(Lesson.chapter_id == chapter_id, Lesson.is_published.is_(True))
     )
     lessons = lessons_result.scalars().all()
-    lesson_ids = [l.id for l in lessons]
+    lesson_ids = [lesson.id for lesson in lessons]
 
     wh_result = await db.execute(
         select(WatchHistory).where(

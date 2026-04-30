@@ -7,14 +7,13 @@ from urllib.parse import urlparse
 
 from arq.connections import RedisSettings
 from arq.cron import cron
-from sqlalchemy import delete, select
+from sqlalchemy import delete
 
 from app.config import settings
 from app.database import AsyncSessionLocal
 from app.models.auth import TokenBlacklist
-from app.services.email_service import send_doubt_answered_email
 from app.services import notification_service
-
+from app.services.email_service import send_doubt_answered_email
 
 # ── Task functions ─────────────────────────────────────────────────────────────
 
@@ -44,6 +43,7 @@ async def task_cleanup_blacklist(ctx) -> None:
 async def task_expire_subscriptions(ctx) -> None:
     """Mark overdue active subscriptions as expired — runs every hour."""
     from sqlalchemy import update
+
     from app.models.subscription import Subscription
 
     now = datetime.now(timezone.utc)

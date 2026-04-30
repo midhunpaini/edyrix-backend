@@ -7,7 +7,7 @@ from sqlalchemy import func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.content import Lesson, Subject
-from app.models.progress import Test, TestAttempt, WatchHistory
+from app.models.progress import WatchHistory
 from app.models.subscription import Plan, Subscription
 from app.models.user import FreeTrial, User
 
@@ -301,7 +301,6 @@ def compute_test_analytics(test, attempts: list) -> dict:
 async def get_dashboard_stats(db: AsyncSession) -> dict:
     from app.models.doubt import Doubt
     from app.models.subscription import Payment, Plan, Subscription
-    from app.models.user import User
 
     now = datetime.now(timezone.utc)
     today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)

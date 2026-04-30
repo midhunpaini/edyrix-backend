@@ -1,6 +1,5 @@
 import asyncio
 import uuid
-from datetime import datetime, timezone
 
 from sqlalchemy import and_, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -22,7 +21,7 @@ from app.schemas.content import (
     SubjectListItem,
 )
 from app.services.storage_service import generate_presigned_url
-from app.utils.access_control import AccessDenied, ContentAccessPolicy
+from app.utils.access_control import ContentAccessPolicy
 
 
 async def get_classes(db: AsyncSession) -> list[ClassSummary]:

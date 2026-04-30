@@ -5,7 +5,7 @@ All DB calls are mocked with AsyncMock — no PostgreSQL required.
 """
 import uuid
 from datetime import datetime, timezone
-from unittest.mock import AsyncMock, MagicMock, call, patch
+from unittest.mock import MagicMock
 
 import pytest
 from fastapi import HTTPException
@@ -17,7 +17,6 @@ from app.services.subscription_service import (
     activate_subscription,
     cancel_by_razorpay_id,
 )
-
 
 # ── helpers ───────────────────────────────────────────────────────────────────
 

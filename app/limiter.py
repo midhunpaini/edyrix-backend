@@ -1,4 +1,3 @@
-from urllib.parse import urlparse
 
 import redis.asyncio as aioredis
 from fastapi import HTTPException, Request, status

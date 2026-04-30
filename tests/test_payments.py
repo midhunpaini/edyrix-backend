@@ -7,11 +7,8 @@ Both verify_payment_signature and verify_webhook_signature are pure functions
 import hashlib
 import hmac
 
-import pytest
-
 from app.config import settings
 from app.services.payment_service import verify_payment_signature, verify_webhook_signature
-
 
 # ── helpers ───────────────────────────────────────────────────────────────────
 
