@@ -25,15 +25,10 @@ class Settings(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_ASYNC_PREFIX: str = "postgresql+asyncpg://"
-    POSTGRES_SYNC_PREFIX: str = "postgresql://"
 
     @property
     def DATABASE_URL(self) -> str:
         return f"{self.POSTGRES_ASYNC_PREFIX}{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
-
-    @property
-    def DATABASE_SYNC_URL(self) -> str:
-        return f"{self.POSTGRES_SYNC_PREFIX}{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
 
     # Redis
     REDIS_URL: str

@@ -26,11 +26,3 @@ class ConflictException(HTTPException):
         super().__init__(status_code=status.HTTP_409_CONFLICT, detail=detail)
 
 
-class UnprocessableException(HTTPException):
-    def __init__(self, detail: str = "Unprocessable entity"):
-        super().__init__(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=detail)
-
-
-class ServiceUnavailableException(HTTPException):
-    def __init__(self, detail: str = "Service unavailable"):
-        super().__init__(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=detail)

@@ -1,4 +1,3 @@
-from collections.abc import Callable
 from typing import AsyncGenerator
 
 from fastapi import Depends
@@ -7,7 +6,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import AsyncSessionLocal
-from app.exceptions import ForbiddenException, UnauthorizedException
+from app.exceptions import UnauthorizedException
 from app.models.admin import AdminUser
 from app.models.user import User
 from app.services.auth_service import decode_access_token, is_token_valid
@@ -83,12 +82,3 @@ async def get_current_admin(
 
 async def require_admin(admin: AdminUser = Depends(get_current_admin)) -> AdminUser:
     return admin
-
-
-def require_admin_role(*roles: str) -> Callable[[AdminUser], AdminUser]:
-    async def dependency(admin: AdminUser = Depends(get_current_admin)) -> AdminUser:
-        if admin.role not in roles:
-            raise ForbiddenException("Admin role required")
-        return admin
-
-    return dependency
